@@ -3215,4 +3215,6 @@ function () {
     g.prepareSound()
   };
   g.init();
+ 
 }();
+export default google;

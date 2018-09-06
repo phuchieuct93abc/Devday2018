@@ -5,10 +5,11 @@ var io = require('socket.io')(http);
 
 
 let timer = 0;
-app.use(express.static(__dirname + '/packman-server')); //Serves resources from public folder
+app.use(express.static(__dirname+"/dist" )); //Serves resources from public folder
+app.use(express.static(__dirname+"/src" )); //Serves resources from public folder
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/packman-server/index.html');
+  res.sendFile(__dirname + '/dist/index.html');
 });
 app.get('/move', function (req, res) {
   io.emit('action', {

@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "^0.12.6",
-    "express": "^4.15.2",
+    "express": "^4.16.3",
+    "http": "0.0.0",
     "socket.io": "^2.1.1",
     "vega-embed": "^3.0.0",
     "yarn": "^1.9.4"
@@ -19,7 +20,11 @@
     "watch": "cross-env NODE_ENV=development parcel index.html --no-hmr --open",
     "build": "cross-env NODE_ENV=production parcel build index.html  --no-minify --public-url ./",
     "link-local": "yalc link",
-    "postinstall": "yarn upgrade --pattern @tensorflow"
+    "postinstall": "yarn upgrade --pattern @tensorflow",
+    "server": "nodemon packman-server/packman-server.js",    
+    "client": "yarn watch --https",
+    "webpack":"webpack",
+    "run": "npm-run-parallel client server webpack"
   },
   "devDependencies": {
     "babel-plugin-transform-runtime": "~6.23.0",
@@ -28,6 +33,8 @@
     "clang-format": "~1.2.2",
     "cross-env": "^5.1.6",
     "parcel-bundler": "~1.8.1",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
     "yalc": "~1.0.0-pre.22"
   },
   "browserslist": [
