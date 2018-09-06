@@ -20,8 +20,7 @@ google.dom.append = function (a) {
 return document.body.appendChild(a)
 };
 
-google.pacman ||
-function () {
+let pacman = function () {
   var a = true,
     e = false,
     g = {},
@@ -3215,6 +3214,7 @@ function () {
     g.prepareSound()
   };
   g.init();
+  return g;
  
 }();
-export default google;
+export default pacman;

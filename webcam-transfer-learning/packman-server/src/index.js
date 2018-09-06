@@ -1,4 +1,4 @@
-import googlea from "./packman";
+import pacman from "./packman";
 let CONTROL_CODES = {
     1: {
         up: 38,
@@ -20,11 +20,11 @@ $( () =>{
     socket.on('action', function (action) {
         let direction = action.action;
         let player = action.player
-        google.pacman.keyPressed(CONTROL_CODES[player][direction]);
+        pacman.keyPressed(CONTROL_CODES[player][direction]);
 
     });
 });
 setTimeout( () =>{
-    google.pacman.switchToDoubleMode();
-    google.pacman.startGameplay(); 
+    pacman.switchToDoubleMode();
+    pacman.startGameplay(); 
 }, 2000)
