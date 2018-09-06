@@ -50,6 +50,8 @@
             background: #eee;
         }
     </style>
+     <link rel="stylesheet" href="styles.css" />
+
 </head>
 
 <body>
@@ -58,13 +60,17 @@
     <script>
         $(function () {
             var socket = io();
-            $('form').submit(function () {
-                socket.emit('chat message', $('#m').val());
-                $('#m').val('');
-                return false;
-            });
-            socket.on('time', function (msg) {
-                $('#messages').text(msg);
+            let CONTROL_CODES={
+                up:38,
+                down:40,
+                left:37,
+                right:39
+            }
+
+           
+            socket.on('action', function (action) {
+                google.pacman.keyPressed(CONTROL_CODES[action]);
+
             });
         });
     </script>
@@ -73,9 +79,25 @@
 
 
     <ul id="messages"></ul>
-    <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    <div id="pacman-container">
+        <div id="logo">
+          <div id="logo-l">
+            <div id="logo-b">
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="packman.js"></script>
+      <script>
+     setTimeout(function(){
+
+         google.pacman.startGameplay();
+
+     },2000)
+
+  
+      
+      </script>
 </body>
 
 </html>

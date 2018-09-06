@@ -87,17 +87,63 @@ async function handler(label) {
   document.body.removeAttribute('data-active');
 }
 
-upButton.addEventListener('mousedown', () => handler(0));
-upButton.addEventListener('mouseup', () => mouseDown = false);
+// upButton.addEventListener('mousedown', () => handler(0));
+// upButton.addEventListener('mouseup', () => mouseDown = false);
 
-downButton.addEventListener('mousedown', () => handler(1));
-downButton.addEventListener('mouseup', () => mouseDown = false);
+// downButton.addEventListener('mousedown', () => handler(1));
+// downButton.addEventListener('mouseup', () => mouseDown = false);
 
-leftButton.addEventListener('mousedown', () => handler(2));
-leftButton.addEventListener('mouseup', () => mouseDown = false);
+// leftButton.addEventListener('mousedown', () => handler(2));
+// leftButton.addEventListener('mouseup', () => mouseDown = false);
 
-rightButton.addEventListener('mousedown', () => handler(3));
-rightButton.addEventListener('mouseup', () => mouseDown = false);
+// rightButton.addEventListener('mousedown', () => handler(3));
+// rightButton.addEventListener('mouseup', () => mouseDown = false);
+
+ upButton.addEventListener('mousedown', () =>{
+  move("up")
+
+});
+downButton.addEventListener('mousedown', () =>{
+  move("down")
+
+});
+  
+leftButton.addEventListener('mousedown', () =>{
+  move("left")
+
+});
+  
+rightButton.addEventListener('mousedown', () =>{
+  move("right")
+
+});
+  
+  
+
+
+
+ function move(direction){
+  $.ajax({
+    url: "http://localhost:3000/move",
+ 
+    // The name of the callback parameter, as specified by the YQL service
+    jsonp: "callback",
+ 
+    // Tell jQuery we're expecting JSONP
+    dataType: "jsonp",
+ 
+    // Tell YQL what we want and that we want JSON
+    data: {
+        action: direction, 
+    },
+ 
+    // Work with the response
+    success: function( response ) {
+        console.log( response ); // server response
+    }
+ })
+}
+
 
 export function drawThumb(img, label) {
   if (thumbDisplayed[label] == null) {

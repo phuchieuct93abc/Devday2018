@@ -1,31 +1,33 @@
-
-
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/packman-server/index.html');
+
+let timer = 0;
+app.use(express.static(__dirname + '/packman-server')); //Serves resources from public folder
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/packman-server/index.html');
 });
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
+app.get('/move', function (req, res) {
+  io.emit('action', req.query.action);
+
+
+  res.jsonp({ status: 200 });
+
+});
+io.on('connection', function (socket) {
+  socket.on('disconnect', function () {
     console.log('user disconnected');
   });
 
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-
-  });
 });
 
-var time=0;
-setInterval(function(){
-  io.emit('time', time++);
 
-},1000)
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+
+http.listen(3000, function () {
+  console.log('listening on 12 *:3000');
 });
 
