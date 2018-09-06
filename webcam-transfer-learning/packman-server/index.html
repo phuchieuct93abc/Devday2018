@@ -50,7 +50,7 @@
             background: #eee;
         }
     </style>
-     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css" />
 
 </head>
 
@@ -60,16 +60,26 @@
     <script>
         $(function () {
             var socket = io();
-            let CONTROL_CODES={
-                up:38,
-                down:40,
-                left:37,
-                right:39
+            let CONTROL_CODES = {
+                1: {
+                    up: 38,
+                    down: 40,
+                    left: 37,
+                    right: 39
+                },
+                2: {
+                    up: 87,
+                    down: 83,
+                    left: 65,
+                    right: 68
+                }
             }
 
-           
+
             socket.on('action', function (action) {
-                google.pacman.keyPressed(CONTROL_CODES[action]);
+                let direction = action.action;
+                let player = action.player
+                google.pacman.keyPressed(CONTROL_CODES[player][direction]);
 
             });
         });
@@ -81,23 +91,23 @@
     <ul id="messages"></ul>
     <div id="pacman-container">
         <div id="logo">
-          <div id="logo-l">
-            <div id="logo-b">
+            <div id="logo-l">
+                <div id="logo-b">
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <script src="packman.js"></script>
-      <script>
-     setTimeout(function(){
+    </div>
+    <script src="packman.js"></script>
+    <script>
+        setTimeout(function () {
+            google.pacman.switchToDoubleMode();
+            google.pacman.startGameplay();
 
-         google.pacman.startGameplay();
+        }, 2000)
 
-     },2000)
 
-  
-      
-      </script>
+
+    </script>
 </body>
 
 </html>

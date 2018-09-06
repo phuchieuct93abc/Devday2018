@@ -3199,6 +3199,7 @@ function () {
     google.pacman.flashLoaded = g.flashLoaded;
     google.pacman.destroy = g.destroy
     google.pacman.keyPressed = g.keyPressed;
+    google.pacman.switchToDoubleMode = g.switchToDoubleMode
   };
   g.updateLoadingProgress = function (b) {
     b = Math.round(b * 200);

@@ -123,6 +123,7 @@ rightButton.addEventListener('mousedown', () =>{
 
 
  function move(direction){
+  
   $.ajax({
     url: "http://localhost:3000/move",
  
@@ -135,6 +136,7 @@ rightButton.addEventListener('mousedown', () =>{
     // Tell YQL what we want and that we want JSON
     data: {
         action: direction, 
+        player: $("#player").val()
     },
  
     // Work with the response

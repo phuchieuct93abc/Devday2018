@@ -11,7 +11,12 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/packman-server/index.html');
 });
 app.get('/move', function (req, res) {
-  io.emit('action', req.query.action);
+  io.emit('action', {
+    action: req.query.action,
+    player: req.query.player
+  }
+  
+ );
 
 
   res.jsonp({ status: 200 });
