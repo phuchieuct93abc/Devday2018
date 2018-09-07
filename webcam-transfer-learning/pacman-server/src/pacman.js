@@ -16,8 +16,8 @@ google.dom.remove = a => a && a.parentNode && a.parentNode.removeChild(a);
 
 google.dom.append = a => document.body.appendChild(a);
 
-const a = true;
-const e = false;
+const TRUE = true;
+const FALSE = false;
 const g = {};
 const i = [1, 4, 2, 8];
 const l = {
@@ -1000,13 +1000,13 @@ const A = {
 const B = {
   1: {
     actors: [{
-      ghost: e,
+      ghost: FALSE,
       x: 64,
       y: 9,
       id: 0
     },
     {
-      ghost: a,
+      ghost: TRUE,
       x: 68.2,
       y: 9,
       id: 1
@@ -1049,19 +1049,19 @@ const B = {
   },
   2: {
     actors: [{
-      ghost: e,
+      ghost: FALSE,
       x: 64,
       y: 9,
       id: 0
     },
     {
-      ghost: a,
+      ghost: TRUE,
       x: 70.2,
       y: 9,
       id: 1
     },
     {
-      ghost: a,
+      ghost: TRUE,
       x: 32,
       y: 9.5,
       id: 2
@@ -1151,13 +1151,13 @@ const B = {
   },
   3: {
     actors: [{
-      ghost: e,
+      ghost: FALSE,
       x: 64,
       y: 9,
       id: 0
     },
     {
-      ghost: a,
+      ghost: TRUE,
       x: 70.2,
       y: 9,
       id: 2
@@ -1191,14 +1191,15 @@ const B = {
 
 const C = [90, 60, 45];
 const D = C[0];
-let pacman = (() => {
+let GHOST_NUMBER = 0;
+let googlePacman = (() => {
 
 
 
 
-  class E {
-    constructor(b) {
-      this.id = b
+  class Actor {
+    constructor(id) {
+      this.id = id
     }
 
     A() {
@@ -1211,7 +1212,7 @@ let pacman = (() => {
       this.lastActiveDir = this.dir = b.dir;
       this.physicalSpeed = this.requestedDir = this.nextDir = 0;
       this.c(0);
-      this.reverseDirectionsNext = this.freeToLeavePen = this.modeChangedWhileInPen = this.eatenInThisFrightMode = e;
+      this.reverseDirectionsNext = this.freeToLeavePen = this.modeChangedWhileInPen = this.eatenInThisFrightMode = FALSE;
       this.l()
     }
 
@@ -1231,7 +1232,7 @@ let pacman = (() => {
       if (this.id == g.playerCount + 3 && (b == 16 || c == 16)) g.updateCruiseElroySpeed();
       switch (c) {
         case 32:
-          g.ghostExitingPenNow = e;
+          g.ghostExitingPenNow = FALSE;
           break;
         case 8:
           g.ghostEyesCount > 0 && g.ghostEyesCount--;
@@ -1242,28 +1243,28 @@ let pacman = (() => {
         case 4:
           this.fullSpeed = g.levels.ghostFrightSpeed * 0.8;
           this.tunnelSpeed = g.levels.ghostTunnelSpeed * 0.8;
-          this.followingRoutine = e;
+          this.followingRoutine = FALSE;
           break;
         case 1:
           this.fullSpeed = g.levels.ghostSpeed * 0.8;
           this.tunnelSpeed = g.levels.ghostTunnelSpeed * 0.8;
           this.followingRoutine =
-            e;
+            FALSE;
           break;
         case 2:
           this.targetPos = this.scatterPos;
           this.fullSpeed = g.levels.ghostSpeed * 0.8;
           this.tunnelSpeed = g.levels.ghostTunnelSpeed * 0.8;
-          this.followingRoutine = e;
+          this.followingRoutine = FALSE;
           break;
         case 8:
           this.tunnelSpeed = this.fullSpeed = 1.6;
           this.targetPos = [s[0], s[1]];
-          this.freeToLeavePen = this.followingRoutine = e;
+          this.freeToLeavePen = this.followingRoutine = FALSE;
           break;
         case 16:
           this.l();
-          this.followingRoutine = a;
+          this.followingRoutine = TRUE;
           this.routineMoveId = -1;
           switch (this.id) {
             case g.playerCount + 1:
@@ -1279,7 +1280,7 @@ let pacman = (() => {
           }
           break;
         case 32:
-          this.followingRoutine = a;
+          this.followingRoutine = TRUE;
           this.routineMoveId = -1;
           switch (this.id) {
             case g.playerCount + 1:
@@ -1292,10 +1293,10 @@ let pacman = (() => {
               this.routineToFollow = 6;
               break
           }
-          g.ghostExitingPenNow = a;
+          g.ghostExitingPenNow = TRUE;
           break;
         case 64:
-          this.followingRoutine = a;
+          this.followingRoutine = TRUE;
           this.routineMoveId = -1;
           switch (this.id) {
             case g.playerCount:
@@ -1311,7 +1312,7 @@ let pacman = (() => {
           }
           break;
         case 128:
-          this.followingRoutine = a;
+          this.followingRoutine = TRUE;
           this.routineMoveId = -1;
           switch (this.id) {
             case g.playerCount:
@@ -1336,7 +1337,7 @@ let pacman = (() => {
 
     z(b) {
       if (!g.userDisabledSound) {
-        google.pacManSound = a;
+        google.pacManSound = TRUE;
         g.updateSoundIcon()
       }
       if (this.dir == g.oppositeDirections[b]) {
@@ -1416,12 +1417,12 @@ let pacman = (() => {
     }
 
     p(b) {
-      g.tilesChanged = a;
+      g.tilesChanged = TRUE;
       if (this.reverseDirectionsNext) {
         this.dir = g.oppositeDirections[this.dir];
         this.nextDir = 0;
-        this.reverseDirectionsNext = e;
-        this.i(a)
+        this.reverseDirectionsNext = FALSE;
+        this.i(TRUE)
       }
       if (!this.ghost && !g.playfield[b[0]][b[1]].path) {
         this.pos[0] = this.lastGoodTilePos[0];
@@ -1476,7 +1477,7 @@ let pacman = (() => {
 
     u() {
       this.n();
-      this.ghost && this.i(e);
+      this.ghost && this.i(FALSE);
       const b = g.playfield[this.pos[0]][this.pos[1]];
       if (b.intersection) if (this.nextDir && this.nextDir & b.allowedDir) {
         if (this.dir != 0) this.lastActiveDir = this.dir;
@@ -1554,7 +1555,7 @@ let pacman = (() => {
         if (this.id == g.playerCount || this.freeToLeavePen) this.a(128);
         else {
           this.eatenInThisFrightMode =
-            a;
+            TRUE;
           this.a(16)
         }
         return
@@ -1565,7 +1566,7 @@ let pacman = (() => {
       this.dir = b.dir;
       this.physicalSpeed = 0;
       this.speedIntervals = g.getSpeedIntervals(b.speed);
-      this.proceedToNextRoutineMove = e;
+      this.proceedToNextRoutineMove = FALSE;
       this.b()
     }
 
@@ -1579,14 +1580,14 @@ let pacman = (() => {
           case 4:
             if (this.pos[c.axis] < b.dest * 8) {
               this.pos[c.axis] = b.dest * 8;
-              this.proceedToNextRoutineMove = a
+              this.proceedToNextRoutineMove = TRUE
             }
             break;
           case 2:
           case 8:
             if (this.pos[c.axis] > b.dest * 8) {
               this.pos[c.axis] = b.dest * 8;
-              this.proceedToNextRoutineMove = a
+              this.proceedToNextRoutineMove = TRUE
             }
             break
         }
@@ -1861,7 +1862,7 @@ let pacman = (() => {
         this.elBackgroundPos[1] = b[1];
         b[0] *= 16;
         b[1] *= 16;
-        g.changeElementBkPos(this.el, b[1], b[0], a)
+        g.changeElementBkPos(this.el, b[1], b[0], TRUE)
       }
     }
   }
@@ -1947,28 +1948,28 @@ let pacman = (() => {
       const d = c.type;
       if (c.w) {
         for (var f = c.y * 8, h = c.x * 8; h <= (c.x + c.w - 1) * 8; h += 8) {
-          g.playfield[f][h].path = a;
+          g.playfield[f][h].path = TRUE;
           if (g.playfield[f][h].dot == 0) {
             g.playfield[f][h].dot = 1;
             g.dotsRemaining++
           }
           g.playfield[f][h].type = !d || h != c.x * 8 && h != (c.x + c.w - 1) * 8 ? d : 0
         }
-        g.playfield[f][c.x * 8].intersection = a;
-        g.playfield[f][(c.x + c.w - 1) * 8].intersection = a
+        g.playfield[f][c.x * 8].intersection = TRUE;
+        g.playfield[f][(c.x + c.w - 1) * 8].intersection = TRUE
       } else {
         h = c.x * 8;
         for (f = c.y * 8; f <= (c.y + c.h - 1) * 8; f += 8) {
-          if (g.playfield[f][h].path) g.playfield[f][h].intersection = a;
-          g.playfield[f][h].path = a;
+          if (g.playfield[f][h].path) g.playfield[f][h].intersection = TRUE;
+          g.playfield[f][h].path = TRUE;
           if (g.playfield[f][h].dot == 0) {
             g.playfield[f][h].dot = 1;
             g.dotsRemaining++
           }
           g.playfield[f][h].type = !d || f != c.y * 8 && f != (c.y + c.h - 1) * 8 ? d : 0
         }
-        g.playfield[c.y * 8][h].intersection = a;
-        g.playfield[(c.y + c.h - 1) * 8][h].intersection = a
+        g.playfield[c.y * 8][h].intersection = TRUE;
+        g.playfield[(c.y + c.h - 1) * 8][h].intersection = TRUE
       }
     }
     for (b in o) if (o[b].w) for (h = o[b].x * 8; h <= (o[b].x + o[b].w - 1) * 8; h += 8) {
@@ -2026,14 +2027,23 @@ let pacman = (() => {
   };
   g.createActors = () => {
     g.actors = [];
-    for (let b = 0; b < g.playerCount + 4; b++) {
-      g.actors[b] = new E(b);
+    for (let b = 0; b < g.playerCount; b++) {
+      g.actors[b] = new Actor(b);
       if (b < g.playerCount) {
-        g.actors[b].ghost = e;
+        g.actors[b].ghost = FALSE;
         g.actors[b].mode = 1
-      } else g.actors[b].ghost = a
+      } else g.actors[b].ghost = TRUE
     }
+    g.createGhost();
   };
+  g.createGhost=()=>{
+    for (let index = 0; index < GHOST_NUMBER; index++){
+      let ghost = new Actor(index);
+      ghost.ghost = TRUE;
+      g.actors.push(ghost)
+
+    }
+  }
   g.restartActors = () => {
     for (const b in g.actors) g.actors[b].A()
   };
@@ -2058,46 +2068,46 @@ let pacman = (() => {
     g.createActorElements()
   };
   g.keyPressed = b => {
-    let c = e;
+    let c = FALSE;
     switch (b) {
       case 37:
         g.actors[0].requestedDir = 4;
-        c = a;
+        c = TRUE;
         break;
       case 38:
         g.actors[0].requestedDir = 1;
-        c = a;
+        c = TRUE;
         break;
       case 39:
         g.actors[0].requestedDir = 8;
-        c = a;
+        c = TRUE;
         break;
       case 40:
         g.actors[0].requestedDir = 2;
-        c = a;
+        c = TRUE;
         break;
       case 65:
         if (g.playerCount == 2) {
           g.actors[1].requestedDir = 4;
-          c = a
+          c = TRUE
         }
         break;
       case 83:
         if (g.playerCount == 2) {
           g.actors[1].requestedDir = 2;
-          c = a
+          c = TRUE
         }
         break;
       case 68:
         if (g.playerCount == 2) {
           g.actors[1].requestedDir = 8;
-          c = a
+          c = TRUE
         }
         break;
       case 87:
         if (g.playerCount == 2) {
           g.actors[1].requestedDir = 1;
-          c = a
+          c = TRUE
         }
         break
     }
@@ -2106,7 +2116,7 @@ let pacman = (() => {
   g.handleKeyDown = b => {
     if (!b) b = window.event;
     if (g.keyPressed(b.keyCode)) if (b.preventDefault) b.preventDefault();
-    else b.returnValue = e
+    else b.returnValue = FALSE
   };
   g.canvasClicked = (b, c) => {
     let d = g.getAbsoluteElPos(g.canvasEl);
@@ -2125,9 +2135,9 @@ let pacman = (() => {
     g.canvasClicked(b.clientX, b.clientY)
   };
   g.registerTouch = () => {
-    document.body.addEventListener("touchstart", g.handleTouchStart, a);
-    g.canvasEl.addEventListener("touchstart", g.handleTouchStart, a);
-    document.f && document.f.q && document.f.q.addEventListener("touchstart", g.handleTouchStart, a)
+    document.body.addEventListener("touchstart", g.handleTouchStart, TRUE);
+    g.canvasEl.addEventListener("touchstart", g.handleTouchStart, TRUE);
+    document.f && document.f.q && document.f.q.addEventListener("touchstart", g.handleTouchStart, TRUE)
   };
   g.handleTouchStart = b => {
     g.touchDX = 0;
@@ -2135,8 +2145,8 @@ let pacman = (() => {
     if (b.touches.length == 1) {
       g.touchStartX = b.touches[0].pageX;
       g.touchStartY = b.touches[0].pageY;
-      document.body.addEventListener("touchmove", g.handleTouchMove, a);
-      document.body.addEventListener("touchend", g.handleTouchEnd, a)
+      document.body.addEventListener("touchmove", g.handleTouchMove, TRUE);
+      document.body.addEventListener("touchend", g.handleTouchEnd, TRUE)
     }
     b.preventDefault();
     b.stopPropagation()
@@ -2164,15 +2174,15 @@ let pacman = (() => {
     g.cancelTouch()
   };
   g.cancelTouch = () => {
-    document.body.removeEventListener("touchmove", g.handleTouchMove, a);
-    document.body.removeEventListener("touchend", g.handleTouchEnd, a);
+    document.body.removeEventListener("touchmove", g.handleTouchMove, TRUE);
+    document.body.removeEventListener("touchend", g.handleTouchEnd, TRUE);
     g.touchStartX = null;
     g.touchStartY = null
   };
   g.addEventListeners = () => {
     if (window.addEventListener) {
-      window.addEventListener("keydown", g.handleKeyDown, e);
-      g.canvasEl.addEventListener("click", g.handleClick, e);
+      window.addEventListener("keydown", g.handleKeyDown, FALSE);
+      g.canvasEl.addEventListener("click", g.handleClick, FALSE);
       g.registerTouch()
     } else {
       document.body.attachEvent("onkeydown", g.handleKeyDown);
@@ -2181,12 +2191,12 @@ let pacman = (() => {
   };
   g.startGameplay = () => {
     g.score = [0, 0];
-    g.extraLifeAwarded = [e, e];
+    g.extraLifeAwarded = [FALSE, FALSE];
     g.lives = 3;
     g.level = 0;
-    g.paused = e;
+    g.paused = FALSE;
     g.globalTime = 0;
-    g.newLevel(a)
+    g.newLevel(TRUE)
   };
   g.restartGameplay = b => {
     g.seed(0);
@@ -2196,16 +2206,16 @@ let pacman = (() => {
     g.fruitTime = 0;
     g.ghostModeSwitchPos = 0;
     g.ghostModeTime = g.levels.ghostModeSwitchTimes[0] * D;
-    g.ghostExitingPenNow = e;
+    g.ghostExitingPenNow = FALSE;
     g.ghostEyesCount = 0;
-    g.tilesChanged = e;
+    g.tilesChanged = FALSE;
     g.updateCruiseElroySpeed();
     g.hideFruit();
     g.resetForcePenLeaveTime();
     g.restartActors();
     g.updateActorPositions();
-    g.switchMainGhostMode(2, a);
-    for (let c = g.playerCount + 1; c < g.playerCount + 4; c++) g.actors[c].a(16);
+    g.switchMainGhostMode(2, TRUE);
+    for (let c = g.playerCount + 1; c < g.playerCount + GHOST_NUMBER; c++) g.actors[c].a(16);
     g.dotEatingChannel = [0, 0];
     g.dotEatingSoundPart = [1, 1];
     g.clearDotEatingNow();
@@ -2250,8 +2260,8 @@ let pacman = (() => {
   g.killScreen = () => {
     g.seed(0);
     g.canvasEl.style.visibility = "";
-    g.createKillScreenElement(272, 0, 200, 80, e);
-    g.createKillScreenElement(280, 80, 192, 56, e);
+    g.createKillScreenElement(272, 0, 200, 80, FALSE);
+    g.createKillScreenElement(280, 80, 192, 56, FALSE);
     g.killScreenTileX = 80;
     g.killScreenTileY = 0;
     for (let b = 280; b <= 472; b += 8) for (let c = 0; c <= 136; c += 8) {
@@ -2259,7 +2269,7 @@ let pacman = (() => {
         g.killScreenTileX = Math.floor(g.rand() * 25) * 10;
         g.killScreenTileY = Math.floor(g.rand() * 2) * 10
       }
-      g.createKillScreenElement(b, c, 8, 8, a)
+      g.createKillScreenElement(b, c, 8, 8, TRUE)
     }
     g.changeGameplayMode(14)
   };
@@ -2272,25 +2282,25 @@ let pacman = (() => {
     // end issue 14
     g.levels.frightTotalTime = g.levels.frightTime + g.timing[1] * (g.levels.frightBlinkCount * 2 - 1);
     for (const c in g.actors) g.actors[c].dotCount = 0;
-    g.alternatePenLeavingScheme = e;
-    g.lostLifeOnThisLevel = e;
+    g.alternatePenLeavingScheme = FALSE;
+    g.lostLifeOnThisLevel = FALSE;
     g.updateChrome();
     g.resetPlayfield();
     g.restartGameplay(b);
     g.level == 256 && g.killScreen()
   };
   g.newLife = () => {
-    g.lostLifeOnThisLevel = a;
-    g.alternatePenLeavingScheme = a;
+    g.lostLifeOnThisLevel = TRUE;
+    g.alternatePenLeavingScheme = TRUE;
     g.alternateDotCount = 0;
     g.lives--;
     g.updateChromeLives();
-    g.lives == -1 ? g.changeGameplayMode(8) : g.restartGameplay(e)
+    g.lives == -1 ? g.changeGameplayMode(8) : g.restartGameplay(FALSE)
   };
   g.switchMainGhostMode = (b, c) => {
     if (b == 4 && g.levels.frightTime == 0) for (var d in g.actors) {
       var f = g.actors[d];
-      if (f.ghost) f.reverseDirectionsNext = a
+      if (f.ghost) f.reverseDirectionsNext = TRUE
     } else {
       f = g.mainGhostMode;
       if (b == 4 && g.mainGhostMode != 4) g.lastMainGhostMode = g.mainGhostMode;
@@ -2312,10 +2322,10 @@ let pacman = (() => {
       for (d in g.actors) {
         f = g.actors[d];
         if (f.ghost) {
-          if (b != 64 && !c) f.modeChangedWhileInPen = a;
-          if (b == 4) f.eatenInThisFrightMode = e;
+          if (b != 64 && !c) f.modeChangedWhileInPen = TRUE;
+          if (b == 4) f.eatenInThisFrightMode = FALSE;
           if (f.mode != 8 && f.mode != 16 && f.mode != 32 && f.mode != 128 && f.mode != 64 || c) {
-            if (!c && f.mode != 4 && f.mode != b) f.reverseDirectionsNext = a;
+            if (!c && f.mode != 4 && f.mode != b) f.reverseDirectionsNext = TRUE;
             f.a(b)
           }
         } else {
@@ -2332,24 +2342,24 @@ let pacman = (() => {
       g.alternateDotCount++;
       switch (g.alternateDotCount) {
         case m[1]:
-          g.actors[g.playerCount + 1].freeToLeavePen = a;
+          g.actors[g.playerCount + 1].freeToLeavePen = TRUE;
           break;
         case m[2]:
-          g.actors[g.playerCount + 2].freeToLeavePen = a;
+          g.actors[g.playerCount + 2].freeToLeavePen = TRUE;
           break;
         case m[3]:
-          if (g.actors[g.playerCount + 3].mode == 16) g.alternatePenLeavingScheme = e;
+          if (g.actors[g.playerCount + 3].mode == 16) g.alternatePenLeavingScheme = FALSE;
           break
       }
     } else if (g.actors[g.playerCount + 1].mode == 16 || g.actors[g.playerCount + 1].mode == 8) {
       g.actors[g.playerCount + 1].dotCount++;
-      if (g.actors[g.playerCount + 1].dotCount >= g.levels.penLeavingLimits[1]) g.actors[g.playerCount + 1].freeToLeavePen = a
+      if (g.actors[g.playerCount + 1].dotCount >= g.levels.penLeavingLimits[1]) g.actors[g.playerCount + 1].freeToLeavePen = TRUE
     } else if (g.actors[g.playerCount + 2].mode == 16 || g.actors[g.playerCount + 2].mode == 8) {
       g.actors[g.playerCount + 2].dotCount++;
-      if (g.actors[g.playerCount + 2].dotCount >= g.levels.penLeavingLimits[2]) g.actors[g.playerCount + 2].freeToLeavePen = a
+      if (g.actors[g.playerCount + 2].dotCount >= g.levels.penLeavingLimits[2]) g.actors[g.playerCount + 2].freeToLeavePen = TRUE
     } else if (g.actors[g.playerCount + 3].mode == 16 || g.actors[g.playerCount + 3].mode == 8) {
       g.actors[g.playerCount + 3].dotCount++;
-      if (g.actors[g.playerCount + 3].dotCount >= g.levels.penLeavingLimits[3]) g.actors[g.playerCount + 3].freeToLeavePen = a
+      if (g.actors[g.playerCount + 3].dotCount >= g.levels.penLeavingLimits[3]) g.actors[g.playerCount + 3].freeToLeavePen = TRUE
     }
   };
   g.resetForcePenLeaveTime = () => {
@@ -2361,7 +2371,7 @@ let pacman = (() => {
     g.actors[b].c(1);
     g.playDotEatingSound(b);
     if (g.playfield[c[0]][c[1]].dot == 2) {
-      g.switchMainGhostMode(4, e);
+      g.switchMainGhostMode(4, FALSE);
       g.addToScore(50, b)
     } else g.addToScore(10, b);
     const d = document.getElementById(g.getDotElementId(c[0], c[1]));
@@ -2369,7 +2379,8 @@ let pacman = (() => {
     g.playfield[c[0]][c[1]].dot = 0;
     g.updateCruiseElroySpeed();
     g.resetForcePenLeaveTime();
-    g.figureOutPenLeaving();
+    //TODO
+    //g.figureOutPenLeaving();
     if (g.dotsEaten == 70 || g.dotsEaten == 170) g.showFruit();
     g.dotsRemaining == 0 && g.finishLevel();
     g.playAmbientSound()
@@ -2385,27 +2396,27 @@ let pacman = (() => {
     return [c, b]
   };
   g.hideFruit = () => {
-    g.fruitShown = e;
-    g.changeElementBkPos(g.fruitEl, 32, 16, a)
+    g.fruitShown = FALSE;
+    g.changeElementBkPos(g.fruitEl, 32, 16, TRUE)
   };
   g.showFruit = () => {
-    g.fruitShown = a;
+    g.fruitShown = TRUE;
     const b = g.getFruitSprite(g.levels.fruit);
-    g.changeElementBkPos(g.fruitEl, b[0], b[1], a);
+    g.changeElementBkPos(g.fruitEl, b[0], b[1], TRUE);
     g.fruitTime = g.timing[15] + (g.timing[16] - g.timing[15]) * g.rand()
   };
   g.eatFruit = b => {
     if (g.fruitShown) {
       g.playSound("fruit", 0);
-      g.fruitShown = e;
+      g.fruitShown = FALSE;
       const c = g.getFruitScoreSprite(g.levels.fruit);
-      g.changeElementBkPos(g.fruitEl, c[0], c[1], a);
+      g.changeElementBkPos(g.fruitEl, c[0], c[1], TRUE);
       g.fruitTime = g.timing[14];
       g.addToScore(g.levels.fruitScore, b)
     }
   };
   g.updateActorTargetPositions = () => {
-    for (let b = g.playerCount; b < g.playerCount + 4; b++) g.actors[b].B()
+    for (let b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++) g.actors[b].B()
   };
   g.moveActors = () => {
     for (const b in g.actors) g.actors[b].move()
@@ -2423,13 +2434,15 @@ let pacman = (() => {
     g.changeGameplayMode(2)
   };
   g.detectCollisions = () => {
-    g.tilesChanged = e;
-    for (let b = g.playerCount; b < g.playerCount + 4; b++) for (let c = 0; c < g.playerCount; c++) if (g.actors[b].tilePos[0] == g.actors[c].tilePos[0] && g.actors[b].tilePos[1] == g.actors[c].tilePos[1]) if (g.actors[b].mode == 4) {
+    g.tilesChanged = FALSE;
+    for (let b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++) for (let c = 0; c < g.playerCount; c++) if (g.actors[b].tilePos[0] == g.actors[c].tilePos[0] && g.actors[b].tilePos[1] == g.actors[c].tilePos[1]) if (g.actors[b].mode == 4) {
       g.ghostDies(b, c);
       return
     } else g.actors[b].mode != 8 && g.actors[b].mode != 16 && g.actors[b].mode != 32 && g.actors[b].mode != 128 && g.actors[b].mode != 64 && g.playerDies(c)
   };
   g.updateCruiseElroySpeed = () => {
+    //TODO
+    /*
     let b = g.levels.ghostSpeed * 0.8;
     if (!g.lostLifeOnThisLevel || g.actors[g.playerCount + 3].mode != 16) {
       const c = g.levels;
@@ -2440,6 +2453,7 @@ let pacman = (() => {
       g.cruiseElroySpeed = b;
       g.actors[g.playerCount].d()
     }
+    */
   };
   g.getSpeedIntervals = b => {
     if (!g.speedIntervals[b]) {
@@ -2449,9 +2463,9 @@ let pacman = (() => {
       for (let f = 0; f < D; f++) {
         c += b;
         if (Math.floor(c) > d) {
-          g.speedIntervals[b].push(a);
+          g.speedIntervals[b].push(TRUE);
           d = Math.floor(c)
-        } else g.speedIntervals[b].push(e)
+        } else g.speedIntervals[b].push(FALSE)
       }
     }
     return g.speedIntervals[b]
@@ -2461,7 +2475,7 @@ let pacman = (() => {
   };
   g.changeGameplayMode = b => {
     g.gameplayMode = b;
-    if (b != 13) for (let c = 0; c < g.playerCount + 4; c++) g.actors[c].b();
+    if (b != 13) for (let c = 0; c < g.playerCount + GHOST_NUMBER; c++) g.actors[c].b();
     switch (b) {
       case 0:
         g.playAmbientSound();
@@ -2496,7 +2510,7 @@ let pacman = (() => {
         g.playfieldEl.appendChild(b);
         g.gameplayModeTime = g.timing[7];
         g.stopAllAudio();
-        g.playerCount == 2 ? g.playSound("start-music-double", 0, a) : g.playSound("start-music", 0, a);
+        g.playerCount == 2 ? g.playSound("start-music-double", 0, TRUE) : g.playSound("start-music", 0, TRUE);
         break;
       case 5:
         g.lives--;
@@ -2549,25 +2563,25 @@ let pacman = (() => {
   };
   g.toggleSound = b => {
     b = window.event || b;
-    b.cancelBubble = a;
+    b.cancelBubble = TRUE;
     if (google.pacManSound) {
-      g.userDisabledSound = a;
+      g.userDisabledSound = TRUE;
       g.stopAllAudio();
-      google.pacManSound = e
+      google.pacManSound = FALSE
     } else {
-      google.pacManSound = a;
+      google.pacManSound = TRUE;
       g.playAmbientSound()
     }
     g.updateSoundIcon();
-    return b.returnValue = e
+    return b.returnValue = FALSE
   };
   g.updateSoundIcon = () => {
-    if (g.soundEl) google.pacManSound ? g.changeElementBkPos(g.soundEl, 216, 105, e) : g.changeElementBkPos(g.soundEl, 236, 105, e)
+    if (g.soundEl) google.pacManSound ? g.changeElementBkPos(g.soundEl, 216, 105, FALSE) : g.changeElementBkPos(g.soundEl, 236, 105, FALSE)
   };
   g.startCutscene = () => {
     g.playfieldEl.style.visibility = "hidden";
     g.canvasEl.style.visibility = "";
-    g.showChrome(e);
+    g.showChrome(FALSE);
     g.cutsceneCanvasEl = document.createElement("div");
     g.cutsceneCanvasEl.id = "pcm-cc";
     g.canvasEl.appendChild(g.cutsceneCanvasEl);
@@ -2582,7 +2596,7 @@ let pacman = (() => {
       d.className = "pcm-ac";
       d.id = `actor${c}`;
       g.prepareElement(d, 0, 0);
-      c = new E(c);
+      c = new Actor(c);
       c.el = d;
       c.elBackgroundPos = [0, 0];
       c.elPos = [0, 0];
@@ -2599,8 +2613,8 @@ let pacman = (() => {
   g.stopCutscene = () => {
     g.playfieldEl.style.visibility = "";
     google.dom.remove(g.cutsceneCanvasEl);
-    g.showChrome(a);
-    g.newLevel(e)
+    g.showChrome(TRUE);
+    g.newLevel(FALSE)
   };
   g.cutsceneNextSequence = () => {
     g.cutsceneSequenceId++;
@@ -2664,7 +2678,7 @@ let pacman = (() => {
     }
   };
   g.finishFrightMode = () => {
-    g.switchMainGhostMode(g.lastMainGhostMode, e)
+    g.switchMainGhostMode(g.lastMainGhostMode, FALSE)
   };
   g.handleGameplayModeTimer = () => {
     if (g.gameplayModeTime) {
@@ -2672,10 +2686,10 @@ let pacman = (() => {
       switch (g.gameplayMode) {
         case 2:
         case 3:
-          for (var b = 0; b < g.playerCount + 4; b++) g.actors[b].b();
+          for (var b = 0; b < g.playerCount + GHOST_NUMBER; b++) g.actors[b].b();
           break;
         case 10:
-          Math.floor(g.gameplayModeTime / (g.timing[11] / 8)) % 2 == 0 ? g.changeElementBkPos(g.playfieldEl, 322, 2, e) : g.changeElementBkPos(g.playfieldEl, 322, 138, e)
+          Math.floor(g.gameplayModeTime / (g.timing[11] / 8)) % 2 == 0 ? g.changeElementBkPos(g.playfieldEl, 322, 2, FALSE) : g.changeElementBkPos(g.playfieldEl, 322, 138, FALSE)
       }
       if (g.gameplayModeTime <= 0) {
         g.gameplayModeTime = 0;
@@ -2686,9 +2700,9 @@ let pacman = (() => {
             g.playAmbientSound();
             g.actors[g.ghostBeingEatenId].el.className = "pcm-ac";
             g.actors[g.ghostBeingEatenId].a(8);
-            let c = e;
-            for (b = g.playerCount; b < g.playerCount + 4; b++) if (g.actors[b].mode == 4 || (g.actors[b].mode == 16 || g.actors[b].mode == 128) && !g.actors[b].eatenInThisFrightMode) {
-              c = a;
+            let c = FALSE;
+            for (b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++) if (g.actors[b].mode == 4 || (g.actors[b].mode == 16 || g.actors[b].mode == 128) && !g.actors[b].eatenInThisFrightMode) {
+              c = TRUE;
               break
             }
             c || g.finishFrightMode();
@@ -2728,7 +2742,7 @@ let pacman = (() => {
               g.changeGameplayMode(13)
             } else {
               g.canvasEl.style.visibility = "";
-              g.newLevel(e)
+              g.newLevel(FALSE)
             }
             break;
           case 12:
@@ -2762,10 +2776,10 @@ let pacman = (() => {
           g.ghostModeTime = g.levels.ghostModeSwitchTimes[g.ghostModeSwitchPos] * D;
           switch (g.mainGhostMode) {
             case 2:
-              g.switchMainGhostMode(1, e);
+              g.switchMainGhostMode(1, FALSE);
               break;
             case 1:
-              g.switchMainGhostMode(2, e);
+              g.switchMainGhostMode(2, FALSE);
               break
           }
         }
@@ -2777,7 +2791,7 @@ let pacman = (() => {
       g.forcePenLeaveTime--;
       if (g.forcePenLeaveTime <= 0) {
         for (let b = 1; b <= 3; b++) if (g.actors[g.playerCount + b].mode == 16) {
-          g.actors[g.playerCount + b].freeToLeavePen = a;
+          g.actors[g.playerCount + b].freeToLeavePen = TRUE;
           break
         }
         g.resetForcePenLeaveTime()
@@ -2829,7 +2843,7 @@ let pacman = (() => {
   };
   g.extraLife = b => {
     g.playSound("extra-life", 0);
-    g.extraLifeAwarded[b] = a;
+    g.extraLifeAwarded[b] = TRUE;
     g.lives++;
     if (g.lives > 5) g.lives = 5;
     g.updateChromeLives()
@@ -2850,7 +2864,7 @@ let pacman = (() => {
     for (let d = 0; d < g.scoreDigits; d++) {
       const f = document.getElementById(`pcm-sc-${b + 1}-${d}`);
       const h = c.substr(d, 1);
-      h ? g.changeElementBkPos(f, 8 + 8 * parseInt(h, 10), 144, a) : g.changeElementBkPos(f, 48, 0, a)
+      h ? g.changeElementBkPos(f, 8 + 8 * parseInt(h, 10), 144, TRUE) : g.changeElementBkPos(f, 48, 0, TRUE)
     }
   };
   g.updateChromeLives = () => {
@@ -2933,8 +2947,8 @@ let pacman = (() => {
     }
   };
   g.clearDotEatingNow = () => {
-    g.dotEatingNow = [e, e];
-    g.dotEatingNext = [e, e]
+    g.dotEatingNow = [FALSE, FALSE];
+    g.dotEatingNext = [FALSE, FALSE]
   };
   g.playSound = (b, c, d) => {
     if (!(!g.soundAvailable || !google.pacManSound || g.paused)) {
@@ -2942,7 +2956,7 @@ let pacman = (() => {
       try {
         g.flashSoundPlayer.playTrack(b, c)
       } catch (f) {
-        g.soundAvailable = e
+        g.soundAvailable = FALSE
       }
     }
   };
@@ -2950,7 +2964,7 @@ let pacman = (() => {
     if (g.soundAvailable) try {
       g.flashSoundPlayer.stopChannel(b)
     } catch (c) {
-      g.soundAvailable = e
+      g.soundAvailable = FALSE
     }
   };
   g.stopAllAudio = () => {
@@ -2958,20 +2972,20 @@ let pacman = (() => {
       try {
         g.flashSoundPlayer.stopAmbientTrack()
       } catch (b) {
-        g.soundAvailable = e
+        g.soundAvailable = FALSE
       }
       for (let c = 0; c < 5; c++) g.stopSoundChannel(c)
     }
   };
   g.playDotEatingSound = b => {
-    if (g.soundAvailable && google.pacManSound) if (g.gameplayMode == 0) if (g.dotEatingNow[b]) g.dotEatingNext[b] = a;
+    if (g.soundAvailable && google.pacManSound) if (g.gameplayMode == 0) if (g.dotEatingNow[b]) g.dotEatingNext[b] = TRUE;
     else {
       if (b == 0) {
         const c = g.dotEatingSoundPart[b] == 1 ? "eating-dot-1" : "eating-dot-2";
-        g.playSound(c, 1 + g.dotEatingChannel[b], a);
+        g.playSound(c, 1 + g.dotEatingChannel[b], TRUE);
         g.dotTimer = window.setInterval(g.repeatDotEatingSoundPacMan, 150)
       } else {
-        g.playSound("eating-dot-double", 3 + g.dotEatingChannel[b], a);
+        g.playSound("eating-dot-double", 3 + g.dotEatingChannel[b], TRUE);
         g.dotTimerMs = window.setInterval(g.repeatDotEatingSoundMsPacMan, 150)
       }
       g.dotEatingChannel[b] = (g.dotEatingChannel[b] + 1) % 2;
@@ -2980,9 +2994,9 @@ let pacman = (() => {
     }
   };
   g.repeatDotEatingSound = b => {
-    g.dotEatingNow[b] = e;
+    g.dotEatingNow[b] = FALSE;
     if (g.dotEatingNext[b]) {
-      g.dotEatingNext[b] = e;
+      g.dotEatingNext[b] = FALSE;
       g.playDotEatingSound(b)
     }
   };
@@ -3000,7 +3014,7 @@ let pacman = (() => {
       if (b) try {
         g.flashSoundPlayer.playAmbientTrack(b)
       } catch (c) {
-        g.soundAvailable = e
+        g.soundAvailable = FALSE
       }
     }
   };
@@ -3024,7 +3038,7 @@ let pacman = (() => {
     if (g.fpsChoice < C.length - 1) {
       g.fpsChoice++;
       g.initializeTickTimer();
-      if (g.fpsChoice == C.length - 1) g.canDecreaseFps = e
+      if (g.fpsChoice == C.length - 1) g.canDecreaseFps = FALSE
     }
   };
   g.addCss = () => {
@@ -3039,14 +3053,14 @@ let pacman = (() => {
   g.createCanvasElement = () => {
     g.canvasEl = document.createElement("div");
     g.canvasEl.id = "pcm-c";
-    g.canvasEl.hideFocus = a;
+    g.canvasEl.hideFocus = TRUE;
     document.getElementById("logo").appendChild(g.canvasEl);
     g.canvasEl.tabIndex = 0;
     g.canvasEl.focus()
   };
   g.everythingIsReady = () => {
     if (!g.ready) {
-      g.ready = a;
+      g.ready = TRUE;
       const b = document.getElementById("logo-l");
       google.dom.remove(b);
       //document.getElementById("logo").style.background = "black";
@@ -3060,7 +3074,7 @@ let pacman = (() => {
       g.oppositeDirections[8] = 4;
       g.addEventListeners();
       g.fpsChoice = 0;
-      g.canDecreaseFps = a;
+      g.canDecreaseFps = TRUE;
       g.initializeTickTimer();
       g.newGame()
     }
@@ -3080,11 +3094,11 @@ let pacman = (() => {
     d && g.imageLoaded()
   };
   g.imageLoaded = () => {
-    g.graphicsReady = a;
+    g.graphicsReady = TRUE;
     g.checkIfEverythingIsReady()
   };
   g.prepareGraphics = () => {
-    g.graphicsReady = e;
+    g.graphicsReady = FALSE;
     g.preloadImage(spriteURL)
   };
   g.trimString = b => b.replace(/^[\s\xa0]+|[\s\xa0]+$/g, "");
@@ -3116,16 +3130,16 @@ let pacman = (() => {
     return b.join(".")
   };
   g.detectFlash = () => {
-    let b = e;
+    let b = FALSE;
     let c = "";
     if (navigator.plugins && navigator.plugins.length) {
       var d = navigator.plugins["Shockwave Flash"];
       if (d) {
-        b = a;
+        b = TRUE;
         if (d.description) c = g.getFlashVersion(d.description)
       }
       if (navigator.plugins["Shockwave Flash 2.0"]) {
-        b = a;
+        b = TRUE;
         c = "2.0.0.11"
       }
     } else if (navigator.mimeTypes && navigator.mimeTypes.length) {
@@ -3135,17 +3149,17 @@ let pacman = (() => {
       }
     } else try {
       d = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");
-      b = a;
+      b = TRUE;
       c = g.getFlashVersion(d.GetVariable("$version"))
     } catch (f) {
       try {
         d = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");
-        b = a;
+        b = TRUE;
         c = "6.0.21"
       } catch (h) {
         try {
           d = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
-          b = a;
+          b = TRUE;
           c = g.getFlashVersion(d.GetVariable("$version"))
         } catch (j) { }
       }
@@ -3155,11 +3169,11 @@ let pacman = (() => {
   };
   g.isFlashVersion = b => g.compareVersions(g.flashVersion, b) >= 0;
   g.prepareSound = () => {
-    g.soundAvailable = e;
-    g.soundReady = e;
+    g.soundAvailable = FALSE;
+    g.soundReady = FALSE;
     g.detectFlash();
     if (!g.hasFlash || !g.isFlashVersion("9.0.0.0")) {
-      g.soundReady = a;
+      g.soundReady = TRUE;
       g.checkIfEverythingIsReady()
     } else {
       g.flashIframe = document.createElement("iframe");
@@ -3180,15 +3194,15 @@ let pacman = (() => {
   };
   g.flashNotReady = () => {
     if (!g.ready) {
-      g.soundAvailable = e;
-      g.soundReady = a;
+      g.soundAvailable = FALSE;
+      g.soundReady = TRUE;
       g.checkIfEverythingIsReady()
     }
   };
   g.flashReady = b => {
     g.flashSoundPlayer = b;
-    g.soundAvailable = a;
-    g.soundReady = a;
+    g.soundAvailable = TRUE;
+    g.soundReady = TRUE;
     g.checkIfEverythingIsReady()
   };
   g.flashLoaded = () => {
@@ -3230,11 +3244,11 @@ let pacman = (() => {
     document.getElementById("logo-b").style.width = `${b}px`
   };
   g.init = () => {
-    g.ready = e;
+    g.ready = FALSE;
     document.getElementById("logo").title = "";
     g.updateLoadingProgress(0.33);
     g.exportFunctionCalls();
-    g.useCss = navigator.userAgent.includes("MSIE 5.") || navigator.userAgent.includes("MSIE 6.") || navigator.userAgent.includes("MSIE 7.") ? e : a;
+    g.useCss = navigator.userAgent.includes("MSIE 5.") || navigator.userAgent.includes("MSIE 6.") || navigator.userAgent.includes("MSIE 7.") ? FALSE : TRUE;
     g.prepareGraphics();
     g.prepareSound()
   };
@@ -3242,4 +3256,41 @@ let pacman = (() => {
   return g;
 })();
 
-export default pacman;
+
+
+const CONTROL_CODES = {
+  1: {
+      up: 38,
+      down: 40,
+      left: 37,
+      right: 39
+  },
+  2: {
+      up: 87,
+      down: 83,
+      left: 65,
+      right: 68
+  }
+}
+class Pacman{
+  constructor(googlePacman){
+    this.googlePacman = googlePacman;
+  }
+  startGameplayNoGhost(){
+    GHOST_NUMBER = 0;
+    this.googlePacman.switchToDoubleMode();
+
+  }
+  startGameplayWithGhost(){
+    GHOST_NUMBER = 2;
+    
+    this.googlePacman.switchToDoubleMode();
+
+  }
+  move(playerId,direction){    
+    this.googlePacman.keyPressed(CONTROL_CODES[playerId][direction]);
+  }
+
+}
+
+export default new Pacman(googlePacman);
