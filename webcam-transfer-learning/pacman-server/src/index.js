@@ -1,4 +1,5 @@
-import pacman from "./packman";
+import pacman from "./pacman";
+
 let CONTROL_CODES = {
     1: {
         up: 38,
@@ -13,10 +14,8 @@ let CONTROL_CODES = {
         right: 68
     }
 }
-$( () =>{
+$(() =>{
     var socket = io();
-
-
     socket.on('action', function (action) {
         let direction = action.action;
         let player = action.player
@@ -27,4 +26,4 @@ $( () =>{
 setTimeout( () =>{
     pacman.switchToDoubleMode();
     pacman.startGameplay(); 
-}, 2000)
+}, 1000)

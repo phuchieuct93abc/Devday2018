@@ -1,8 +1,8 @@
 {
-  "name": "packman-server",
+  "name": "pacman-server",
   "version": "1.0.0",
   "description": "",
-  "main": "packman-server.js",
+  "main": "pacman-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
