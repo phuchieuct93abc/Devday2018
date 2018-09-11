@@ -7,7 +7,6 @@ $(() =>{
         let direction = action.action;
         let player = action.player
         pacman.move(player,direction);
-
     });
 });
 setTimeout( () =>{

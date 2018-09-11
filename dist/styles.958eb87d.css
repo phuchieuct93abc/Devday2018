@@ -350,3 +350,46 @@ header b {
   padding: 30px;
   line-height: 30px;
 }
+
+.control-panel{
+  position: relative;
+}
+.controller{
+  position: absolute;
+  width:150px;
+  height: 150px;
+}
+.controller:hover{  
+  background-color: rgba(179, 179, 179, 0.5);
+  cursor: pointer;
+}
+.control-up{
+position: absolute;
+left: 141px;
+top: 0;
+width: 100px;
+height: 100px;
+
+}
+
+.control-down{
+position: absolute;
+left: 141px;
+top: 115px;
+width: 100px;
+height: 100px;}
+
+.control-left{
+position: absolute;
+left: 31px;
+top: 115px;
+width: 100px;
+height: 100px;
+}
+.control-right{
+position: absolute;
+left: 243px;
+top: 115px;
+width: 100px;
+height: 100px;
+}

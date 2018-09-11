@@ -87,40 +87,36 @@ async function handler(label) {
   document.body.removeAttribute('data-active');
 }
 
-// upButton.addEventListener('mousedown', () => handler(0));
-// upButton.addEventListener('mouseup', () => mouseDown = false);
+ upButton.addEventListener('mousedown', () => handler(0));
+ upButton.addEventListener('mouseup', () => mouseDown = false);
 
-// downButton.addEventListener('mousedown', () => handler(1));
-// downButton.addEventListener('mouseup', () => mouseDown = false);
+ downButton.addEventListener('mousedown', () => handler(1));
+ downButton.addEventListener('mouseup', () => mouseDown = false);
 
-// leftButton.addEventListener('mousedown', () => handler(2));
-// leftButton.addEventListener('mouseup', () => mouseDown = false);
+ leftButton.addEventListener('mousedown', () => handler(2));
+ leftButton.addEventListener('mouseup', () => mouseDown = false);
 
-// rightButton.addEventListener('mousedown', () => handler(3));
-// rightButton.addEventListener('mouseup', () => mouseDown = false);
+ rightButton.addEventListener('mousedown', () => handler(3));
+ rightButton.addEventListener('mouseup', () => mouseDown = false);
 
- upButton.addEventListener('mousedown', () =>{
+ document.getElementsByClassName("control-up")[0].addEventListener('mousedown', () =>{
   move("up")
 
 });
-downButton.addEventListener('mousedown', () =>{
+document.getElementsByClassName("control-down")[0].addEventListener('mousedown', () =>{
   move("down")
 
 });
   
-leftButton.addEventListener('mousedown', () =>{
+document.getElementsByClassName("control-left")[0].addEventListener('mousedown', () =>{
   move("left")
 
 });
   
-rightButton.addEventListener('mousedown', () =>{
+document.getElementsByClassName("control-right")[0].addEventListener('mousedown', () =>{
   move("right")
 
 });
-  
-  
-
-
 
  function move(direction){
   

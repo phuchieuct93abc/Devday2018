@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _pacman__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pacman */ \"./pacman-server/src/pacman.js\");\n\r\n\r\n\r\n$(() =>{\r\n    var socket = io();\r\n    socket.on('action', function (action) {\r\n        let direction = action.action;\r\n        let player = action.player\r\n        _pacman__WEBPACK_IMPORTED_MODULE_0__[\"default\"].move(player,direction);\r\n\r\n    });\r\n});\r\nsetTimeout( () =>{\r\n    _pacman__WEBPACK_IMPORTED_MODULE_0__[\"default\"].startGameplayNoGhost(); \r\n}, 2000)\r\n\n\n//# sourceURL=webpack:///./pacman-server/src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _pacman__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pacman */ \"./pacman-server/src/pacman.js\");\n\r\n\r\n\r\n$(() =>{\r\n    var socket = io();\r\n    socket.on('action', function (action) {\r\n        let direction = action.action;\r\n        let player = action.player\r\n        _pacman__WEBPACK_IMPORTED_MODULE_0__[\"default\"].move(player,direction);\r\n    });\r\n});\r\nsetTimeout( () =>{\r\n    _pacman__WEBPACK_IMPORTED_MODULE_0__[\"default\"].startGameplayNoGhost(); \r\n}, 2000)\r\n\n\n//# sourceURL=webpack:///./pacman-server/src/index.js?");
 
 /***/ }),
 
