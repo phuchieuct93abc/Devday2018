@@ -398,7 +398,7 @@ const w = {
 };
 
 const y = 0.8 * 0.4;
-/* 
+
 const z = [{},
 {
   ghostSpeed: 0.75,
@@ -825,7 +825,7 @@ const z = [{},
   penForceTime: 3,
   penLeavingLimits: [0, 0, 0, 0]
 }];
- */
+ 
 const A = {
   1: [{
     x: 37.6,
@@ -2809,7 +2809,7 @@ let googlePacman = (() => {
     g.handleGameplayModeTimer()
   };
   //TODO
-/*   g.tick = () => {
+   g.tick = () => {
     let b = (new Date).getTime();
     g.lastTimeDelta += b - g.lastTime - g.tickInterval;
     if (g.lastTimeDelta > 100) g.lastTimeDelta = 100;
@@ -2843,7 +2843,7 @@ let googlePacman = (() => {
       g.blinkScoreLabels();
       g.handleTimers()
     }
-  }; */
+  }; 
   g.extraLife = b => {
     g.playSound("extra-life", 0);
     g.extraLifeAwarded[b] = TRUE;

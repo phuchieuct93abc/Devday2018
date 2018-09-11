@@ -12,4 +12,4 @@ $(() =>{
 });
 setTimeout( () =>{
     pacman.startGameplayNoGhost(); 
-}, 1000)
+}, 2000)
