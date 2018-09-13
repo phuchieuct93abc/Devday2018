@@ -14,7 +14,7 @@ let User = function (game, map) {
     keyMap[KEY.ARROW_UP]    = UP;
     keyMap[KEY.ARROW_RIGHT] = RIGHT;
     keyMap[KEY.ARROW_DOWN]  = DOWN;
-    name = game.name
+    let name = game.name
 
     function addScore(nScore) { 
         score += nScore;
