@@ -2421,7 +2421,7 @@ let googlePacman = (() => {
     for (let b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++) g.actors[b].B()
   };
   g.moveActors = () => {
-    for (const b in g.actors) g.actors[b].move()
+    for (let b in g.actors) g.actors[b].move()
   };
   g.ghostDies = (b, c) => {
     g.playSound("eating-ghost", 0);

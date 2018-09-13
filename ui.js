@@ -133,12 +133,8 @@ document.getElementsByClassName("control-right")[0].addEventListener('mousedown'
     data: {
         action: direction, 
         player: $("#player").val()
-    },
- 
-    // Work with the response
-    success: function( response ) {
-        console.log( response ); // server response
     }
+ 
  })
 }
 
