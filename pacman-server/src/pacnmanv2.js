@@ -1,25 +1,5 @@
-/*jslint browser: true, undef: true, eqeqeq: true, nomen: true, white: true */
-/*global window: false, document: false */
-
-/*
- * fix looped audio
- * add fruits + levels
- * fix what happens when a ghost is eaten (should go back to base)
- * do proper ghost mechanics (blinky/wimpy etc)
- */
-
-var NONE        = 4,
-    UP          = 3,
-    LEFT        = 2,
-    DOWN        = 1,
-    RIGHT       = 11,
-    WAITING     = 5,
-    PAUSE       = 6,
-    PLAYING     = 7,
-    COUNTDOWN   = 8,
-    EATEN_PAUSE = 9,
-    DYING       = 10,
-    Pacman      = {};
+import PacmanUser from "./pacnmanv2User";
+import {KEY,NONE,UP,LEFT,DOWN,RIGHT,WAITING,PAUSE,PLAYING,COUNTDOWN,EATEN_PAUSE,DYING,Pacman} from "./pacnmanv2Const"
 
 Pacman.FPS = 30;
 
@@ -276,256 +256,6 @@ Pacman.Ghost = function (game, map, colour) {
     };
 };
 
-Pacman.User = function (game, map) {
-    
-    var position  = null,
-        direction = null,
-        eaten     = null,
-        due       = null, 
-        lives     = null,
-        score     = 5,
-        keyMap    = {};
-    
-    keyMap[KEY.ARROW_LEFT]  = LEFT;
-    keyMap[KEY.ARROW_UP]    = UP;
-    keyMap[KEY.ARROW_RIGHT] = RIGHT;
-    keyMap[KEY.ARROW_DOWN]  = DOWN;
-
-    function addScore(nScore) { 
-        score += nScore;
-        if (score >= 10000 && score - nScore < 10000) { 
-            lives += 1;
-        }
-    };
-
-    function theScore() { 
-        return score;
-    };
-
-    function loseLife() { 
-        lives -= 1;
-    };
-
-    function getLives() {
-        return lives;
-    };
-
-    function initUser() {
-        score = 0;
-        lives = 3;
-        newLevel();
-    }
-    
-    function newLevel() {
-        resetPosition();
-        eaten = 0;
-    };
-    
-    function resetPosition() {
-        position = {"x": 90, "y": 120};
-        direction = LEFT;
-        due = LEFT;
-    };
-    
-    function reset() {
-        initUser();
-        resetPosition();
-    };        
-    
-    function keyDown(direction) {
-            due = direction;
-            console.log(direction)
-           
-            return false;
-       
-	};
-
-    function getNewCoord(dir, current) {   
-        return {
-            "x": current.x + (dir === LEFT && -2 || dir === RIGHT && 2 || 0),
-            "y": current.y + (dir === DOWN && 2 || dir === UP    && -2 || 0)
-        };
-    };
-
-    function onWholeSquare(x) {
-        return x % 10 === 0;
-    };
-
-    function pointToCoord(x) {
-        return Math.round(x/10);
-    };
-    
-    function nextSquare(x, dir) {
-        var rem = x % 10;
-        if (rem === 0) { 
-            return x; 
-        } else if (dir === RIGHT || dir === DOWN) { 
-            return x + (10 - rem);
-        } else {
-            return x - rem;
-        }
-    };
-
-    function next(pos, dir) {
-        return {
-            "y" : pointToCoord(nextSquare(pos.y, dir)),
-            "x" : pointToCoord(nextSquare(pos.x, dir)),
-        };                               
-    };
-
-    function onGridSquare(pos) {
-        return onWholeSquare(pos.y) && onWholeSquare(pos.x);
-    };
-
-    function isOnSamePlane(due, dir) { 
-        return ((due === LEFT || due === RIGHT) && 
-                (dir === LEFT || dir === RIGHT)) || 
-            ((due === UP || due === DOWN) && 
-             (dir === UP || dir === DOWN));
-    };
-
-    function move() {
-        
-        var npos        = null, 
-            nextWhole   = null, 
-            oldPosition = position,
-            block       = null;
-        
-        if (due !== direction) {
-            npos = getNewCoord(due, position);
-            
-            if (isOnSamePlane(due, direction) || 
-                (onGridSquare(position) && 
-                 map.isFloorSpace(next(npos, due)))) {
-                direction = due;
-            } else {
-                npos = null;
-            }
-        }
-
-        if (npos === null) {
-            npos = getNewCoord(direction, position);
-        }
-        
-        if (onGridSquare(position) && map.isWallSpace(next(npos, direction))) {
-            direction = NONE;
-        }
-
-        if (direction === NONE) {
-            return {"new" : position, "old" : position};
-        }
-        
-        if (npos.y === 100 && npos.x >= 190 && direction === RIGHT) {
-            npos = {"y": 100, "x": -10};
-        }
-        
-        if (npos.y === 100 && npos.x <= -12 && direction === LEFT) {
-            npos = {"y": 100, "x": 190};
-        }
-        
-        position = npos;        
-        nextWhole = next(position, direction);
-        
-        block = map.block(nextWhole);        
-        
-        if ((isMidSquare(position.y) || isMidSquare(position.x)) &&
-            block === Pacman.BISCUIT || block === Pacman.PILL) {
-            
-            map.setBlock(nextWhole, Pacman.EMPTY);           
-            addScore((block === Pacman.BISCUIT) ? 10 : 50);
-            eaten += 1;
-            
-            if (eaten === 182) {
-                game.completedLevel();
-            }
-            
-            if (block === Pacman.PILL) { 
-                game.eatenPill();
-            }
-        }   
-                
-        return {
-            "new" : position,
-            "old" : oldPosition
-        };
-    };
-
-    function isMidSquare(x) { 
-        var rem = x % 10;
-        return rem > 3 || rem < 7;
-    };
-
-    function calcAngle(dir, pos) { 
-        if (dir == RIGHT && (pos.x % 10 < 5)) {
-            return {"start":0.25, "end":1.75, "direction": false};
-        } else if (dir === DOWN && (pos.y % 10 < 5)) { 
-            return {"start":0.75, "end":2.25, "direction": false};
-        } else if (dir === UP && (pos.y % 10 < 5)) { 
-            return {"start":1.25, "end":1.75, "direction": true};
-        } else if (dir === LEFT && (pos.x % 10 < 5)) {             
-            return {"start":0.75, "end":1.25, "direction": true};
-        }
-        return {"start":0, "end":2, "direction": false};
-    };
-
-    function drawDead(ctx, amount) { 
-
-        var size = map.blockSize, 
-            half = size / 2;
-
-        if (amount >= 1) { 
-            return;
-        }
-
-        ctx.fillStyle = "#FFFF00";
-        ctx.beginPath();        
-        ctx.moveTo(((position.x/10) * size) + half, 
-                   ((position.y/10) * size) + half);
-        
-        ctx.arc(((position.x/10) * size) + half, 
-                ((position.y/10) * size) + half,
-                half, 0, Math.PI * 2 * amount, true); 
-        
-        ctx.fill();    
-    };
-
-    function draw(ctx) { 
-
-        var s     = map.blockSize, 
-            angle = calcAngle(direction, position);
-
-        ctx.fillStyle = "#FFFF00";
-
-        ctx.beginPath();        
-
-        ctx.moveTo(((position.x/10) * s) + s / 2,
-                   ((position.y/10) * s) + s / 2);
-        
-        ctx.arc(((position.x/10) * s) + s / 2,
-                ((position.y/10) * s) + s / 2,
-                s / 2, Math.PI * angle.start, 
-                Math.PI * angle.end, angle.direction); 
-        
-        ctx.fill();    
-    };
-    
-    initUser();
-
-    return {
-        "draw"          : draw,
-        "drawDead"      : drawDead,
-        "loseLife"      : loseLife,
-        "getLives"      : getLives,
-        "score"         : score,
-        "addScore"      : addScore,
-        "theScore"      : theScore,
-        "keyDown"       : keyDown,
-        "move"          : move,
-        "newLevel"      : newLevel,
-        "reset"         : reset,
-        "resetPosition" : resetPosition
-    };
-};
 
 Pacman.Map = function (size) {
     
@@ -1007,6 +737,7 @@ var PACMAN = (function () {
 
     function eatenPill() {
         audio.play("eatpill");
+        console.log("eat pill")
         timerStart = tick;
         eatenCount = 0;
         for (let i = 0; i < ghosts.length; i += 1) {
@@ -1029,6 +760,7 @@ var PACMAN = (function () {
         }
     };
     
+
     function init(wrapper, root) {
         
         var i, len, ghost,
@@ -1044,13 +776,17 @@ var PACMAN = (function () {
 
         audio = new Pacman.Audio({"soundDisabled":soundDisabled});
         map   = new Pacman.Map(blockSize);
-        let user1  = new Pacman.User({ 
+        let user1  = new PacmanUser({ 
             "completedLevel" : completedLevel, 
-            "eatenPill"      : eatenPill 
+            "eatenPill"      : eatenPill,
+            name:"Pacman 1" 
+            ,
         }, map);
-        let user2 =  new Pacman.User({ 
+        let user2 =  new PacmanUser({ 
             "completedLevel" : completedLevel, 
-            "eatenPill"      : eatenPill 
+            "eatenPill"      : eatenPill ,
+            name:"Pacman 2" 
+
         }, map);
         users = new PacmanUsers();
         users.addUser(user1)
@@ -1149,7 +885,6 @@ class PacmanUsers{
 }
 
 /* Human readable keyCode index */
-var KEY = {'BACKSPACE': 8, 'TAB': 9, 'NUM_PAD_CLEAR': 12, 'ENTER': 13, 'SHIFT': 16, 'CTRL': 17, 'ALT': 18, 'PAUSE': 19, 'CAPS_LOCK': 20, 'ESCAPE': 27, 'SPACEBAR': 32, 'PAGE_UP': 33, 'PAGE_DOWN': 34, 'END': 35, 'HOME': 36, 'ARROW_LEFT': 37, 'ARROW_UP': 38, 'ARROW_RIGHT': 39, 'ARROW_DOWN': 40, 'PRINT_SCREEN': 44, 'INSERT': 45, 'DELETE': 46, 'SEMICOLON': 59, 'WINDOWS_LEFT': 91, 'WINDOWS_RIGHT': 92, 'SELECT': 93, 'NUM_PAD_ASTERISK': 106, 'NUM_PAD_PLUS_SIGN': 107, 'NUM_PAD_HYPHEN-MINUS': 109, 'NUM_PAD_FULL_STOP': 110, 'NUM_PAD_SOLIDUS': 111, 'NUM_LOCK': 144, 'SCROLL_LOCK': 145, 'SEMICOLON': 186, 'EQUALS_SIGN': 187, 'COMMA': 188, 'HYPHEN-MINUS': 189, 'FULL_STOP': 190, 'SOLIDUS': 191, 'GRAVE_ACCENT': 192, 'LEFT_SQUARE_BRACKET': 219, 'REVERSE_SOLIDUS': 220, 'RIGHT_SQUARE_BRACKET': 221, 'APOSTROPHE': 222};
 
 (function () {
 	/* 0 - 9 */
@@ -1170,11 +905,7 @@ var KEY = {'BACKSPACE': 8, 'TAB': 9, 'NUM_PAD_CLEAR': 12, 'ENTER': 13, 'SHIFT': 
 	}
 })();
 
-Pacman.WALL    = 0;
-Pacman.BISCUIT = 1;
-Pacman.EMPTY   = 2;
-Pacman.BLOCK   = 3;
-Pacman.PILL    = 4;
+
 
 Pacman.MAP = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
