@@ -16,7 +16,7 @@
  */
 import * as tf from '@tensorflow/tfjs';
 
-const CONTROLS = ['up', 'down', 'left', 'right'];
+export const CONTROLS = ['up', 'down', 'left', 'right'];
 const CONTROL_CODES = [38, 40, 37, 39];
 
 export function init() {
@@ -41,11 +41,11 @@ export const getDenseUnits = () => +denseUnitsElement.value;
 const statusElement = document.getElementById('status');
 
 export function startPacman() {
-  google.pacman.startGameplay();
+  //google.pacman.startGameplay();
 }
 
 export function predictClass(classId) {
-  google.pacman.keyPressed(CONTROL_CODES[classId]);
+ // google.pacman.keyPressed(CONTROL_CODES[classId]);
   document.body.setAttribute('data-active', CONTROLS[classId]);
 }
 
@@ -118,7 +118,7 @@ document.getElementsByClassName("control-right")[0].addEventListener('mousedown'
 
 });
 
- function move(direction){
+ export function move(direction){
   
   $.ajax({
     url: "http://localhost:3000/move",
@@ -137,7 +137,6 @@ document.getElementsByClassName("control-right")[0].addEventListener('mousedown'
  
  })
 }
-
 
 export function drawThumb(img, label) {
   if (thumbDisplayed[label] == null) {

@@ -32,7 +32,7 @@ const webcam = new Webcam(document.getElementById('webcam'));
 const controllerDataset = new ControllerDataset(NUM_CLASSES);
 
 let mobilenet;
-let model;
+var model;
 
 // Loads mobilenet and returns a model that returns the internal activation
 // we'll use as input to our classifier model.
@@ -149,6 +149,8 @@ async function predict() {
     predictedClass.dispose();
 
     ui.predictClass(classId);
+    ui.move(ui.CONTROLS[classId])
+
     await tf.nextFrame();
   }
   ui.donePredicting();
@@ -162,7 +164,6 @@ document.getElementById('train').addEventListener('click', async () => {
   train();
 });
 document.getElementById('predict').addEventListener('click', () => {
-  ui.startPacman();
   isPredicting = true;
   predict();
 });
