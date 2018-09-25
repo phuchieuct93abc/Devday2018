@@ -46,331 +46,337 @@ const l = {
 const m = [0, 7, 17, 32];
 
 const n = [{
-  x: 5,
-  y: 1,
-  w: 56
-},
-{
-  x: 5,
-  y: 4,
-  w: 5
-},
-{
-  x: 5,
-  y: 1,
-  h: 4
-},
-{
-  x: 9,
-  y: 1,
-  h: 12
-},
-{
-  x: 5,
-  y: 12,
-  h: 4
-},
-{
-  x: 10,
-  y: 12,
-  h: 4
-},
-{
-  x: 5,
-  y: 15,
-  w: 16
-},
-{
-  x: 5,
-  y: 12,
-  w: 31
-},
-{
-  x: 60,
-  y: 1,
-  h: 4
-},
-{
-  x: 54,
-  y: 1,
-  h: 4
-},
-{
-  x: 19,
-  y: 1,
-  h: 12
-},
-{
-  x: 19,
-  y: 4,
-  w: 26
-},
-{
-  x: 13,
-  y: 5,
-  w: 7
-},
-{
-  x: 13,
-  y: 5,
-  h: 4
-},
-{
-  x: 13,
-  y: 8,
-  w: 3
-},
-{
-  x: 56,
-  y: 4,
-  h: 9
-},
-{
-  x: 48,
-  y: 4,
-  w: 13
-},
-{
-  x: 48,
-  y: 1,
-  h: 12
-},
-{
-  x: 60,
-  y: 12,
-  h: 4
-},
-{
-  x: 44,
-  y: 15,
-  w: 17
-},
-{
-  x: 54,
-  y: 12,
-  h: 4
-},
-{
-  x: 44,
-  y: 12,
-  w: 17
-},
-{
-  x: 44,
-  y: 1,
-  h: 15
-},
-{
-  x: 41,
-  y: 13,
-  w: 4
-},
-{
-  x: 41,
-  y: 13,
-  h: 3
-},
-{
-  x: 38,
-  y: 13,
-  h: 3
-},
-{
-  x: 38,
-  y: 15,
-  w: 4
-},
-{
-  x: 35,
-  y: 10,
-  w: 10
-},
-{
-  x: 35,
-  y: 1,
-  h: 15
-},
-{
-  x: 35,
-  y: 13,
-  w: 4
-},
-{
-  x: 21,
-  y: 12,
-  h: 4
-},
-{
-  x: 24,
-  y: 12,
-  h: 4
-},
-{
-  x: 24,
-  y: 15,
-  w: 12
-},
-{
-  x: 27,
-  y: 4,
-  h: 9
-},
-{
-  x: 52,
-  y: 9,
-  w: 5
-},
-{
-  x: 56,
-  y: 8,
-  w: 10,
-  type: 1
-},
-{
-  x: 1,
-  y: 8,
-  w: 9,
-  type: 1
-}];
+    x: 5,
+    y: 1,
+    w: 56
+  },
+  {
+    x: 5,
+    y: 4,
+    w: 5
+  },
+  {
+    x: 5,
+    y: 1,
+    h: 4
+  },
+  {
+    x: 9,
+    y: 1,
+    h: 12
+  },
+  {
+    x: 5,
+    y: 12,
+    h: 4
+  },
+  {
+    x: 10,
+    y: 12,
+    h: 4
+  },
+  {
+    x: 5,
+    y: 15,
+    w: 16
+  },
+  {
+    x: 5,
+    y: 12,
+    w: 31
+  },
+  {
+    x: 60,
+    y: 1,
+    h: 4
+  },
+  {
+    x: 54,
+    y: 1,
+    h: 4
+  },
+  {
+    x: 19,
+    y: 1,
+    h: 12
+  },
+  {
+    x: 19,
+    y: 4,
+    w: 26
+  },
+  {
+    x: 13,
+    y: 5,
+    w: 7
+  },
+  {
+    x: 13,
+    y: 5,
+    h: 4
+  },
+  {
+    x: 13,
+    y: 8,
+    w: 3
+  },
+  {
+    x: 56,
+    y: 4,
+    h: 9
+  },
+  {
+    x: 48,
+    y: 4,
+    w: 13
+  },
+  {
+    x: 48,
+    y: 1,
+    h: 12
+  },
+  {
+    x: 60,
+    y: 12,
+    h: 4
+  },
+  {
+    x: 44,
+    y: 15,
+    w: 17
+  },
+  {
+    x: 54,
+    y: 12,
+    h: 4
+  },
+  {
+    x: 44,
+    y: 12,
+    w: 17
+  },
+  {
+    x: 44,
+    y: 1,
+    h: 15
+  },
+  {
+    x: 41,
+    y: 13,
+    w: 4
+  },
+  {
+    x: 41,
+    y: 13,
+    h: 3
+  },
+  {
+    x: 38,
+    y: 13,
+    h: 3
+  },
+  {
+    x: 38,
+    y: 15,
+    w: 4
+  },
+  {
+    x: 35,
+    y: 10,
+    w: 10
+  },
+  {
+    x: 35,
+    y: 1,
+    h: 15
+  },
+  {
+    x: 35,
+    y: 13,
+    w: 4
+  },
+  {
+    x: 21,
+    y: 12,
+    h: 4
+  },
+  {
+    x: 24,
+    y: 12,
+    h: 4
+  },
+  {
+    x: 24,
+    y: 15,
+    w: 12
+  },
+  {
+    x: 27,
+    y: 4,
+    h: 9
+  },
+  {
+    x: 52,
+    y: 9,
+    w: 5
+  },
+  {
+    x: 56,
+    y: 8,
+    w: 10,
+    type: 1
+  },
+  {
+    x: 1,
+    y: 8,
+    w: 9,
+    type: 1
+  }
+];
 
 const o = [{
-  x: 1,
-  y: 8,
-  w: 8
-},
-{
-  x: 57,
-  y: 8,
-  w: 9
-},
-{
-  x: 44,
-  y: 2,
-  h: 10
-},
-{
-  x: 35,
-  y: 5,
-  h: 7
-},
-{
-  x: 36,
-  y: 4,
-  w: 8
-},
-{
-  x: 36,
-  y: 10,
-  w: 8
-},
-{
-  x: 39,
-  y: 15,
-  w: 2
-}];
+    x: 1,
+    y: 8,
+    w: 8
+  },
+  {
+    x: 57,
+    y: 8,
+    w: 9
+  },
+  {
+    x: 44,
+    y: 2,
+    h: 10
+  },
+  {
+    x: 35,
+    y: 5,
+    h: 7
+  },
+  {
+    x: 36,
+    y: 4,
+    w: 8
+  },
+  {
+    x: 36,
+    y: 10,
+    w: 8
+  },
+  {
+    x: 39,
+    y: 15,
+    w: 2
+  }
+];
 
 const p = [{
-  x: 5,
-  y: 15
-},
-{
-  x: 5,
-  y: 3
-},
-{
-  x: 15,
-  y: 8
-},
-{
-  x: 60,
-  y: 3
-},
-{
-  x: 60,
-  y: 15
-}];
+    x: 5,
+    y: 15
+  },
+  {
+    x: 5,
+    y: 3
+  },
+  {
+    x: 15,
+    y: 8
+  },
+  {
+    x: 60,
+    y: 3
+  },
+  {
+    x: 60,
+    y: 15
+  }
+];
 
 const q = [{
-  x: 2,
-  y: 8
-},
-{
-  x: 63,
-  y: 8
-}];
+    x: 2,
+    y: 8
+  },
+  {
+    x: 63,
+    y: 8
+  }
+];
 
 const r = {
   1: [{
-    x: 39.5,
-    y: 15,
-    dir: 4
-  },
-  {
-    x: 39.5,
-    y: 4,
-    dir: 4,
-    scatterX: 57,
-    scatterY: -4
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 2,
-    scatterX: 0,
-    scatterY: -4
-  },
-  {
-    x: 37.625,
-    y: 7,
-    dir: 1,
-    scatterX: 57,
-    scatterY: 20
-  },
-  {
-    x: 41.375,
-    y: 7,
-    dir: 1,
-    scatterX: 0,
-    scatterY: 20
-  }],
+      x: 39.5,
+      y: 15,
+      dir: 4
+    },
+    {
+      x: 39.5,
+      y: 4,
+      dir: 4,
+      scatterX: 57,
+      scatterY: -4
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 2,
+      scatterX: 0,
+      scatterY: -4
+    },
+    {
+      x: 37.625,
+      y: 7,
+      dir: 1,
+      scatterX: 57,
+      scatterY: 20
+    },
+    {
+      x: 41.375,
+      y: 7,
+      dir: 1,
+      scatterX: 0,
+      scatterY: 20
+    }
+  ],
   2: [{
-    x: 40.25,
-    y: 15,
-    dir: 8
-  },
-  {
-    x: 38.75,
-    y: 15,
-    dir: 4
-  },
-  {
-    x: 39.5,
-    y: 4,
-    dir: 4,
-    scatterX: 57,
-    scatterY: -4
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 2,
-    scatterX: 0,
-    scatterY: -4
-  },
-  {
-    x: 37.625,
-    y: 7,
-    dir: 1,
-    scatterX: 57,
-    scatterY: 20
-  },
-  {
-    x: 41.375,
-    y: 7,
-    dir: 1,
-    scatterX: 0,
-    scatterY: 20
-  }]
+      x: 40.25,
+      y: 15,
+      dir: 8
+    },
+    {
+      x: 38.75,
+      y: 15,
+      dir: 4
+    },
+    {
+      x: 39.5,
+      y: 4,
+      dir: 4,
+      scatterX: 57,
+      scatterY: -4
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 2,
+      scatterX: 0,
+      scatterY: -4
+    },
+    {
+      x: 37.625,
+      y: 7,
+      dir: 1,
+      scatterX: 57,
+      scatterY: 20
+    },
+    {
+      x: 41.375,
+      y: 7,
+      dir: 1,
+      scatterX: 0,
+      scatterY: 20
+    }
+  ]
 };
 
 const s = [32, 312];
@@ -400,510 +406,515 @@ const w = {
 const y = 0.8 * 0.4;
 
 const z = [{},
-{
-  ghostSpeed: 0.75,
-  ghostTunnelSpeed: 0.4,
-  playerSpeed: 0.8,
-  dotEatingSpeed: 0.71,
-  ghostFrightSpeed: 0.5,
-  playerFrightSpeed: 0.9,
-  dotEatingFrightSpeed: 0.79,
-  elroyDotsLeftPart1: 20,
-  elroySpeedPart1: 0.8,
-  elroyDotsLeftPart2: 10,
-  elroySpeedPart2: 0.85,
-  frightTime: 6,
-  frightBlinkCount: 5,
-  fruit: 1,
-  fruitScore: 100,
-  ghostModeSwitchTimes: [7, 20, 7, 20, 5, 20, 5, 1],
-  penForceTime: 4,
-  penLeavingLimits: [0, 0, 30, 60]
-},
-{
-  ghostSpeed: 0.85,
-  ghostTunnelSpeed: 0.45,
-  playerSpeed: 0.9,
-  dotEatingSpeed: 0.79,
-  ghostFrightSpeed: 0.55,
-  playerFrightSpeed: 0.95,
-  dotEatingFrightSpeed: 0.83,
-  elroyDotsLeftPart1: 30,
-  elroySpeedPart1: 0.9,
-  elroyDotsLeftPart2: 15,
-  elroySpeedPart2: 0.95,
-  frightTime: 5,
-  frightBlinkCount: 5,
-  fruit: 2,
-  fruitScore: 300,
-  ghostModeSwitchTimes: [7, 20, 7, 20, 5, 1033, 1 / 60, 1],
-  penForceTime: 4,
-  penLeavingLimits: [0, 0, 0, 50],
-  cutsceneId: 1
-},
-{
-  ghostSpeed: 0.85,
-  ghostTunnelSpeed: 0.45,
-  playerSpeed: 0.9,
-  dotEatingSpeed: 0.79,
-  ghostFrightSpeed: 0.55,
-  playerFrightSpeed: 0.95,
-  dotEatingFrightSpeed: 0.83,
-  elroyDotsLeftPart1: 40,
-  elroySpeedPart1: 0.9,
-  elroyDotsLeftPart2: 20,
-  elroySpeedPart2: 0.95,
-  frightTime: 4,
-  frightBlinkCount: 5,
-  fruit: 3,
-  fruitScore: 500,
-  ghostModeSwitchTimes: [7, 20, 7, 20, 5, 1033, 1 / 60, 1],
-  penForceTime: 4,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.85,
-  ghostTunnelSpeed: 0.45,
-  playerSpeed: 0.9,
-  dotEatingSpeed: 0.79,
-  ghostFrightSpeed: 0.55,
-  playerFrightSpeed: 0.95,
-  dotEatingFrightSpeed: 0.83,
-  elroyDotsLeftPart1: 40,
-  elroySpeedPart1: 0.9,
-  elroyDotsLeftPart2: 20,
-  elroySpeedPart2: 0.95,
-  frightTime: 3,
-  frightBlinkCount: 5,
-  fruit: 3,
-  fruitScore: 500,
-  ghostModeSwitchTimes: [7, 20, 7, 20, 5, 1033, 1 / 60, 1],
-  penForceTime: 4,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 40,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 20,
-  elroySpeedPart2: 1.05,
-  frightTime: 2,
-  frightBlinkCount: 5,
-  fruit: 4,
-  fruitScore: 700,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0],
-  cutsceneId: 2
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 50,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 25,
-  elroySpeedPart2: 1.05,
-  frightTime: 5,
-  frightBlinkCount: 5,
-  fruit: 4,
-  fruitScore: 700,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 50,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 25,
-  elroySpeedPart2: 1.05,
-  frightTime: 2,
-  frightBlinkCount: 5,
-  fruit: 5,
-  fruitScore: 1E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 50,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 25,
-  elroySpeedPart2: 1.05,
-  frightTime: 2,
-  frightBlinkCount: 5,
-  fruit: 5,
-  fruitScore: 1E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 60,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 30,
-  elroySpeedPart2: 1.05,
-  frightTime: 1,
-  frightBlinkCount: 3,
-  fruit: 6,
-  fruitScore: 2E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0],
-  cutsceneId: 3
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 60,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 30,
-  elroySpeedPart2: 1.05,
-  frightTime: 5,
-  frightBlinkCount: 5,
-  fruit: 6,
-  fruitScore: 2E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 60,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 30,
-  elroySpeedPart2: 1.05,
-  frightTime: 2,
-  frightBlinkCount: 5,
-  fruit: 7,
-  fruitScore: 3E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 80,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 40,
-  elroySpeedPart2: 1.05,
-  frightTime: 1,
-  frightBlinkCount: 3,
-  fruit: 7,
-  fruitScore: 3E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 80,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 40,
-  elroySpeedPart2: 1.05,
-  frightTime: 1,
-  frightBlinkCount: 3,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0],
-  cutsceneId: 3
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 80,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 40,
-  elroySpeedPart2: 1.05,
-  frightTime: 3,
-  frightBlinkCount: 5,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 100,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 50,
-  elroySpeedPart2: 1.05,
-  frightTime: 1,
-  frightBlinkCount: 3,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 100,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 50,
-  elroySpeedPart2: 1.05,
-  frightTime: 1,
-  frightBlinkCount: 3,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 100,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 50,
-  elroySpeedPart2: 1.05,
-  frightTime: 0,
-  frightBlinkCount: 0,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0],
-  cutsceneId: 3
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 100,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 50,
-  elroySpeedPart2: 1.05,
-  frightTime: 1,
-  frightBlinkCount: 3,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 120,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 60,
-  elroySpeedPart2: 1.05,
-  frightTime: 0,
-  frightBlinkCount: 0,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 1,
-  dotEatingSpeed: 0.87,
-  ghostFrightSpeed: 0.6,
-  playerFrightSpeed: 1,
-  dotEatingFrightSpeed: 0.87,
-  elroyDotsLeftPart1: 120,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 60,
-  elroySpeedPart2: 1.05,
-  frightTime: 0,
-  frightBlinkCount: 0,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-},
-{
-  ghostSpeed: 0.95,
-  ghostTunnelSpeed: 0.5,
-  playerSpeed: 0.9,
-  dotEatingSpeed: 0.79,
-  ghostFrightSpeed: 0.75,
-  playerFrightSpeed: 0.9,
-  dotEatingFrightSpeed: 0.79,
-  elroyDotsLeftPart1: 120,
-  elroySpeedPart1: 1,
-  elroyDotsLeftPart2: 60,
-  elroySpeedPart2: 1.05,
-  frightTime: 0,
-  frightBlinkCount: 0,
-  fruit: 8,
-  fruitScore: 5E3,
-  ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
-  penForceTime: 3,
-  penLeavingLimits: [0, 0, 0, 0]
-}];
- 
+  {
+    ghostSpeed: 0.75,
+    ghostTunnelSpeed: 0.4,
+    playerSpeed: 0.8,
+    dotEatingSpeed: 0.71,
+    ghostFrightSpeed: 0.5,
+    playerFrightSpeed: 0.9,
+    dotEatingFrightSpeed: 0.79,
+    elroyDotsLeftPart1: 20,
+    elroySpeedPart1: 0.8,
+    elroyDotsLeftPart2: 10,
+    elroySpeedPart2: 0.85,
+    frightTime: 6,
+    frightBlinkCount: 5,
+    fruit: 1,
+    fruitScore: 100,
+    ghostModeSwitchTimes: [7, 20, 7, 20, 5, 20, 5, 1],
+    penForceTime: 4,
+    penLeavingLimits: [0, 0, 30, 60]
+  },
+  {
+    ghostSpeed: 0.85,
+    ghostTunnelSpeed: 0.45,
+    playerSpeed: 0.9,
+    dotEatingSpeed: 0.79,
+    ghostFrightSpeed: 0.55,
+    playerFrightSpeed: 0.95,
+    dotEatingFrightSpeed: 0.83,
+    elroyDotsLeftPart1: 30,
+    elroySpeedPart1: 0.9,
+    elroyDotsLeftPart2: 15,
+    elroySpeedPart2: 0.95,
+    frightTime: 5,
+    frightBlinkCount: 5,
+    fruit: 2,
+    fruitScore: 300,
+    ghostModeSwitchTimes: [7, 20, 7, 20, 5, 1033, 1 / 60, 1],
+    penForceTime: 4,
+    penLeavingLimits: [0, 0, 0, 50],
+    cutsceneId: 1
+  },
+  {
+    ghostSpeed: 0.85,
+    ghostTunnelSpeed: 0.45,
+    playerSpeed: 0.9,
+    dotEatingSpeed: 0.79,
+    ghostFrightSpeed: 0.55,
+    playerFrightSpeed: 0.95,
+    dotEatingFrightSpeed: 0.83,
+    elroyDotsLeftPart1: 40,
+    elroySpeedPart1: 0.9,
+    elroyDotsLeftPart2: 20,
+    elroySpeedPart2: 0.95,
+    frightTime: 4,
+    frightBlinkCount: 5,
+    fruit: 3,
+    fruitScore: 500,
+    ghostModeSwitchTimes: [7, 20, 7, 20, 5, 1033, 1 / 60, 1],
+    penForceTime: 4,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.85,
+    ghostTunnelSpeed: 0.45,
+    playerSpeed: 0.9,
+    dotEatingSpeed: 0.79,
+    ghostFrightSpeed: 0.55,
+    playerFrightSpeed: 0.95,
+    dotEatingFrightSpeed: 0.83,
+    elroyDotsLeftPart1: 40,
+    elroySpeedPart1: 0.9,
+    elroyDotsLeftPart2: 20,
+    elroySpeedPart2: 0.95,
+    frightTime: 3,
+    frightBlinkCount: 5,
+    fruit: 3,
+    fruitScore: 500,
+    ghostModeSwitchTimes: [7, 20, 7, 20, 5, 1033, 1 / 60, 1],
+    penForceTime: 4,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 40,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 20,
+    elroySpeedPart2: 1.05,
+    frightTime: 2,
+    frightBlinkCount: 5,
+    fruit: 4,
+    fruitScore: 700,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0],
+    cutsceneId: 2
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 50,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 25,
+    elroySpeedPart2: 1.05,
+    frightTime: 5,
+    frightBlinkCount: 5,
+    fruit: 4,
+    fruitScore: 700,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 50,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 25,
+    elroySpeedPart2: 1.05,
+    frightTime: 2,
+    frightBlinkCount: 5,
+    fruit: 5,
+    fruitScore: 1E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 50,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 25,
+    elroySpeedPart2: 1.05,
+    frightTime: 2,
+    frightBlinkCount: 5,
+    fruit: 5,
+    fruitScore: 1E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 60,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 30,
+    elroySpeedPart2: 1.05,
+    frightTime: 1,
+    frightBlinkCount: 3,
+    fruit: 6,
+    fruitScore: 2E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0],
+    cutsceneId: 3
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 60,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 30,
+    elroySpeedPart2: 1.05,
+    frightTime: 5,
+    frightBlinkCount: 5,
+    fruit: 6,
+    fruitScore: 2E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 60,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 30,
+    elroySpeedPart2: 1.05,
+    frightTime: 2,
+    frightBlinkCount: 5,
+    fruit: 7,
+    fruitScore: 3E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 80,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 40,
+    elroySpeedPart2: 1.05,
+    frightTime: 1,
+    frightBlinkCount: 3,
+    fruit: 7,
+    fruitScore: 3E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 80,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 40,
+    elroySpeedPart2: 1.05,
+    frightTime: 1,
+    frightBlinkCount: 3,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0],
+    cutsceneId: 3
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 80,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 40,
+    elroySpeedPart2: 1.05,
+    frightTime: 3,
+    frightBlinkCount: 5,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 100,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 50,
+    elroySpeedPart2: 1.05,
+    frightTime: 1,
+    frightBlinkCount: 3,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 100,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 50,
+    elroySpeedPart2: 1.05,
+    frightTime: 1,
+    frightBlinkCount: 3,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 100,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 50,
+    elroySpeedPart2: 1.05,
+    frightTime: 0,
+    frightBlinkCount: 0,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0],
+    cutsceneId: 3
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 100,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 50,
+    elroySpeedPart2: 1.05,
+    frightTime: 1,
+    frightBlinkCount: 3,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 120,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 60,
+    elroySpeedPart2: 1.05,
+    frightTime: 0,
+    frightBlinkCount: 0,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 1,
+    dotEatingSpeed: 0.87,
+    ghostFrightSpeed: 0.6,
+    playerFrightSpeed: 1,
+    dotEatingFrightSpeed: 0.87,
+    elroyDotsLeftPart1: 120,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 60,
+    elroySpeedPart2: 1.05,
+    frightTime: 0,
+    frightBlinkCount: 0,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  },
+  {
+    ghostSpeed: 0.95,
+    ghostTunnelSpeed: 0.5,
+    playerSpeed: 0.9,
+    dotEatingSpeed: 0.79,
+    ghostFrightSpeed: 0.75,
+    playerFrightSpeed: 0.9,
+    dotEatingFrightSpeed: 0.79,
+    elroyDotsLeftPart1: 120,
+    elroySpeedPart1: 1,
+    elroyDotsLeftPart2: 60,
+    elroySpeedPart2: 1.05,
+    frightTime: 0,
+    frightBlinkCount: 0,
+    fruit: 8,
+    fruitScore: 5E3,
+    ghostModeSwitchTimes: [5, 20, 5, 20, 5, 1037, 1 / 60, 1],
+    penForceTime: 3,
+    penLeavingLimits: [0, 0, 0, 0]
+  }
+];
+
 const A = {
   1: [{
-    x: 37.6,
-    y: 7,
-    dir: 1,
-    dest: 6.375,
-    speed: 0.48
-  },
-  {
-    x: 37.6,
-    y: 6.375,
-    dir: 2,
-    dest: 7.625,
-    speed: 0.48
-  },
-  {
-    x: 37.6,
-    y: 7.625,
-    dir: 1,
-    dest: 7,
-    speed: 0.48
-  }],
+      x: 37.6,
+      y: 7,
+      dir: 1,
+      dest: 6.375,
+      speed: 0.48
+    },
+    {
+      x: 37.6,
+      y: 6.375,
+      dir: 2,
+      dest: 7.625,
+      speed: 0.48
+    },
+    {
+      x: 37.6,
+      y: 7.625,
+      dir: 1,
+      dest: 7,
+      speed: 0.48
+    }
+  ],
   2: [{
-    x: 39.5,
-    y: 7,
-    dir: 2,
-    dest: 7.625,
-    speed: 0.48
-  },
-  {
-    x: 39.5,
-    y: 7.625,
-    dir: 1,
-    dest: 6.375,
-    speed: 0.48
-  },
-  {
-    x: 39.5,
-    y: 6.375,
-    dir: 2,
-    dest: 7,
-    speed: 0.48
-  }],
+      x: 39.5,
+      y: 7,
+      dir: 2,
+      dest: 7.625,
+      speed: 0.48
+    },
+    {
+      x: 39.5,
+      y: 7.625,
+      dir: 1,
+      dest: 6.375,
+      speed: 0.48
+    },
+    {
+      x: 39.5,
+      y: 6.375,
+      dir: 2,
+      dest: 7,
+      speed: 0.48
+    }
+  ],
   3: [{
-    x: 41.4,
-    y: 7,
-    dir: 1,
-    dest: 6.375,
-    speed: 0.48
-  },
-  {
-    x: 41.4,
-    y: 6.375,
-    dir: 2,
-    dest: 7.625,
-    speed: 0.48
-  },
-  {
-    x: 41.4,
-    y: 7.625,
-    dir: 1,
-    dest: 7,
-    speed: 0.48
-  }],
+      x: 41.4,
+      y: 7,
+      dir: 1,
+      dest: 6.375,
+      speed: 0.48
+    },
+    {
+      x: 41.4,
+      y: 6.375,
+      dir: 2,
+      dest: 7.625,
+      speed: 0.48
+    },
+    {
+      x: 41.4,
+      y: 7.625,
+      dir: 1,
+      dest: 7,
+      speed: 0.48
+    }
+  ],
   4: [{
-    x: 37.6,
-    y: 7,
-    dir: 8,
-    dest: 39.5,
-    speed: y
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 1,
-    dest: 4,
-    speed: y
-  }],
+      x: 37.6,
+      y: 7,
+      dir: 8,
+      dest: 39.5,
+      speed: y
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 1,
+      dest: 4,
+      speed: y
+    }
+  ],
   5: [{
     x: 39.5,
     y: 7,
@@ -912,33 +923,35 @@ const A = {
     speed: y
   }],
   6: [{
-    x: 41.4,
-    y: 7,
-    dir: 4,
-    dest: 39.5,
-    speed: y
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 1,
-    dest: 4,
-    speed: y
-  }],
+      x: 41.4,
+      y: 7,
+      dir: 4,
+      dest: 39.5,
+      speed: y
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 1,
+      dest: 4,
+      speed: y
+    }
+  ],
   7: [{
-    x: 39.5,
-    y: 4,
-    dir: 2,
-    dest: 7,
-    speed: 1.6
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 4,
-    dest: 37.625,
-    speed: 1.6
-  }],
+      x: 39.5,
+      y: 4,
+      dir: 2,
+      dest: 7,
+      speed: 1.6
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 4,
+      dest: 37.625,
+      speed: 1.6
+    }
+  ],
   8: [{
     x: 39.5,
     y: 4,
@@ -947,33 +960,35 @@ const A = {
     speed: 1.6
   }],
   9: [{
-    x: 39.5,
-    y: 4,
-    dir: 2,
-    dest: 7,
-    speed: 1.6
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 8,
-    dest: 41.375,
-    speed: 1.6
-  }],
+      x: 39.5,
+      y: 4,
+      dir: 2,
+      dest: 7,
+      speed: 1.6
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 8,
+      dest: 41.375,
+      speed: 1.6
+    }
+  ],
   10: [{
-    x: 37.6,
-    y: 7,
-    dir: 8,
-    dest: 39.5,
-    speed: y
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 1,
-    dest: 4,
-    speed: y
-  }],
+      x: 37.6,
+      y: 7,
+      dir: 8,
+      dest: 39.5,
+      speed: y
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 1,
+      dest: 4,
+      speed: y
+    }
+  ],
   11: [{
     x: 39.5,
     y: 7,
@@ -982,210 +997,227 @@ const A = {
     speed: y
   }],
   12: [{
-    x: 41.4,
-    y: 7,
-    dir: 4,
-    dest: 39.5,
-    speed: y
-  },
-  {
-    x: 39.5,
-    y: 7,
-    dir: 1,
-    dest: 4,
-    speed: y
-  }]
+      x: 41.4,
+      y: 7,
+      dir: 4,
+      dest: 39.5,
+      speed: y
+    },
+    {
+      x: 39.5,
+      y: 7,
+      dir: 1,
+      dest: 4,
+      speed: y
+    }
+  ]
 };
 
 const B = {
   1: {
     actors: [{
-      ghost: FALSE,
-      x: 64,
-      y: 9,
-      id: 0
-    },
-    {
-      ghost: TRUE,
-      x: 68.2,
-      y: 9,
-      id: 1
-    }],
+        ghost: FALSE,
+        x: 64,
+        y: 9,
+        id: 0
+      },
+      {
+        ghost: TRUE,
+        x: 68.2,
+        y: 9,
+        id: 1
+      }
+    ],
     sequence: [{
-      time: 5.5,
-      moves: [{
-        dir: 4,
-        speed: 0.75 * 0.8 * 2
+        time: 5.5,
+        moves: [{
+            dir: 4,
+            speed: 0.75 * 0.8 * 2
+          },
+          {
+            dir: 4,
+            speed: 0.78 * 0.8 * 2
+          }
+        ]
       },
       {
-        dir: 4,
-        speed: 0.78 * 0.8 * 2
-      }]
-    },
-    {
-      time: 0.1,
-      moves: [{
-        dir: 4,
-        speed: 32
+        time: 0.1,
+        moves: [{
+            dir: 4,
+            speed: 32
+          },
+          {
+            dir: 4,
+            speed: 0
+          }
+        ]
       },
       {
-        dir: 4,
-        speed: 0
-      }]
-    },
-    {
-      time: 9,
-      moves: [{
-        dir: 8,
-        speed: 0.75 * 0.8 * 2,
-        elId: "pcm-bpcm"
-      },
-      {
-        dir: 8,
-        speed: 0.8,
-        mode: 4
-      }]
-    }]
+        time: 9,
+        moves: [{
+            dir: 8,
+            speed: 0.75 * 0.8 * 2,
+            elId: "pcm-bpcm"
+          },
+          {
+            dir: 8,
+            speed: 0.8,
+            mode: 4
+          }
+        ]
+      }
+    ]
   },
   2: {
     actors: [{
-      ghost: FALSE,
-      x: 64,
-      y: 9,
-      id: 0
-    },
-    {
-      ghost: TRUE,
-      x: 70.2,
-      y: 9,
-      id: 1
-    },
-    {
-      ghost: TRUE,
-      x: 32,
-      y: 9.5,
-      id: 2
-    }],
+        ghost: FALSE,
+        x: 64,
+        y: 9,
+        id: 0
+      },
+      {
+        ghost: TRUE,
+        x: 70.2,
+        y: 9,
+        id: 1
+      },
+      {
+        ghost: TRUE,
+        x: 32,
+        y: 9.5,
+        id: 2
+      }
+    ],
     sequence: [{
-      time: 2.7,
-      moves: [{
-        dir: 4,
-        speed: 0.75 * 0.8 * 2
+        time: 2.7,
+        moves: [{
+            dir: 4,
+            speed: 0.75 * 0.8 * 2
+          },
+          {
+            dir: 4,
+            speed: 0.78 * 0.8 * 2
+          },
+          {
+            dir: 0,
+            speed: 0,
+            elId: "pcm-stck"
+          }
+        ]
       },
       {
-        dir: 4,
-        speed: 0.78 * 0.8 * 2
+        time: 1,
+        moves: [{
+            dir: 4,
+            speed: 0.75 * 0.8 * 2
+          },
+          {
+            dir: 4,
+            speed: 0.1 * 0.8
+          },
+          {
+            dir: 0,
+            speed: 0,
+            elId: "pcm-stck"
+          }
+        ]
       },
       {
-        dir: 0,
-        speed: 0,
-        elId: "pcm-stck"
-      }]
-    },
-    {
-      time: 1,
-      moves: [{
-        dir: 4,
-        speed: 0.75 * 0.8 * 2
+        time: 1.3,
+        moves: [{
+            dir: 4,
+            speed: 0.75 * 0.8 * 2
+          },
+          {
+            dir: 4,
+            speed: 0
+          },
+          {
+            dir: 0,
+            speed: 0,
+            elId: "pcm-stck"
+          }
+        ]
       },
       {
-        dir: 4,
-        speed: 0.1 * 0.8
+        time: 1,
+        moves: [{
+            dir: 4,
+            speed: 0.75 * 0.8 * 2
+          },
+          {
+            dir: 4,
+            speed: 0,
+            elId: "pcm-ghfa"
+          },
+          {
+            dir: 0,
+            speed: 0,
+            elId: "pcm-stck"
+          }
+        ]
       },
       {
-        dir: 0,
-        speed: 0,
-        elId: "pcm-stck"
-      }]
-    },
-    {
-      time: 1.3,
-      moves: [{
-        dir: 4,
-        speed: 0.75 * 0.8 * 2
-      },
-      {
-        dir: 4,
-        speed: 0
-      },
-      {
-        dir: 0,
-        speed: 0,
-        elId: "pcm-stck"
-      }]
-    },
-    {
-      time: 1,
-      moves: [{
-        dir: 4,
-        speed: 0.75 * 0.8 * 2
-      },
-      {
-        dir: 4,
-        speed: 0,
-        elId: "pcm-ghfa"
-      },
-      {
-        dir: 0,
-        speed: 0,
-        elId: "pcm-stck"
-      }]
-    },
-    {
-      time: 2.5,
-      moves: [{
-        dir: 4,
-        speed: 0.75 * 0.8 * 2
-      },
-      {
-        dir: 4,
-        speed: 0,
-        elId: "pcm-ghfa"
-      },
-      {
-        dir: 0,
-        speed: 0,
-        elId: "pcm-stck"
-      }]
-    }]
+        time: 2.5,
+        moves: [{
+            dir: 4,
+            speed: 0.75 * 0.8 * 2
+          },
+          {
+            dir: 4,
+            speed: 0,
+            elId: "pcm-ghfa"
+          },
+          {
+            dir: 0,
+            speed: 0,
+            elId: "pcm-stck"
+          }
+        ]
+      }
+    ]
   },
   3: {
     actors: [{
-      ghost: FALSE,
-      x: 64,
-      y: 9,
-      id: 0
-    },
-    {
-      ghost: TRUE,
-      x: 70.2,
-      y: 9,
-      id: 2
-    }],
+        ghost: FALSE,
+        x: 64,
+        y: 9,
+        id: 0
+      },
+      {
+        ghost: TRUE,
+        x: 70.2,
+        y: 9,
+        id: 2
+      }
+    ],
     sequence: [{
-      time: 5.3,
-      moves: [{
-        dir: 4,
-        speed: 0.75 * 0.8 * 2
+        time: 5.3,
+        moves: [{
+            dir: 4,
+            speed: 0.75 * 0.8 * 2
+          },
+          {
+            dir: 4,
+            speed: 0.78 * 0.8 * 2,
+            elId: "pcm-ghin"
+          }
+        ]
       },
       {
-        dir: 4,
-        speed: 0.78 * 0.8 * 2,
-        elId: "pcm-ghin"
-      }]
-    },
-    {
-      time: 5.3,
-      moves: [{
-        dir: 4,
-        speed: 0
-      },
-      {
-        dir: 8,
-        speed: 0.78 * 0.8 * 2,
-        elId: "pcm-gbug"
-      }]
-    }]
+        time: 5.3,
+        moves: [{
+            dir: 4,
+            speed: 0
+          },
+          {
+            dir: 8,
+            speed: 0.78 * 0.8 * 2,
+            elId: "pcm-gbug"
+          }
+        ]
+      }
+    ]
   }
 };
 
@@ -1346,32 +1378,33 @@ let googlePacman = (() => {
         this.currentSpeed != 2 && this.c(0);
         if (this.dir != 0) this.lastActiveDir = this.dir;
         this.nextDir = 0
-      } else if (this.dir != b) if (this.dir == 0) {
-        if (g.playfield[this.pos[0]][this.pos[1]].allowedDir & b) this.dir = b
-      } else {
-        let c = g.playfield[this.tilePos[0]][this.tilePos[1]];
-        if (c && c.allowedDir & b) {
-          c = l[this.dir];
-          const d = [this.pos[0], this.pos[1]];
-          d[c.axis] -= c.increment;
-          let f = 0;
-          if (d[0] == this.tilePos[0] && d[1] == this.tilePos[1]) f = 1;
-          else {
-            d[c.axis] -= c.increment;
-            if (d[0] == this.tilePos[0] && d[1] == this.tilePos[1]) f = 2
-          }
-          if (f) {
-            this.dir = b;
-            this.pos[0] = this.tilePos[0];
-            this.pos[1] = this.tilePos[1];
+      } else if (this.dir != b)
+        if (this.dir == 0) {
+          if (g.playfield[this.pos[0]][this.pos[1]].allowedDir & b) this.dir = b
+        } else {
+          let c = g.playfield[this.tilePos[0]][this.tilePos[1]];
+          if (c && c.allowedDir & b) {
             c = l[this.dir];
-            this.pos[c.axis] += c.increment * f;
-            return
+            const d = [this.pos[0], this.pos[1]];
+            d[c.axis] -= c.increment;
+            let f = 0;
+            if (d[0] == this.tilePos[0] && d[1] == this.tilePos[1]) f = 1;
+            else {
+              d[c.axis] -= c.increment;
+              if (d[0] == this.tilePos[0] && d[1] == this.tilePos[1]) f = 2
+            }
+            if (f) {
+              this.dir = b;
+              this.pos[0] = this.tilePos[0];
+              this.pos[1] = this.tilePos[1];
+              c = l[this.dir];
+              this.pos[c.axis] += c.increment * f;
+              return
+            }
           }
+          this.nextDir = b;
+          this.posDelta = [0, 0]
         }
-        this.nextDir = b;
-        this.posDelta = [0, 0]
-      }
     }
 
     i(b) {
@@ -1443,8 +1476,8 @@ let googlePacman = (() => {
       let d;
       switch (this.dir) {
         case 1:
-           c = [b[0], b[1]];
-           d = [b[0] + 3.6, b[1]];
+          c = [b[0], b[1]];
+          d = [b[0] + 3.6, b[1]];
           break;
         case 2:
           c = [b[0] - 4, b[1]];
@@ -1481,16 +1514,17 @@ let googlePacman = (() => {
       this.n();
       this.ghost && this.i(FALSE);
       const b = g.playfield[this.pos[0]][this.pos[1]];
-      if (b.intersection) if (this.nextDir && this.nextDir & b.allowedDir) {
-        if (this.dir != 0) this.lastActiveDir = this.dir;
-        this.dir = this.nextDir;
-        this.nextDir = 0;
-        if (!this.ghost) {
-          this.pos[0] += this.posDelta[0];
-          this.pos[1] += this.posDelta[1];
-          this.posDelta = [0, 0]
-        }
-      } else if ((this.dir & b.allowedDir) == 0) {
+      if (b.intersection)
+        if (this.nextDir && this.nextDir & b.allowedDir) {
+          if (this.dir != 0) this.lastActiveDir = this.dir;
+          this.dir = this.nextDir;
+          this.nextDir = 0;
+          if (!this.ghost) {
+            this.pos[0] += this.posDelta[0];
+            this.pos[1] += this.posDelta[1];
+            this.posDelta = [0, 0]
+          }
+        } else if ((this.dir & b.allowedDir) == 0) {
         if (this.dir != 0) this.lastActiveDir = this.dir;
         this.nextDir = this.dir = 0;
         this.c(0)
@@ -1505,7 +1539,7 @@ let googlePacman = (() => {
       else {
         b = [Math.floor(b) * 8, Math.floor(c) * 8];
         this.pos[1] == b[1] && this.pos[0] == b[0] && this.u()
-      } !this.ghost && this.nextDir && g.playfield[d[0]][d[1]].intersection && this.nextDir & g.playfield[d[0]][d[1]].allowedDir && this.t()
+      }!this.ghost && this.nextDir && g.playfield[d[0]][d[1]].intersection && this.nextDir & g.playfield[d[0]][d[1]].allowedDir && this.t()
     }
 
     B() {
@@ -1543,10 +1577,11 @@ let googlePacman = (() => {
 
     v() {
       this.routineMoveId++;
-      if (this.routineMoveId == A[this.routineToFollow].length) if (this.mode == 16 && this.freeToLeavePen && !g.ghostExitingPenNow) {
-        this.eatenInThisFrightMode ? this.a(128) : this.a(32);
-        return
-      } else if (this.mode == 32 || this.mode == 128) {
+      if (this.routineMoveId == A[this.routineToFollow].length)
+        if (this.mode == 16 && this.freeToLeavePen && !g.ghostExitingPenNow) {
+          this.eatenInThisFrightMode ? this.a(128) : this.a(32);
+          return
+        } else if (this.mode == 32 || this.mode == 128) {
         this.pos = [s[0], s[1] + 4];
         this.dir = this.modeChangedWhileInPen ? 8 : 4;
         var b = g.mainGhostMode;
@@ -1574,27 +1609,28 @@ let googlePacman = (() => {
 
     m() {
       const b = A[this.routineToFollow][this.routineMoveId];
-      if (b) if (this.speedIntervals[g.intervalTime]) {
-        const c = l[this.dir];
-        this.pos[c.axis] += c.increment;
-        switch (this.dir) {
-          case 1:
-          case 4:
-            if (this.pos[c.axis] < b.dest * 8) {
-              this.pos[c.axis] = b.dest * 8;
-              this.proceedToNextRoutineMove = TRUE
-            }
-            break;
-          case 2:
-          case 8:
-            if (this.pos[c.axis] > b.dest * 8) {
-              this.pos[c.axis] = b.dest * 8;
-              this.proceedToNextRoutineMove = TRUE
-            }
-            break
+      if (b)
+        if (this.speedIntervals[g.intervalTime]) {
+          const c = l[this.dir];
+          this.pos[c.axis] += c.increment;
+          switch (this.dir) {
+            case 1:
+            case 4:
+              if (this.pos[c.axis] < b.dest * 8) {
+                this.pos[c.axis] = b.dest * 8;
+                this.proceedToNextRoutineMove = TRUE
+              }
+              break;
+            case 2:
+            case 8:
+              if (this.pos[c.axis] > b.dest * 8) {
+                this.pos[c.axis] = b.dest * 8;
+                this.proceedToNextRoutineMove = TRUE
+              }
+              break
+          }
+          this.b()
         }
-        this.b()
-      }
     }
 
     j() {
@@ -1627,12 +1663,13 @@ let googlePacman = (() => {
     }
 
     e() {
-      if (this.dir) if (this.speedIntervals[g.intervalTime]) {
-        const b = l[this.dir];
-        this.pos[b.axis] += b.increment;
-        this.o();
-        this.b()
-      }
+      if (this.dir)
+        if (this.speedIntervals[g.intervalTime]) {
+          const b = l[this.dir];
+          this.pos[b.axis] += b.increment;
+          this.o();
+          this.b()
+        }
     }
 
     move() {
@@ -1676,17 +1713,49 @@ let googlePacman = (() => {
       } else if (g.gameplayMode == 4 || g.gameplayMode == 5 || g.gameplayMode == 7) {
         b = this.id == 0 ? 2 : 4;
         c = 0
-      } else if (g.gameplayMode == 3) if (this.id == g.playerDyingId) {
-        d = 20 - Math.floor(g.gameplayModeTime / g.timing[4] * 21);
-        if (this.id == 0) {
-          b = d - 1;
-          switch (b) {
-            case -1:
-              b = 0;
+      } else if (g.gameplayMode == 3)
+        if (this.id == g.playerDyingId) {
+          d = 20 - Math.floor(g.gameplayModeTime / g.timing[4] * 21);
+          if (this.id == 0) {
+            b = d - 1;
+            switch (b) {
+              case -1:
+                b = 0;
+                break;
+              case 11:
+                b = 10;
+                break;
+              case 12:
+              case 13:
+              case 14:
+              case 15:
+              case 16:
+              case 17:
+              case 18:
+              case 19:
+              case 20:
+                b =
+                  11;
+                break
+            }
+            c = 12
+          } else switch (d) {
+            case 0:
+            case 1:
+            case 2:
+            case 6:
+            case 10:
+              b = 4;
+              c = 3;
               break;
+            case 3:
+            case 7:
             case 11:
-              b = 10;
+              b = 4;
+              c = 0;
               break;
+            case 4:
+            case 8:
             case 12:
             case 13:
             case 14:
@@ -1696,50 +1765,20 @@ let googlePacman = (() => {
             case 18:
             case 19:
             case 20:
-              b =
-                11;
+              b = 4;
+              c = 2;
+              break;
+            case 5:
+            case 9:
+              b = 4;
+              c = 1;
               break
           }
-          c = 12
-        } else switch (d) {
-          case 0:
-          case 1:
-          case 2:
-          case 6:
-          case 10:
-            b = 4;
-            c = 3;
-            break;
-          case 3:
-          case 7:
-          case 11:
-            b = 4;
-            c = 0;
-            break;
-          case 4:
-          case 8:
-          case 12:
-          case 13:
-          case 14:
-          case 15:
-          case 16:
-          case 17:
-          case 18:
-          case 19:
-          case 20:
-            b = 4;
-            c = 2;
-            break;
-          case 5:
-          case 9:
-            b = 4;
-            c = 1;
-            break
+        } else {
+          b = 3;
+          c = 0
         }
-      } else {
-        b = 3;
-        c = 0
-      } else if (this.el.id == "pcm-bpcm") {
+      else if (this.el.id == "pcm-bpcm") {
         b = 14;
         c = 0;
         d = Math.floor(g.globalTime * 0.2) % 4;
@@ -1974,32 +2013,38 @@ let googlePacman = (() => {
         g.playfield[(c.y + c.h - 1) * 8][h].intersection = TRUE
       }
     }
-    for (b in o) if (o[b].w) for (h = o[b].x * 8; h <= (o[b].x + o[b].w - 1) * 8; h += 8) {
-      g.playfield[o[b].y * 8][h].dot = 0;
-      g.dotsRemaining--
-    } else for (f = o[b].y * 8; f <= (o[b].y + o[b].h - 1) * 8; f += 8) {
-      g.playfield[f][o[b].x * 8].dot = 0;
-      g.dotsRemaining--
-    }
+    for (b in o)
+      if (o[b].w)
+        for (h = o[b].x * 8; h <= (o[b].x + o[b].w - 1) * 8; h += 8) {
+          g.playfield[o[b].y * 8][h].dot = 0;
+          g.dotsRemaining--
+        } else
+          for (f = o[b].y * 8; f <= (o[b].y + o[b].h - 1) * 8; f += 8) {
+            g.playfield[f][o[b].x * 8].dot = 0;
+            g.dotsRemaining--
+          }
   };
   g.prepareAllowedDirections = () => {
-    for (let b = 8; b <= g.playfieldHeight * 8; b += 8) for (let c = 8; c <= g.playfieldWidth * 8; c += 8) {
-      g.playfield[b][c].allowedDir = 0;
-      if (g.playfield[b - 8][c].path) g.playfield[b][c].allowedDir += 1;
-      if (g.playfield[b + 8][c].path) g.playfield[b][c].allowedDir += 2;
-      if (g.playfield[b][c - 8].path) g.playfield[b][c].allowedDir += 4;
-      if (g.playfield[b][c + 8].path) g.playfield[b][c].allowedDir += 8
-    }
+    for (let b = 8; b <= g.playfieldHeight * 8; b += 8)
+      for (let c = 8; c <= g.playfieldWidth * 8; c += 8) {
+        g.playfield[b][c].allowedDir = 0;
+        if (g.playfield[b - 8][c].path) g.playfield[b][c].allowedDir += 1;
+        if (g.playfield[b + 8][c].path) g.playfield[b][c].allowedDir += 2;
+        if (g.playfield[b][c - 8].path) g.playfield[b][c].allowedDir += 4;
+        if (g.playfield[b][c + 8].path) g.playfield[b][c].allowedDir += 8
+      }
   };
   g.createDotElements = () => {
-    for (let b = 8; b <= g.playfieldHeight * 8; b += 8) for (let c = 8; c <= g.playfieldWidth * 8; c += 8) if (g.playfield[b][c].dot) {
-      const d = document.createElement("div");
-      d.className = "pcm-d";
-      d.id = g.getDotElementId(b, c);
-      d.style.left = `${c + -32}px`;
-      d.style.top = `${b + 0}px`;
-      g.playfieldEl.appendChild(d)
-    }
+    for (let b = 8; b <= g.playfieldHeight * 8; b += 8)
+      for (let c = 8; c <= g.playfieldWidth * 8; c += 8)
+        if (g.playfield[b][c].dot) {
+          const d = document.createElement("div");
+          d.className = "pcm-d";
+          d.id = g.getDotElementId(b, c);
+          d.style.left = `${c + -32}px`;
+          d.style.top = `${b + 0}px`;
+          g.playfieldEl.appendChild(d)
+        }
   };
   g.createEnergizerElements = () => {
     for (const b in p) {
@@ -2038,8 +2083,8 @@ let googlePacman = (() => {
     }
     g.createGhost();
   };
-  g.createGhost=()=>{
-    for (let index = 0; index < GHOST_NUMBER; index++){
+  g.createGhost = () => {
+    for (let index = 0; index < GHOST_NUMBER; index++) {
       let ghost = new Actor(index);
       ghost.ghost = TRUE;
       g.actors.push(ghost)
@@ -2117,8 +2162,9 @@ let googlePacman = (() => {
   };
   g.handleKeyDown = b => {
     if (!b) b = window.event;
-    if (g.keyPressed(b.keyCode)) if (b.preventDefault) b.preventDefault();
-    else b.returnValue = FALSE
+    if (g.keyPressed(b.keyCode))
+      if (b.preventDefault) b.preventDefault();
+      else b.returnValue = FALSE
   };
   g.canvasClicked = (b, c) => {
     let d = g.getAbsoluteElPos(g.canvasEl);
@@ -2266,13 +2312,14 @@ let googlePacman = (() => {
     g.createKillScreenElement(280, 80, 192, 56, FALSE);
     g.killScreenTileX = 80;
     g.killScreenTileY = 0;
-    for (let b = 280; b <= 472; b += 8) for (let c = 0; c <= 136; c += 8) {
-      if (g.rand() < 0.03) {
-        g.killScreenTileX = Math.floor(g.rand() * 25) * 10;
-        g.killScreenTileY = Math.floor(g.rand() * 2) * 10
+    for (let b = 280; b <= 472; b += 8)
+      for (let c = 0; c <= 136; c += 8) {
+        if (g.rand() < 0.03) {
+          g.killScreenTileX = Math.floor(g.rand() * 25) * 10;
+          g.killScreenTileY = Math.floor(g.rand() * 2) * 10
+        }
+        g.createKillScreenElement(b, c, 8, 8, TRUE)
       }
-      g.createKillScreenElement(b, c, 8, 8, TRUE)
-    }
     g.changeGameplayMode(14)
   };
   g.newLevel = b => {
@@ -2300,44 +2347,45 @@ let googlePacman = (() => {
     g.lives == -1 ? g.changeGameplayMode(8) : g.restartGameplay(FALSE)
   };
   g.switchMainGhostMode = (b, c) => {
-    if (b == 4 && g.levels.frightTime == 0) for (var d in g.actors) {
-      var f = g.actors[d];
-      if (f.ghost) f.reverseDirectionsNext = TRUE
-    } else {
-      f = g.mainGhostMode;
-      if (b == 4 && g.mainGhostMode != 4) g.lastMainGhostMode = g.mainGhostMode;
-      g.mainGhostMode = b;
-      if (b == 4 || f == 4) g.playAmbientSound();
-      switch (b) {
-        case 1:
-        case 2:
-          g.currentPlayerSpeed = g.levels.playerSpeed * 0.8;
-          g.currentDotEatingSpeed = g.levels.dotEatingSpeed * 0.8;
-          break;
-        case 4:
-          g.currentPlayerSpeed = g.levels.playerFrightSpeed * 0.8;
-          g.currentDotEatingSpeed = g.levels.dotEatingFrightSpeed * 0.8;
-          g.frightModeTime = g.levels.frightTotalTime;
-          g.modeScoreMultiplier = 1;
-          break
-      }
-      for (d in g.actors) {
-        f = g.actors[d];
-        if (f.ghost) {
-          if (b != 64 && !c) f.modeChangedWhileInPen = TRUE;
-          if (b == 4) f.eatenInThisFrightMode = FALSE;
-          if (f.mode != 8 && f.mode != 16 && f.mode != 32 && f.mode != 128 && f.mode != 64 || c) {
-            if (!c && f.mode != 4 && f.mode != b) f.reverseDirectionsNext = TRUE;
-            f.a(b)
+    if (b == 4 && g.levels.frightTime == 0)
+      for (var d in g.actors) {
+        var f = g.actors[d];
+        if (f.ghost) f.reverseDirectionsNext = TRUE
+      } else {
+        f = g.mainGhostMode;
+        if (b == 4 && g.mainGhostMode != 4) g.lastMainGhostMode = g.mainGhostMode;
+        g.mainGhostMode = b;
+        if (b == 4 || f == 4) g.playAmbientSound();
+        switch (b) {
+          case 1:
+          case 2:
+            g.currentPlayerSpeed = g.levels.playerSpeed * 0.8;
+            g.currentDotEatingSpeed = g.levels.dotEatingSpeed * 0.8;
+            break;
+          case 4:
+            g.currentPlayerSpeed = g.levels.playerFrightSpeed * 0.8;
+            g.currentDotEatingSpeed = g.levels.dotEatingFrightSpeed * 0.8;
+            g.frightModeTime = g.levels.frightTotalTime;
+            g.modeScoreMultiplier = 1;
+            break
+        }
+        for (d in g.actors) {
+          f = g.actors[d];
+          if (f.ghost) {
+            if (b != 64 && !c) f.modeChangedWhileInPen = TRUE;
+            if (b == 4) f.eatenInThisFrightMode = FALSE;
+            if (f.mode != 8 && f.mode != 16 && f.mode != 32 && f.mode != 128 && f.mode != 64 || c) {
+              if (!c && f.mode != 4 && f.mode != b) f.reverseDirectionsNext = TRUE;
+              f.a(b)
+            }
+          } else {
+            f.fullSpeed = g.currentPlayerSpeed;
+            f.dotEatingSpeed = g.currentDotEatingSpeed;
+            f.tunnelSpeed = g.currentPlayerSpeed;
+            f.d()
           }
-        } else {
-          f.fullSpeed = g.currentPlayerSpeed;
-          f.dotEatingSpeed = g.currentDotEatingSpeed;
-          f.tunnelSpeed = g.currentPlayerSpeed;
-          f.d()
         }
       }
-    }
   };
   g.figureOutPenLeaving = () => {
     if (g.alternatePenLeavingScheme) {
@@ -2437,10 +2485,13 @@ let googlePacman = (() => {
   };
   g.detectCollisions = () => {
     g.tilesChanged = FALSE;
-    for (let b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++) for (let c = 0; c < g.playerCount; c++) if (g.actors[b].tilePos[0] == g.actors[c].tilePos[0] && g.actors[b].tilePos[1] == g.actors[c].tilePos[1]) if (g.actors[b].mode == 4) {
-      g.ghostDies(b, c);
-      return
-    } else g.actors[b].mode != 8 && g.actors[b].mode != 16 && g.actors[b].mode != 32 && g.actors[b].mode != 128 && g.actors[b].mode != 64 && g.playerDies(c)
+    for (let b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++)
+      for (let c = 0; c < g.playerCount; c++)
+        if (g.actors[b].tilePos[0] == g.actors[c].tilePos[0] && g.actors[b].tilePos[1] == g.actors[c].tilePos[1])
+          if (g.actors[b].mode == 4) {
+            g.ghostDies(b, c);
+            return
+          } else g.actors[b].mode != 8 && g.actors[b].mode != 16 && g.actors[b].mode != 32 && g.actors[b].mode != 128 && g.actors[b].mode != 64 && g.playerDies(c)
   };
   g.updateCruiseElroySpeed = () => {
     //TODO
@@ -2477,7 +2528,8 @@ let googlePacman = (() => {
   };
   g.changeGameplayMode = b => {
     g.gameplayMode = b;
-    if (b != 13) for (let c = 0; c < g.playerCount + GHOST_NUMBER; c++) g.actors[c].b();
+    if (b != 13)
+      for (let c = 0; c < g.playerCount + GHOST_NUMBER; c++) g.actors[c].b();
     switch (b) {
       case 0:
         g.playAmbientSound();
@@ -2676,7 +2728,8 @@ let googlePacman = (() => {
       let b = "";
       if (g.globalTime % (g.timing[17] * 2) == 0) b = "visible";
       else if (g.globalTime % (g.timing[17] * 2) == g.timing[17]) b = "hidden";
-      if (b) for (let c = 0; c < g.playerCount; c++) g.scoreLabelEl[c].style.visibility = b
+      if (b)
+        for (let c = 0; c < g.playerCount; c++) g.scoreLabelEl[c].style.visibility = b
     }
   };
   g.finishFrightMode = () => {
@@ -2703,10 +2756,11 @@ let googlePacman = (() => {
             g.actors[g.ghostBeingEatenId].el.className = "pcm-ac";
             g.actors[g.ghostBeingEatenId].a(8);
             let c = FALSE;
-            for (b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++) if (g.actors[b].mode == 4 || (g.actors[b].mode == 16 || g.actors[b].mode == 128) && !g.actors[b].eatenInThisFrightMode) {
-              c = TRUE;
-              break
-            }
+            for (b = g.playerCount; b < g.playerCount + GHOST_NUMBER; b++)
+              if (g.actors[b].mode == 4 || (g.actors[b].mode == 16 || g.actors[b].mode == 128) && !g.actors[b].eatenInThisFrightMode) {
+                c = TRUE;
+                break
+              }
             c || g.finishFrightMode();
             break;
           case 2:
@@ -2792,10 +2846,11 @@ let googlePacman = (() => {
     if (g.forcePenLeaveTime) {
       g.forcePenLeaveTime--;
       if (g.forcePenLeaveTime <= 0) {
-        for (let b = 1; b <= 3; b++) if (g.actors[g.playerCount + b].mode == 16) {
-          g.actors[g.playerCount + b].freeToLeavePen = TRUE;
-          break
-        }
+        for (let b = 1; b <= 3; b++)
+          if (g.actors[g.playerCount + b].mode == 16) {
+            g.actors[g.playerCount + b].freeToLeavePen = TRUE;
+            break
+          }
         g.resetForcePenLeaveTime()
       }
     }
@@ -2809,7 +2864,7 @@ let googlePacman = (() => {
     g.handleGameplayModeTimer()
   };
   //TODO
-   g.tick = () => {
+  g.tick = () => {
     let b = (new Date).getTime();
     g.lastTimeDelta += b - g.lastTime - g.tickInterval;
     if (g.lastTimeDelta > 100) g.lastTimeDelta = 100;
@@ -2831,19 +2886,21 @@ let googlePacman = (() => {
       }
       g.checkCutscene();
       g.blinkScoreLabels()
-    } else for (b = 0; b < g.tickMultiplier + c; b++) {
-      g.moveActors();
-      if (g.gameplayMode == 0) if (g.tilesChanged) {
-        g.detectCollisions();
-        g.updateActorTargetPositions()
+    } else
+      for (b = 0; b < g.tickMultiplier + c; b++) {
+        g.moveActors();
+        if (g.gameplayMode == 0)
+          if (g.tilesChanged) {
+            g.detectCollisions();
+            g.updateActorTargetPositions()
+          }
+        g.globalTime++;
+        g.intervalTime = (g.intervalTime + 1) % D;
+        g.blinkEnergizers();
+        g.blinkScoreLabels();
+        g.handleTimers()
       }
-      g.globalTime++;
-      g.intervalTime = (g.intervalTime + 1) % D;
-      g.blinkEnergizers();
-      g.blinkScoreLabels();
-      g.handleTimers()
-    }
-  }; 
+  };
   g.extraLife = b => {
     g.playSound("extra-life", 0);
     g.extraLifeAwarded[b] = TRUE;
@@ -2981,20 +3038,22 @@ let googlePacman = (() => {
     }
   };
   g.playDotEatingSound = b => {
-    if (g.soundAvailable && google.pacManSound) if (g.gameplayMode == 0) if (g.dotEatingNow[b]) g.dotEatingNext[b] = TRUE;
-    else {
-      if (b == 0) {
-        const c = g.dotEatingSoundPart[b] == 1 ? "eating-dot-1" : "eating-dot-2";
-        g.playSound(c, 1 + g.dotEatingChannel[b], TRUE);
-        g.dotTimer = window.setInterval(g.repeatDotEatingSoundPacMan, 150)
-      } else {
-        g.playSound("eating-dot-double", 3 + g.dotEatingChannel[b], TRUE);
-        g.dotTimerMs = window.setInterval(g.repeatDotEatingSoundMsPacMan, 150)
-      }
-      g.dotEatingChannel[b] = (g.dotEatingChannel[b] + 1) % 2;
-      g.dotEatingSoundPart[b] =
-        3 - g.dotEatingSoundPart[b]
-    }
+    if (g.soundAvailable && google.pacManSound)
+      if (g.gameplayMode == 0)
+        if (g.dotEatingNow[b]) g.dotEatingNext[b] = TRUE;
+        else {
+          if (b == 0) {
+            const c = g.dotEatingSoundPart[b] == 1 ? "eating-dot-1" : "eating-dot-2";
+            g.playSound(c, 1 + g.dotEatingChannel[b], TRUE);
+            g.dotTimer = window.setInterval(g.repeatDotEatingSoundPacMan, 150)
+          } else {
+            g.playSound("eating-dot-double", 3 + g.dotEatingChannel[b], TRUE);
+            g.dotTimerMs = window.setInterval(g.repeatDotEatingSoundMsPacMan, 150)
+          }
+          g.dotEatingChannel[b] = (g.dotEatingChannel[b] + 1) % 2;
+          g.dotEatingSoundPart[b] =
+            3 - g.dotEatingSoundPart[b]
+        }
   };
   g.repeatDotEatingSound = b => {
     g.dotEatingNow[b] = FALSE;
@@ -3164,7 +3223,7 @@ let googlePacman = (() => {
           d = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
           b = TRUE;
           c = g.getFlashVersion(d.GetVariable("$version"))
-        } catch (j) { }
+        } catch (j) {}
       }
     }
     g.hasFlash = b;
@@ -3263,34 +3322,34 @@ let googlePacman = (() => {
 
 const CONTROL_CODES = {
   1: {
-      up: 38,
-      down: 40,
-      left: 37,
-      right: 39
+    up: 38,
+    down: 40,
+    left: 37,
+    right: 39
   },
   2: {
-      up: 87,
-      down: 83,
-      left: 65,
-      right: 68
+    up: 87,
+    down: 83,
+    left: 65,
+    right: 68
   }
 }
-class Pacman{
-  constructor(googlePacman){
+class Pacman {
+  constructor(googlePacman) {
     this.googlePacman = googlePacman;
   }
-  startGameplayNoGhost(){
+  startGameplayNoGhost() {
     GHOST_NUMBER = 0;
     this.googlePacman.switchToDoubleMode();
 
   }
-  startGameplayWithGhost(){
+  startGameplayWithGhost() {
     GHOST_NUMBER = 2;
-    
+
     this.googlePacman.switchToDoubleMode();
 
   }
-  move(playerId,direction){    
+  move(playerId, direction) {
     this.googlePacman.keyPressed(CONTROL_CODES[playerId][direction]);
   }
 

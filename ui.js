@@ -45,7 +45,7 @@ export function startPacman() {
 }
 
 export function predictClass(classId) {
- // google.pacman.keyPressed(CONTROL_CODES[classId]);
+  // google.pacman.keyPressed(CONTROL_CODES[classId]);
   document.body.setAttribute('data-active', CONTROLS[classId]);
 }
 
@@ -87,55 +87,55 @@ async function handler(label) {
   document.body.removeAttribute('data-active');
 }
 
- upButton.addEventListener('mousedown', () => handler(0));
- upButton.addEventListener('mouseup', () => mouseDown = false);
+upButton.addEventListener('mousedown', () => handler(0));
+upButton.addEventListener('mouseup', () => mouseDown = false);
 
- downButton.addEventListener('mousedown', () => handler(1));
- downButton.addEventListener('mouseup', () => mouseDown = false);
+downButton.addEventListener('mousedown', () => handler(1));
+downButton.addEventListener('mouseup', () => mouseDown = false);
 
- leftButton.addEventListener('mousedown', () => handler(2));
- leftButton.addEventListener('mouseup', () => mouseDown = false);
+leftButton.addEventListener('mousedown', () => handler(2));
+leftButton.addEventListener('mouseup', () => mouseDown = false);
 
- rightButton.addEventListener('mousedown', () => handler(3));
- rightButton.addEventListener('mouseup', () => mouseDown = false);
+rightButton.addEventListener('mousedown', () => handler(3));
+rightButton.addEventListener('mouseup', () => mouseDown = false);
 
- document.getElementsByClassName("control-up")[0].addEventListener('mousedown', () =>{
+document.getElementsByClassName("control-up")[0].addEventListener('mousedown', () => {
   move("up")
 
 });
-document.getElementsByClassName("control-down")[0].addEventListener('mousedown', () =>{
+document.getElementsByClassName("control-down")[0].addEventListener('mousedown', () => {
   move("down")
 
 });
-  
-document.getElementsByClassName("control-left")[0].addEventListener('mousedown', () =>{
+
+document.getElementsByClassName("control-left")[0].addEventListener('mousedown', () => {
   move("left")
 
 });
-  
-document.getElementsByClassName("control-right")[0].addEventListener('mousedown', () =>{
+
+document.getElementsByClassName("control-right")[0].addEventListener('mousedown', () => {
   move("right")
 
 });
 
- export function move(direction){
-  
+export function move(direction) {
+
   $.ajax({
     url: "http://localhost:3000/move",
- 
+
     // The name of the callback parameter, as specified by the YQL service
     jsonp: "callback",
- 
+
     // Tell jQuery we're expecting JSONP
     dataType: "jsonp",
- 
+
     // Tell YQL what we want and that we want JSON
     data: {
-        action: direction, 
-        player: $("#player").val()
+      action: direction,
+      player: $("#player").val()
     }
- 
- })
+
+  })
 }
 
 export function drawThumb(img, label) {
