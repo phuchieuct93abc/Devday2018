@@ -4,7 +4,8 @@
   "description": "",
   "main": "pacman-server.js",
   "scripts": {
-    "build": "webpack --progress --hide-modules"
+    "build": "webpack --progress --hide-modules",
+    "run": "nodemon pacman-server.js"
   },
   "author": "",
   "license": "ISC",
