@@ -4,8 +4,7 @@
   "description": "",
   "main": "pacman-server.js",
   "scripts": {
-    "webpack": "webpack",
-    "start": "webpack"
+    "build": "webpack --progress --hide-modules"
   },
   "author": "",
   "license": "ISC",

@@ -6,7 +6,7 @@ module.exports = {
   entry: './src',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js',
+    filename: 'main.js',
   },
   mode: 'development',
   module: {
@@ -26,6 +26,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin("bundle.css")
+    new ExtractTextPlugin("styles.css")
   ]
 };
