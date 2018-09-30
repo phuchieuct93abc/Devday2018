@@ -5,7 +5,7 @@
   "main": "pacman-server.js",
   "scripts": {
     "webpack": "webpack",
-    "start": "webpack && open index.html"
+    "start": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,9 @@
     "socket.io": "^2.1.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "style-loader": "^0.23.0",
