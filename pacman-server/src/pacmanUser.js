@@ -12,7 +12,7 @@ import {
     EATEN_PAUSE,
     DYING,
     Pacman
-} from "./pacnmanv2Const"
+} from "./pacmanConst"
 
 let User = function (game, map) {
 
@@ -76,8 +76,6 @@ let User = function (game, map) {
 
     function keyDown(direction) {
         due = direction;
-        console.log(direction)
-
         return false;
 
     };
