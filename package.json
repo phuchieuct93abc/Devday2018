@@ -21,9 +21,8 @@
     "build": "cross-env NODE_ENV=production parcel build index.html  --no-minify --public-url ./",
     "link-local": "yalc link",
     "postinstall": "yarn upgrade --pattern @tensorflow",
-    "server": "nodemon pacman-server/pacman-server.js",
     "client": "yarn watch --https",
-    "run": "npm-run-parallel client server"
+    "run": "npm-run-parallel client"
   },
   "devDependencies": {
     "babel-plugin-transform-runtime": "~6.23.0",
