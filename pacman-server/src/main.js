@@ -1,6 +1,9 @@
 //This script is used for team fighting
 import PacmanController from "./pacman";
 
+import app from "./assets/css/app.css";
+import styles from "./assets/css/styles.css";
+
 $(() => {
     var socket = io();
     socket.on('action', function (action) {
