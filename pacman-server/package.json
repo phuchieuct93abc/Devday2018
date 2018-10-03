@@ -5,7 +5,8 @@
   "main": "pacman-server.js",
   "scripts": {
     "build": "webpack --progress --hide-modules",
-    "run": "nodemon pacman-server.js"
+    "start": "node pacman-server.js",
+    "run": "npm-run-all --parallel start build"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +21,7 @@
     "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "nodemon": "^1.18.4",
+    "npm-run-all": "^4.1.3",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.2"
   }
