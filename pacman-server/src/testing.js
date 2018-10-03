@@ -1,5 +1,6 @@
 //This script is used in index.html for testing.
 //This page will be ginven to team for testing purpose, work with query param token
+import  "./assets/css/app.css";
 import PacmanController from "./pacman";
 var urlParams = new URLSearchParams(window.location.search);
 var token = urlParams.get('token');
