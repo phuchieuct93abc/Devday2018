@@ -1,17 +1,20 @@
 const express = require('express');
 const app = express();
 const https = require('https');
+const http = require('http');
 const fs = require("fs");
 
-const port = process.env.PACMAN_SERVER_PORT || 3000;
+const httpsPort = process.env.PACMAN_HTTPS_SERVER_PORT || 3000;
+const httpPort = process.env.PACMAN_HTTP_SERVER_PORT || 3001;
 
 const httpsOptions = {
   key: fs.readFileSync("./key/test_key.pem", "utf-8"),
   cert: fs.readFileSync("./key/test_cert.pem", "utf-8"),
 }
 
-const server = https.createServer(httpsOptions, app);
-const io = require('socket.io').listen(server);
+const httpsServer = https.createServer(httpsOptions, app);
+const httpServer = http.createServer(app);
+const io = require('socket.io').listen(httpsServer).listen(httpServer);
 
 app.use(express.static(__dirname + "/dist")); //Serves resources from public folder
 app.use(express.static(__dirname + "/src")); //Serves resources from public folder
@@ -38,6 +41,10 @@ io.on('connection', function (socket) {
   });
 });
 
-server.listen(port, function () {
-  console.log("Pacman server is running on " + port);
+httpsServer.listen(httpsPort, function () {
+  console.log("https server is running on " + httpsPort);
+});
+
+httpServer.listen(httpPort, function () {
+  console.log("http server is running on " + httpPort);
 });
