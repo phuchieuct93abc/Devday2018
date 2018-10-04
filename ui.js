@@ -132,7 +132,7 @@ export function move(direction) {
     // Tell YQL what we want and that we want JSON
     data: {
       action: direction,
-      player: $("#player").val()
+      token: $("#player").val()
     }
 
   })
