@@ -766,8 +766,8 @@ var PACMAN = (function () {
                 }
             }
         }
-
-        drawFooter();
+        //TODO: Remove footer
+       // drawFooter();
     }
 
     function eatenPill() {
