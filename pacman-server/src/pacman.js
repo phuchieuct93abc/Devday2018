@@ -814,7 +814,7 @@ var PACMAN = (function () {
         });
         map = new Pacman.Map(blockSize);
         setUpUsers();
-       
+        
 
         for (let i = 0, len = ghostSpecs.length; i < len; i += 1) {
             ghost = new Pacman.Ghost({
@@ -1451,6 +1451,12 @@ class PacmanController {
     setNumberOfPlayer(numberOfPlayers){
         PACMAN.setNumberOfPlayer(numberOfPlayers)
     }
+    setPlayer(players){
+        PACMAN.setNumberOfPlayer(players.length)
+    }       
+
+
+
     move(playerId, direction) {
         PACMAN.move(playerId - 1, CONTROL_CODES[direction])
     }
