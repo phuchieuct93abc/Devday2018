@@ -848,6 +848,7 @@ var PACMAN = (function () {
                 "completedLevel": completedLevel,
                 "eatenPill": eatenPill,
                 name: player.name,
+                color:player.playerColor
             }, map);
         })
         
