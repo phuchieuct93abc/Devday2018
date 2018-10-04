@@ -1,0 +1,1 @@
+//This script is used for admin.html for configuration: team token, color, team name
