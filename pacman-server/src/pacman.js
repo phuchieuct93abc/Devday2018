@@ -559,8 +559,7 @@ var PACMAN = (function () {
         map = null,
         users = [],
         stored = null,
-        numberOfPlayer =0;
-
+        players=[];
     function setNumberOfPlayer(number){
         numberOfPlayer = number;
     }
@@ -794,7 +793,9 @@ var PACMAN = (function () {
             e.stopPropagation();
         }
     };
-
+    function registerPlayers(inputPlayers){
+        players = inputPlayers;
+    }
 
     function init(wrapper, root) {
 
@@ -813,7 +814,7 @@ var PACMAN = (function () {
             "soundDisabled": soundDisabled
         });
         map = new Pacman.Map(blockSize);
-        setUpUsers();
+        setUpUsers(players);
         
 
         for (let i = 0, len = ghostSpecs.length; i < len; i += 1) {
@@ -841,21 +842,17 @@ var PACMAN = (function () {
             loaded();
         });
     };
-    function setUpUsers(){
-        let user1 = new PacmanUser({
-            "completedLevel": completedLevel,
-            "eatenPill": eatenPill,
-            name: "Pacman 1",
-        }, map);
-        let user2 = new PacmanUser({
-            "completedLevel": completedLevel,
-            "eatenPill": eatenPill,
-            name: "Pacman 2"
+    function setUpUsers(players){
+        let pacmanUsers = players.map(player=>{
+            return new PacmanUser({
+                "completedLevel": completedLevel,
+                "eatenPill": eatenPill,
+                name: player.name,
+            }, map);
+        })
+        
+        users = new PacmanUsers(pacmanUsers);
 
-        }, map);
-        users = new PacmanUsers();
-        users.addUser(user1);
-        numberOfPlayer>1 &&        users.addUser(user2)
     }
     function load(arr, callback) {
 
@@ -883,20 +880,16 @@ var PACMAN = (function () {
         "init": init,
         "move": keyDown,
         "startNewGame": startNewGame,
-        setNumberOfPlayer:setNumberOfPlayer
+        registerPlayers:registerPlayers
     };
 
 }());
 
 class PacmanUsers {
-    constructor() {
-        this.users = []
+    constructor(users) {
+        this.users = users
     }
 
-
-    addUser(user) {
-        this.users.push(user);
-    }
     newLevel() {
         this.users.forEach(element => element.newLevel());
     }
@@ -1452,7 +1445,7 @@ class PacmanController {
         PACMAN.setNumberOfPlayer(numberOfPlayers)
     }
     setPlayer(players){
-        PACMAN.setNumberOfPlayer(players.length)
+        PACMAN.registerPlayers(players)
     }       
 
 
