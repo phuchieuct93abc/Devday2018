@@ -694,7 +694,6 @@ var PACMAN = (function () {
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             ghosts[i].draw(ctx);
         }
-
         users.draw(ctx);
 
         userPos = userPos["new"];
@@ -847,8 +846,7 @@ var PACMAN = (function () {
             return new PacmanUser({
                 "completedLevel": completedLevel,
                 "eatenPill": eatenPill,
-                name: player.name,
-                color:player.playerColor
+                player:player
             }, map);
         })
         
@@ -871,8 +869,8 @@ var PACMAN = (function () {
 
         dialog("Press N to Start");
 
-        document.addEventListener("keydown", keyDown, true);
-        document.addEventListener("keypress", keyPress, true);
+        // document.addEventListener("keydown", keyDown, true);
+        // document.addEventListener("keypress", keyPress, true);
 
         timer = window.setInterval(mainLoop, 1000 / Pacman.FPS);
     };
@@ -916,7 +914,7 @@ class PacmanUsers {
         return this.users.map(element => element.move());
 
     }
-    draw(ctx) {
+    draw(ctx,position) {
         this.users.forEach(element => element.draw(ctx));
 
     }
