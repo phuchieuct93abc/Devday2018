@@ -13,7 +13,6 @@ import {
     DYING,
     Pacman
 } from "./pacmanConst"
-
 let User = function (game, map) {
 
     var position = null,
@@ -28,8 +27,10 @@ let User = function (game, map) {
     keyMap[KEY.ARROW_UP] = UP;
     keyMap[KEY.ARROW_RIGHT] = RIGHT;
     keyMap[KEY.ARROW_DOWN] = DOWN;
-    let name = game.name
+    let name = game.name;
 
+    let player =game.player
+    let currentPos={};
     function addScore(nScore) {
         score += nScore;
         if (score >= 10000 && score - nScore < 10000) {
@@ -119,13 +120,12 @@ let User = function (game, map) {
 
     function isOnSamePlane(due, dir) {
         return ((due === LEFT || due === RIGHT) &&
-                (dir === LEFT || dir === RIGHT)) ||
+            (dir === LEFT || dir === RIGHT)) ||
             ((due === UP || due === DOWN) &&
                 (dir === UP || dir === DOWN));
     };
 
     function move() {
-
         var npos = null,
             nextWhole = null,
             oldPosition = position,
@@ -260,26 +260,28 @@ let User = function (game, map) {
             half, 0, Math.PI * 2 * amount, true);
 
         ctx.fill();
+
     };
 
     function draw(ctx) {
-
-        var s = map.blockSize,
+        var blockSize = map.blockSize,
             angle = calcAngle(direction, position);
 
-        ctx.fillStyle = "#FFFF00";
+        ctx.fillStyle = player.playerColor;
+        let positionX = ((position.x / 10) * blockSize) + blockSize / 2;
+        let positionY = ((position.y / 10) * blockSize) + blockSize / 2
 
         ctx.beginPath();
+        ctx.moveTo(positionX, positionY);
+       
 
-        ctx.moveTo(((position.x / 10) * s) + s / 2,
-            ((position.y / 10) * s) + s / 2);
-
-        ctx.arc(((position.x / 10) * s) + s / 2,
-            ((position.y / 10) * s) + s / 2,
-            s / 2, Math.PI * angle.start,
+        ctx.arc(positionX,positionY,
+            blockSize / 2, Math.PI * angle.start,
             Math.PI * angle.end, angle.direction);
 
+        
         ctx.fill();
+        player.moveName(positionX,positionY)
     };
 
     initUser();

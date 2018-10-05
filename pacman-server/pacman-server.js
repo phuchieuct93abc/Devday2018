@@ -26,8 +26,10 @@ app.get('/', function (req, res) {
 app.get('/move', function (req, res) {
   io.emit('action', {
     action: req.query.action,
-    player: req.query.player
-  });
+    token: req.query.token
+  }
+  
+ );
 
   res.jsonp({
     status: 200

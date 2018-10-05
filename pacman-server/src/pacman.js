@@ -559,8 +559,7 @@ var PACMAN = (function () {
         map = null,
         users = [],
         stored = null,
-        numberOfPlayer =0;
-
+        players=[];
     function setNumberOfPlayer(number){
         numberOfPlayer = number;
     }
@@ -695,7 +694,6 @@ var PACMAN = (function () {
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             ghosts[i].draw(ctx);
         }
-
         users.draw(ctx);
 
         userPos = userPos["new"];
@@ -794,7 +792,9 @@ var PACMAN = (function () {
             e.stopPropagation();
         }
     };
-
+    function registerPlayers(inputPlayers){
+        players = inputPlayers;
+    }
 
     function init(wrapper, root) {
 
@@ -813,8 +813,8 @@ var PACMAN = (function () {
             "soundDisabled": soundDisabled
         });
         map = new Pacman.Map(blockSize);
-        setUpUsers();
-       
+        setUpUsers(players);
+        
 
         for (let i = 0, len = ghostSpecs.length; i < len; i += 1) {
             ghost = new Pacman.Ghost({
@@ -841,21 +841,17 @@ var PACMAN = (function () {
             loaded();
         });
     };
-    function setUpUsers(){
-        let user1 = new PacmanUser({
-            "completedLevel": completedLevel,
-            "eatenPill": eatenPill,
-            name: "Pacman 1",
-        }, map);
-        let user2 = new PacmanUser({
-            "completedLevel": completedLevel,
-            "eatenPill": eatenPill,
-            name: "Pacman 2"
+    function setUpUsers(players){
+        let pacmanUsers = players.map(player=>{
+            return new PacmanUser({
+                "completedLevel": completedLevel,
+                "eatenPill": eatenPill,
+                player:player
+            }, map);
+        })
+        
+        users = new PacmanUsers(pacmanUsers);
 
-        }, map);
-        users = new PacmanUsers();
-        users.addUser(user1);
-        numberOfPlayer>1 &&        users.addUser(user2)
     }
     function load(arr, callback) {
 
@@ -873,8 +869,8 @@ var PACMAN = (function () {
 
         dialog("Press N to Start");
 
-        document.addEventListener("keydown", keyDown, true);
-        document.addEventListener("keypress", keyPress, true);
+        // document.addEventListener("keydown", keyDown, true);
+        // document.addEventListener("keypress", keyPress, true);
 
         timer = window.setInterval(mainLoop, 1000 / Pacman.FPS);
     };
@@ -883,20 +879,16 @@ var PACMAN = (function () {
         "init": init,
         "move": keyDown,
         "startNewGame": startNewGame,
-        "setNumberOfPlayer":setNumberOfPlayer
+        "registerPlayers":registerPlayers
     };
 
 }());
 
 class PacmanUsers {
-    constructor() {
-        this.users = []
+    constructor(users) {
+        this.users = users
     }
 
-
-    addUser(user) {
-        this.users.push(user);
-    }
     newLevel() {
         this.users.forEach(element => element.newLevel());
     }
@@ -922,7 +914,7 @@ class PacmanUsers {
         return this.users.map(element => element.move());
 
     }
-    draw(ctx) {
+    draw(ctx,position) {
         this.users.forEach(element => element.draw(ctx));
 
     }
@@ -1451,6 +1443,12 @@ class PacmanController {
     setNumberOfPlayer(numberOfPlayers){
         PACMAN.setNumberOfPlayer(numberOfPlayers)
     }
+    setPlayer(players){
+        PACMAN.registerPlayers(players)
+    }       
+
+
+
     move(playerId, direction) {
         PACMAN.move(playerId - 1, CONTROL_CODES[direction])
     }
