@@ -10,7 +10,7 @@ export default class Player {
         this.playerName = playerName;
 
         this.playerNameElement = $(`#player${playerId}`);
-        this.playerNameElement.text(this.playerName);
+        this.playerNameElement.find(".player-name").text(this.playerName);
         this.playerNameElement.css({"color":this.playerColor});
         this.playerNameElement.hide();
     }
@@ -23,7 +23,7 @@ export default class Player {
     }
     moveName(positionX, positionY) {
         this.playerNameElement.show();
-        this.playerNameElement.css({ left: positionX - 10, top: positionY - 30 })
+        this.playerNameElement.css({ left: positionX, top: positionY - 40 })
 
     }
     static getPlayerByToken(token) {
