@@ -8,21 +8,28 @@ const commonModule = {
     include: __dirname + '/src',
     exclude: /node_modules/,
   },
-
   {
     test: /\.css$/,
     use: ExtractTextWebpackPlugin.extract({
       fallback: 'style-loader',
       use: 'css-loader'
     })
+  },
+  {
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /node_modules/
   }
   ],
+}
+const extensions = {
+  extensions: ['.tsx', '.ts', '.js']
 }
 const extractTextPlugin = new ExtractTextWebpackPlugin("styles.css");
 
 module.exports = [{
-  entry: './src/testing.js',
-
+  entry: './src/testing.ts',
+  devtool: 'inline-source-map',
   output: {
     filename: 'testing.js',
     path: path.resolve(__dirname, './dist')
@@ -37,10 +44,12 @@ module.exports = [{
       template: './src/pages/testing.html'
     })
   ],
-  module: commonModule
+  module: commonModule,
+  resolve: extensions
 },
 {
   entry: './src/admin.js',
+  devtool: 'inline-source-map',
   output: {
     filename: 'admin.js',
     path: path.resolve(__dirname, './dist')
@@ -55,11 +64,13 @@ module.exports = [{
       template: './src/pages/admin.html'
     }),
   ],
-  module: commonModule
+  module: commonModule,
+  resolve: extensions
 
 },
 {
-  entry: './src/main.js',
+  entry: './src/main.ts',
+  devtool: 'inline-source-map',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, './dist')
@@ -74,7 +85,9 @@ module.exports = [{
       template: './src/pages/main.html'
     })
   ],
-  module: commonModule
+  module: commonModule,
+  resolve: extensions
+
 
 }
 ]
