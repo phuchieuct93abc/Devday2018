@@ -121,7 +121,7 @@ document.getElementsByClassName("control-right")[0].addEventListener('mousedown'
 export function move(direction) {
 
   $.ajax({
-    url: "http://localhost:3000/move",
+    url: "https://localhost:3000/move",
 
     // The name of the callback parameter, as specified by the YQL service
     jsonp: "callback",
