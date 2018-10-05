@@ -883,7 +883,7 @@ var PACMAN = (function () {
         "init": init,
         "move": keyDown,
         "startNewGame": startNewGame,
-        setNumberOfPlayer:setNumberOfPlayer
+        "setNumberOfPlayer":setNumberOfPlayer
     };
 
 }());
