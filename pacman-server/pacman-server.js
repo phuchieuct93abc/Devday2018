@@ -1,39 +1,50 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+const express = require('express');
+const app = express();
+const https = require('https');
+const http = require('http');
+const fs = require("fs");
 
+const httpsPort = process.env.PACMAN_HTTPS_SERVER_PORT || 3000;
+const httpPort = process.env.PACMAN_HTTP_SERVER_PORT || 3001;
 
-let timer = 0;
-app.use(express.static(__dirname+"/dist" )); //Serves resources from public folder
-app.use(express.static(__dirname+"/src" )); //Serves resources from public folder
+const httpsOptions = {
+  key: fs.readFileSync("./key/test_key.pem", "utf-8"),
+  cert: fs.readFileSync("./key/test_cert.pem", "utf-8"),
+}
+
+const httpsServer = https.createServer(httpsOptions, app);
+const httpServer = http.createServer(app);
+const io = require('socket.io').listen(httpsServer).listen(httpServer);
+
+app.use(express.static(__dirname + "/dist")); //Serves resources from public folder
+app.use(express.static(__dirname + "/src")); //Serves resources from public folder
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
+
 app.get('/move', function (req, res) {
   io.emit('action', {
     action: req.query.action,
     player: req.query.player
-  }
-  
- );
+  });
 
-
-  res.jsonp({ status: 200 });
-
-});
-io.on('connection', function (socket) {
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
+  res.jsonp({
+    status: 200
   });
 
 });
 
-
-
-
-http.listen(3000, function () {
-  console.log('listening on 12 *:3000');
+io.on('connection', function (socket) {
+  socket.on('disconnect', function () {
+    console.log('User disconnected');
+  });
 });
 
+httpsServer.listen(httpsPort, function () {
+  console.log("https server is running on " + httpsPort);
+});
+
+httpServer.listen(httpPort, function () {
+  console.log("http server is running on " + httpPort);
+});
