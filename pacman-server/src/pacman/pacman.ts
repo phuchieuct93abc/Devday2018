@@ -883,7 +883,7 @@ class PacmanUsers {
     loseLife(): any {
         throw new Error("Method not implemented.");
     }
-    constructor(private users:any[]) {
+    constructor(private users:PacmanUser[]) {
     }
 
     newLevel() {

@@ -10,18 +10,10 @@ export default class PacmanUser {
     name: string;
     player: Player;
     constructor(public game: any, public map: any) {
-
-
-   
         this.name = game.name;
-
         this.player = game.player;
-
         this.initUser();
-
-
     }
-
     addScore(nScore) {
         this.score += nScore;
         if (this.score >= 10000 && this.score - nScore < 10000) {
