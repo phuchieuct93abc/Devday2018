@@ -6,6 +6,8 @@
 
 body {
     font: 13px Helvetica, Arial;
+    background-color: #323232;
+    color:white;
 }
 
 form {

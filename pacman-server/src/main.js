@@ -1,3 +1,4 @@
+//This script is used for team fighting
 import PacmanController from "./pacman";
 
 import app from "./assets/css/app.css";
@@ -13,5 +14,6 @@ $(() => {
 });
 $(()=>{
     PacmanController.startGameplayNoGhost();
-
+    PacmanController.setNumberOfPlayer(2)
+    PacmanController.startNewGame()
 })

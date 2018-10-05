@@ -20,7 +20,7 @@ app.use(express.static(__dirname + "/dist")); //Serves resources from public fol
 app.use(express.static(__dirname + "/src")); //Serves resources from public folder
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/dist/index.html');
+  res.sendFile(__dirname + '/dist/testing.html');
 });
 
 app.get('/move', function (req, res) {
