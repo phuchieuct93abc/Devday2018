@@ -15,7 +15,9 @@ var NONE = 4,
     EMPTY = 2,
     BLOCK = 3,
     PILL = 4,
-    FPS = 30;
+    FPS = 30,
+    BISCUIT_SCORE=1,
+    PILL_SCORE=20;
 export {
     WALL,
     BISCUIT,
@@ -33,5 +35,7 @@ export {
     PLAYING,
     COUNTDOWN,
     EATEN_PAUSE,
-    DYING
+    DYING,
+    BISCUIT_SCORE,
+    PILL_SCORE
 };

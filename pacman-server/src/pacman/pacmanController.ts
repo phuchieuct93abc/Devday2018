@@ -1,5 +1,6 @@
 import { UP, DOWN, LEFT, RIGHT } from "./pacmanConst";
 import Pacman from "./pacman";
+import Player from "../player";
 const CONTROL_CODES = {
     up: UP,
     down: DOWN,
@@ -7,7 +8,9 @@ const CONTROL_CODES = {
     right: RIGHT
 }
 class PacmanController {
+    players:Player[];
     constructor() { }
+
     startGameplayNoGhost() {
         window.setTimeout(() => {
             var el = document.getElementById("pacman");
@@ -25,14 +28,16 @@ class PacmanController {
 
     }
 
-    setPlayer(players) {
+    setPlayer(players:Player[]) {
+        this.players = players;
         Pacman.registerPlayers(players)
     }
 
 
 
-    move(playerId, direction) {
-        Pacman.move(playerId - 1, CONTROL_CODES[direction])
+    move(player:Player, direction) {
+        let playerIndex=this.players.indexOf(player);
+        Pacman.move(playerIndex, CONTROL_CODES[direction])
     }
     startNewGame() {
         setTimeout(() => {

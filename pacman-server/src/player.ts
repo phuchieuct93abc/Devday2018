@@ -3,20 +3,26 @@ import pacmanController from "./pacman/pacmanController";
 import { playerStorage } from "./playerStorage";
 
 export default class Player {
-
-    playerNameElement:JQuery<HTMLElement>
+    
+    playerNameElement:JQuery<HTMLElement>;
+    score:number;
     constructor(public token:string,public playerId:string, public playerName:string,public playerColor:string) {
         this.playerNameElement = $(`#player${playerId}`);
+        if(this.playerName.length){
+            this.playerNameElement = $(`#player`);
+            
+        }
         this.playerNameElement.find(".player-name").text(this.playerName);
         this.playerNameElement.css({"color":this.playerColor});
         this.playerNameElement.hide();
     }
-
-    score() {
-        console.log(`${this.playerId} score`)
+    updateScore(score: number): any {
+        this.score = score;
+        this.playerNameElement.find(".player-name").text(`${this.playerName}: ${score}`);
     }
+
     move(direction:string) {
-        pacmanController.move(this.playerId, direction);
+        pacmanController.move(this, direction);
     }
     moveName(positionX:number, positionY:number) {
         this.playerNameElement.show();

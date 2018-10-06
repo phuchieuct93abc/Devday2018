@@ -1,6 +1,7 @@
 import * as CONST from "./pacmanConst"
 
 import PacmanUser from "./pacmanUser";
+import Player from "../player";
 
 var Pacman:any={};
 var {LEFT,WAITING,RIGHT,DOWN,UP,PAUSE,PLAYING,COUNTDOWN,EATEN_PAUSE,DYING,FPS,BISCUIT,EMPTY,BLOCK,PILL,WALL} = CONST;
@@ -781,7 +782,7 @@ var PACMAN = (function () {
             e.stopPropagation();
         }
     };
-    function registerPlayers(inputPlayers){
+    function registerPlayers(inputPlayers:Player[]){
         players = inputPlayers;
     }
 

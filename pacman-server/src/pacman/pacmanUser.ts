@@ -7,18 +7,14 @@ export default class PacmanUser {
     due = null;
     lives = null;
     score = 5;
-    name: string;
     player: Player;
     constructor(public game: any, public map: any) {
-        this.name = game.name;
         this.player = game.player;
         this.initUser();
     }
     addScore(nScore) {
         this.score += nScore;
-        if (this.score >= 10000 && this.score - nScore < 10000) {
-            this.lives += 1;
-        }
+        this.player.updateScore(this.score);
     };
 
     theScore() {
@@ -164,19 +160,17 @@ export default class PacmanUser {
             block === CONST.BISCUIT || block === CONST.PILL) {
 
             this.map.setBlock(nextWhole, CONST.EMPTY);
-            this.addScore((block === CONST.BISCUIT) ? 10 : 50);
+            this.addScore((block === CONST.BISCUIT) ? CONST.BISCUIT_SCORE   : CONST.PILL_SCORE);
             this.eaten += 1;
 
             if (this.eaten === 182) {
-                console.log(name + "complete")
 
-                this.game.completedLevel();
+                // this.game.completedLevel();
             }
 
-            if (block === CONST.PILL) {
-                console.log(name + "eat pill")
+            if (block ===CONST.PILL) {
 
-                this.game.eatenPill();
+                //this.game.eatenPill();
             }
         }
 
@@ -246,7 +240,7 @@ export default class PacmanUser {
 
     };
 
-    draw(ctx) {
+    draw(ctx:CanvasRenderingContext2D) {
         var blockSize = this.map.blockSize,
             angle = this.calcAngle(this.direction, this.position);
 
