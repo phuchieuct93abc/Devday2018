@@ -244,7 +244,7 @@ export default class PacmanUser {
         var blockSize = this.map.blockSize,
             angle = this.calcAngle(this.direction, this.position);
 
-        ctx.fillStyle = this.player.playerColor;
+        ctx.fillStyle = this.player.color;
         let positionX = ((this.position.x / 10) * blockSize) + blockSize / 2;
         let positionY = ((this.position.y / 10) * blockSize) + blockSize / 2
 

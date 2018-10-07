@@ -1,36 +1,42 @@
 import * as $ from "jquery";
 import pacmanController from "./pacman/pacmanController";
-import { playerStorage } from "./playerStorage";
+import { playerDataSource, IPlayerDatasource } from "./playerStorage";
 
 export default class Player {
-    
-    playerNameElement:JQuery<HTMLElement>;
-    score:number;
-    constructor(public token:string,public playerId:string, public playerName:string,public playerColor:string) {
-        this.playerNameElement = $(`#player${playerId}`);
-        if(this.playerNameElement.length==0){
+
+    playerNameElement: JQuery<HTMLElement>;
+    score: number;
+    id: string;
+    color: string;
+    token: string;
+    name: string
+    constructor(dataSource: IPlayerDatasource) {
+        this.id = dataSource.playerId;
+        this.name = dataSource.playerName;
+        this.token = dataSource.token;
+        this.color = dataSource.playerColor;
+        this.playerNameElement = $(`#player${this.id}`);
+        if (this.playerNameElement.length == 0) {
             this.playerNameElement = $(`#player`);
-            
+
         }
-        this.playerNameElement.find(".player-name").text(this.playerName);
-        this.playerNameElement.css({"color":this.playerColor});
-        this.playerNameElement.hide();
+        this.playerNameElement.css({ "color": this.color }).hide().find(".player-name").text(this.name);
     }
     updateScore(score: number): any {
         this.score = score;
-        this.playerNameElement.find(".player-name").text(`${this.playerName}: ${score}`);
+        this.playerNameElement.find(".player-name").text(`${this.name}: ${score}`);
     }
 
-    move(direction:string) {
+    move(direction: string) {
         pacmanController.move(this, direction);
     }
-    moveName(positionX:number, positionY:number) {
+    moveName(positionX: number, positionY: number) {
         this.playerNameElement.show();
         this.playerNameElement.css({ left: positionX, top: positionY - 40 })
 
     }
-    static getPlayerByToken(token:string) {
-        let { playerId, playerName, playerColor } = playerStorage.filter((player:any) => player.token == token)[0];
-        return new Player(token, playerId, playerName, playerColor);
+    static getPlayerByToken(token: string) {
+        let playerData: IPlayerDatasource = playerDataSource.filter((player: any) => player.token == token)[0];
+        return new Player(playerData);
     }
 }
