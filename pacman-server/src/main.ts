@@ -11,10 +11,7 @@ $(() => {
 
     let player1:Player = Player.getPlayerByToken(player1Token);
     let player2 :Player= Player.getPlayerByToken(player2Token);
-    pacmanController.startGameplayNoGhost();
-    pacmanController.setPlayer([player1, player2])
-    pacmanController.startNewGame()
-    
+    pacmanController.setPlayer([player1, player2]).startGameWithNoGhost();
 
     var socket = io(); 
     socket.on('action', (action:any) =>{

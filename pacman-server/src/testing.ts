@@ -8,12 +8,10 @@ var urlParams = new URLSearchParams(window.location.search);
 var token = urlParams.get('token');
 
 if (token) {
+
     $(() => {
         let player = Player.getPlayerByToken(token);
-
-        PacmanController.startGameplayNoGhost();
-        PacmanController.setPlayer([player])
-        PacmanController.startNewGame()
+        PacmanController.setPlayer([player]).startGameWithNoGhost();
 
         var socket = io();
         socket.on('action', function (action) {

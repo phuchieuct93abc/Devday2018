@@ -8,44 +8,39 @@ const CONTROL_CODES = {
     right: RIGHT
 }
 class PacmanController {
-    players:Player[];
+    private players: Player[];
     constructor() { }
 
-    startGameplayNoGhost() {
-        window.setTimeout(() => {
-            var el = document.getElementById("pacman");
-            Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
-        }, 0);
+    startGameWithNoGhost() {
+
+        var el = document.getElementById("pacman");
+        Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
+        this.startNewGame();
 
     }
     startGameplayWithGhost() {
-
-        window.setTimeout(() => {
-            var el = document.getElementById("pacman");
-            Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
-
-        }, 0);
-
+        var el = document.getElementById("pacman");
+        Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
+        return this;
     }
-
-    setPlayer(players:Player[]) {
+ 
+    setPlayer(players: Player[]) {
         this.players = players;
         Pacman.registerPlayers(players)
+        return this;
     }
 
-
-
-    move(player:Player, direction) {
-        let playerIndex=this.players.indexOf(player);
+    move(player: Player, direction) {
+        let playerIndex = this.players.indexOf(player);
         Pacman.move(playerIndex, CONTROL_CODES[direction])
     }
-    startNewGame() {
+    private startNewGame() {
         setTimeout(() => {
             Pacman.startNewGame();
-        }, 3000)
-
+        }, 3000);
     }
-
 }
 
 export default new PacmanController();
+
+

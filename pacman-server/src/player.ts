@@ -8,7 +8,7 @@ export default class Player {
     score:number;
     constructor(public token:string,public playerId:string, public playerName:string,public playerColor:string) {
         this.playerNameElement = $(`#player${playerId}`);
-        if(this.playerName.length){
+        if(this.playerNameElement.length==0){
             this.playerNameElement = $(`#player`);
             
         }
