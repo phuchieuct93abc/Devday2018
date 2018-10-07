@@ -5,7 +5,6 @@ import Player from "../player";
 
 var Pacman:any={};
 var {LEFT,WAITING,RIGHT,DOWN,UP,PAUSE,PLAYING,COUNTDOWN,EATEN_PAUSE,DYING,FPS,BISCUIT,EMPTY,BLOCK,PILL,WALL} = CONST;
-console.log(COUNTDOWN)
 Pacman.Ghost = function (game, map, colour) {
 
     var position = null,
@@ -760,7 +759,6 @@ var PACMAN = (function () {
 
     function eatenPill() {
         audio.play("eatpill");
-        console.log("eat pill")
         timerStart = tick;
         eatenCount = 0;
         for (let i = 0; i < ghosts.length; i += 1) {
