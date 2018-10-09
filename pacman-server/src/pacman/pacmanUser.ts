@@ -160,7 +160,7 @@ export default class PacmanUser {
             block === CONST.BISCUIT || block === CONST.PILL) {
 
             this.map.setBlock(nextWhole, CONST.EMPTY);
-            this.addScore((block === CONST.BISCUIT) ? CONST.BISCUIT_SCORE   : CONST.PILL_SCORE);
+            this.addScore((block === CONST.BISCUIT) ? CONST.BISCUIT_SCORE : CONST.PILL_SCORE);
             this.eaten += 1;
 
             if (this.eaten === 182) {
@@ -168,7 +168,7 @@ export default class PacmanUser {
                 // this.game.completedLevel();
             }
 
-            if (block ===CONST.PILL) {
+            if (block === CONST.PILL) {
 
                 //this.game.eatenPill();
             }
@@ -240,7 +240,7 @@ export default class PacmanUser {
 
     };
 
-    draw(ctx:CanvasRenderingContext2D) {
+    draw(ctx: CanvasRenderingContext2D) {
         var blockSize = this.map.blockSize,
             angle = this.calcAngle(this.direction, this.position);
 
