@@ -1,21 +1,10 @@
-import PacmanUser from "./pacmanUser";
-import {
-    KEY,
-    NONE,
-    UP,
-    LEFT,
-    DOWN,
-    RIGHT,
-    WAITING,
-    PAUSE,
-    PLAYING,
-    COUNTDOWN,
-    EATEN_PAUSE,
-    DYING,
-    Pacman
-} from "./pacmanConst"
-Pacman.FPS = 30;
+import * as CONST from "./pacmanConst"
 
+import PacmanUser from "./pacmanUser";
+import Player from "../player";
+
+var Pacman:any={};
+var {LEFT,WAITING,RIGHT,DOWN,UP,PAUSE,PLAYING,COUNTDOWN,EATEN_PAUSE,DYING,FPS,BISCUIT,EMPTY,BLOCK,PILL,WALL} = CONST;
 Pacman.Ghost = function (game, map, colour) {
 
     var position = null,
@@ -24,10 +13,12 @@ Pacman.Ghost = function (game, map, colour) {
         eaten = null,
         due = null;
 
+    
+
     function getNewCoord(dir, current) {
 
         var speed = isVunerable() ? 1 : isHidden() ? 4 : 2,
-            xSpeed = (dir === LEFT && -speed || dir === RIGHT && speed || 0),
+            xSpeed = (dir === WAITING && -speed || dir === RIGHT && speed || 0),
             ySpeed = (dir === DOWN && speed || dir === UP && -speed || 0);
 
         return {
@@ -119,7 +110,7 @@ Pacman.Ghost = function (game, map, colour) {
     };
 
     function secondsAgo(tick) {
-        return (game.getTick() - tick) / Pacman.FPS;
+        return (game.getTick() - tick) / FPS;
     };
 
     function getColour() {
@@ -293,7 +284,7 @@ Pacman.Map = function (size) {
     }
 
     function isWall(pos) {
-        return withinBounds(pos.y, pos.x) && map[pos.y][pos.x] === Pacman.WALL;
+        return withinBounds(pos.y, pos.x) && map[pos.y][pos.x] === WALL;
     }
 
     function isFloorSpace(pos) {
@@ -301,9 +292,9 @@ Pacman.Map = function (size) {
             return false;
         }
         var peice = map[pos.y][pos.x];
-        return peice === Pacman.EMPTY ||
-            peice === Pacman.BISCUIT ||
-            peice === Pacman.PILL;
+        return peice === EMPTY ||
+            peice === BISCUIT ||
+            peice === PILL;
     }
 
     function drawWall(ctx) {
@@ -374,7 +365,7 @@ Pacman.Map = function (size) {
 
         for (let i = 0; i < height; i += 1) {
             for (let j = 0; j < width; j += 1) {
-                if (map[i][j] === Pacman.PILL) {
+                if (map[i][j] === PILL) {
                     ctx.beginPath();
 
                     ctx.fillStyle = "#000";
@@ -414,20 +405,20 @@ Pacman.Map = function (size) {
 
         var layout = map[y][x];
 
-        if (layout === Pacman.PILL) {
+        if (layout === PILL) {
             return;
         }
 
         ctx.beginPath();
 
-        if (layout === Pacman.EMPTY || layout === Pacman.BLOCK ||
-            layout === Pacman.BISCUIT) {
+        if (layout === EMPTY || layout === BLOCK ||
+            layout === BISCUIT) {
 
             ctx.fillStyle = "#000";
             ctx.fillRect((x * blockSize), (y * blockSize),
                 blockSize, blockSize);
 
-            if (layout === Pacman.BISCUIT) {
+            if (layout === BISCUIT) {
                 ctx.fillStyle = "#FFF";
                 ctx.fillRect((x * blockSize) + (blockSize / 2.5),
                     (y * blockSize) + (blockSize / 2.5),
@@ -557,12 +548,10 @@ var PACMAN = (function () {
         ctx = null,
         timer = null,
         map = null,
-        users = [],
+        users:PacmanUsers,
         stored = null,
         players=[];
-    function setNumberOfPlayer(number){
-        numberOfPlayer = number;
-    }
+
     function setGhost() {
         ghostSpecs = ["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]
 
@@ -686,7 +675,7 @@ var PACMAN = (function () {
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             redrawBlock(ghostPos[i].old);
         }
-        userPos = users.move(ctx);
+        userPos = users.move();
         userPos.forEach(pos => redrawBlock(pos.old))
         //TODO
         //redrawBlock(userPos.old);
@@ -735,11 +724,11 @@ var PACMAN = (function () {
             map.draw(ctx);
             dialog("Press N to start a New game");
         } else if (state === EATEN_PAUSE &&
-            (tick - timerStart) > (Pacman.FPS / 3)) {
+            (tick - timerStart) > (FPS / 3)) {
             map.draw(ctx);
             setState(PLAYING);
         } else if (state === DYING) {
-            if (tick - timerStart > (Pacman.FPS * 2)) {
+            if (tick - timerStart > (FPS * 2)) {
                 loseLife();
             } else {
                 redrawBlock(userPos);
@@ -747,11 +736,11 @@ var PACMAN = (function () {
                     redrawBlock(ghostPos[i].old);
                     ghostPos.push(ghosts[i].draw(ctx));
                 }
-                users.drawDead(ctx, (tick - timerStart) / (Pacman.FPS * 2));
+                users.drawDead(ctx, (tick - timerStart) / (FPS * 2));
             }
         } else if (state === COUNTDOWN) {
 
-            diff = 5 + Math.floor((timerStart - tick) / Pacman.FPS);
+            diff = 5 + Math.floor((timerStart - tick) / FPS);
 
             if (diff === 0) {
                 map.draw(ctx);
@@ -770,7 +759,6 @@ var PACMAN = (function () {
 
     function eatenPill() {
         audio.play("eatpill");
-        console.log("eat pill")
         timerStart = tick;
         eatenCount = 0;
         for (let i = 0; i < ghosts.length; i += 1) {
@@ -792,7 +780,7 @@ var PACMAN = (function () {
             e.stopPropagation();
         }
     };
-    function registerPlayers(inputPlayers){
+    function registerPlayers(inputPlayers:Player[]){
         players = inputPlayers;
     }
 
@@ -872,7 +860,7 @@ var PACMAN = (function () {
         // document.addEventListener("keydown", keyDown, true);
         // document.addEventListener("keypress", keyPress, true);
 
-        timer = window.setInterval(mainLoop, 1000 / Pacman.FPS);
+        timer = window.setInterval(mainLoop, 1000 / FPS);
     };
 
     return {
@@ -885,8 +873,16 @@ var PACMAN = (function () {
 }());
 
 class PacmanUsers {
-    constructor(users) {
-        this.users = users
+    addScore(nScore: any): any {
+        throw new Error("Method not implemented.");
+    }
+    drawDead(ctx: any, arg1: number): any {
+        throw new Error("Method not implemented.");
+    }
+    loseLife(): any {
+        throw new Error("Method not implemented.");
+    }
+    constructor(private users:PacmanUser[]) {
     }
 
     newLevel() {
@@ -914,7 +910,7 @@ class PacmanUsers {
         return this.users.map(element => element.move());
 
     }
-    draw(ctx,position) {
+    draw(ctx) {
         this.users.forEach(element => element.draw(ctx));
 
     }
@@ -922,26 +918,6 @@ class PacmanUsers {
 
 }
 
-/* Human readable keyCode index */
-
-(function () {
-    /* 0 - 9 */
-    for (var i = 48; i <= 57; i++) {
-        KEY['' + (i - 48)] = i;
-    }
-    /* A - Z */
-    for (let i = 65; i <= 90; i++) {
-        KEY['' + String.fromCharCode(i)] = i;
-    }
-    /* NUM_PAD_0 - NUM_PAD_9 */
-    for (let i = 96; i <= 105; i++) {
-        KEY['NUM_PAD_' + (i - 96)] = i;
-    }
-    /* F1 - F12 */
-    for (let i = 112; i <= 123; i++) {
-        KEY['F' + (i - 112 + 1)] = i;
-    }
-})();
 
 
 
@@ -1407,58 +1383,4 @@ Pacman.WALLS = [
         }
     ]
 ];
-
-
-
-
-
-
-const CONTROL_CODES = {
-
-
-    up: UP,
-    down: DOWN,
-    left: LEFT,
-    right: RIGHT
-
-}
-class PacmanController {
-    constructor() {}
-    startGameplayNoGhost() {
-        window.setTimeout(() => {
-            var el = document.getElementById("pacman");
-            PACMAN.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
-        }, 0);
-
-    }
-    startGameplayWithGhost() {
-
-        window.setTimeout(() => {
-            var el = document.getElementById("pacman");
-            PACMAN.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
-
-        }, 0);
-
-    }
-    setNumberOfPlayer(numberOfPlayers){
-        PACMAN.setNumberOfPlayer(numberOfPlayers)
-    }
-    setPlayer(players){
-        PACMAN.registerPlayers(players)
-    }       
-
-
-
-    move(playerId, direction) {
-        PACMAN.move(playerId - 1, CONTROL_CODES[direction])
-    }
-    startNewGame() {
-        setTimeout(() => {
-            PACMAN.startNewGame();
-        }, 3000)
-
-    }
-
-}
-
-export default new PacmanController();
+export default PACMAN
