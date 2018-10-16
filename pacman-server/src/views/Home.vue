@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <play-board></play-board>
+    <testing-board></testing-board>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import PlayBoard from '@/components/PlayBoard.vue'
+import TestingBoard from '@/components/TestingBoard.vue'
 
 @Component({
   components: {
-    PlayBoard
+    TestingBoard
   },
 })
 export default class Home extends Vue {}

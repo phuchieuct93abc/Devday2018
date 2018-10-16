@@ -14,7 +14,7 @@ import Player from "../player"
 import * as io from 'socket.io-client';
 
 @Component
-export default class PlayBoard extends Vue {
+export default class TestingBoard extends Vue {
   private errorMessage: String = "";
 
   mounted() {
