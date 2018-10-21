@@ -31,6 +31,7 @@ export default new Vuex.Store({
     mutations: {
         updateScoreFirstPlayer: (state, value) => state.firstPlayer.score = value,
         updateScoreSecondPlayer: (state, value) => state.secondPlayer.score = value,
+        updateScoreTestPlayer: (state, value) => state.testPlayer.score = value,
     },
     actions: {}
 })

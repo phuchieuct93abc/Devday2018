@@ -1,9 +1,14 @@
 <template>
-    <div id="pacman">
-    <span id="player" class="player-name-wrapper">
-      <span class="player-name"></span>
-      <p>{{ errorMessage }}</p>
-    </span>
+    <div>
+        <div v-if="isError" class="error-message">Please put token in url like ?token=ABC</div>
+        <div v-else>
+            <score-board class="test-player" :score=testPlayer.score :team-name=testPlayer.name></score-board>
+            <div id="pacman">
+                <span id="player" class="player-name-wrapper">
+                <span class="player-name"></span>
+            </span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -16,13 +21,13 @@
 
     @Component
     export default class TestingBoard extends Vue {
-        private errorMessage: String = "";
+        private error: boolean = false;
 
         mounted() {
             let urlParams = new URLSearchParams(window.location.search);
             let token = urlParams.get('token');
             if (token) {
-                this.errorMessage = "";
+                this.error = false;
                 let player = Player.fromPlayerData(this.testPlayer);
                 pacmanController.setPlayer([player]).startGameWithNoGhost();
 
@@ -33,12 +38,16 @@
                     }
                 });
             } else {
-                this.errorMessage = "Please put token in url like ?token=ABC";
+                this.error = true;
             }
         }
 
         get testPlayer(): PlayerData {
             return this.$store.state.testPlayer;
+        }
+
+        get isError() {
+            return this.error;
         }
     }
 </script>
@@ -61,5 +70,16 @@
         white-space: nowrap;
         justify-content: center;
         font-size: 1.5em;
+    }
+
+    .test-player {
+        position: absolute;
+        right: 20%;
+    }
+
+    .error-message {
+        margin: 0 auto;
+        width: 800px;
+        font-size: 40px;
     }
 </style>

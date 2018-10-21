@@ -23,6 +23,8 @@ export default class PacmanUser {
             Store.commit("updateScoreFirstPlayer", this.score);
         } else if (this.player.token === Store.state.secondPlayer.token) {
             Store.commit("updateScoreSecondPlayer", this.score);
+        } else {
+            Store.commit("updateScoreTestPlayer", this.score);
         }
     };
 
