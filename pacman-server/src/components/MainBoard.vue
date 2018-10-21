@@ -1,9 +1,9 @@
 <template>
     <div class="main-board">
 
-        <score-board class="team-one" :score=firstPlayerScore team-name="Hung Nguyen"></score-board>
+        <score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></score-board>
 
-        <score-board class="team-two" :score=secondPlayerScore team-name="Hieu Lam"></score-board>
+        <score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></score-board>
 
         <div id="pacman">
             <span id="player1" class="player-name-wrapper">
@@ -25,8 +25,8 @@
     @Component
     export default class MainBoard extends Vue {
         mounted() {
-            const player1Token: string = "1";
-            const player2Token: string = "2";
+            const player1Token: string = this.firstPlayer.token;
+            const player2Token: string = this.secondPlayer.token;
             let player1: Player = Player.getPlayerByToken(player1Token);
             let player2: Player = Player.getPlayerByToken(player2Token);
             pacmanController.setPlayer([player1, player2]).startGameWithNoGhost();
@@ -46,13 +46,14 @@
             });
         }
 
-        get firstPlayerScore() {
-            return this.$store.state.firstPlayer.score;
+        get firstPlayer() {
+            return this.$store.state.firstPlayer;
         }
 
-        get secondPlayerScore() {
-            return this.$store.state.secondPlayer.score;
+        get secondPlayer() {
+            return this.$store.state.secondPlayer;
         }
+
     }
 </script>
 

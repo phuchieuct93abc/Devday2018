@@ -1,21 +1,29 @@
-import * as CONST from "./pacmanConst"
-import Player from "../player";
+import * as CONST from "@/pacman/pacmanConst"
+import Player from "@/player";
+import Store from "@/store";
+
 export default class PacmanUser {
     position: any = null;
     direction: any = null;
     eaten: any = null;
     due: any = null;
     lives: any = null;
-    score: any = 5;
+    score: number = 5;
     player: Player;
 
     constructor(public game: any, public map: any) {
         this.player = game.player;
         this.initUser();
     }
-    addScore(nScore) {
-        this.score += nScore;
+    private addScore(score: number) {
+        this.score += score;
         this.player.updateScore(this.score);
+
+        if (this.player.token === Store.state.firstPlayer.token) {
+            Store.commit("updateScoreFirstPlayer", this.score);
+        } else if (this.player.token === Store.state.secondPlayer.token) {
+            Store.commit("updateScoreSecondPlayer", this.score);
+        }
     };
 
     theScore() {

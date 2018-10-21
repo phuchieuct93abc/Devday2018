@@ -7,13 +7,13 @@ export default new Vuex.Store({
     state: {
         firstPlayer: {
             token: "1",
-            name: "Hung",
+            name: "Hieu",
             color: "#00ff18",
             score: 10,
         },
         secondPlayer: {
             token: "2",
-            name: "Hieu",
+            name: "Hung",
             color: "#ff0000",
             score: 20,
         }
