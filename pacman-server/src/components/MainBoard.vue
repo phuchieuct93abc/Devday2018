@@ -6,10 +6,10 @@
         <score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></score-board>
 
         <div id="pacman">
-            <span id="player1" class="player-name-wrapper">
+            <span id="player-1" class="player-name-wrapper">
                 <span class="player-name"></span>
             </span>
-                <span id="player2" class="player-name-wrapper">
+                <span id="player-2" class="player-name-wrapper">
                 <span class="player-name"></span>
             </span>
         </div>
@@ -21,18 +21,17 @@
     import * as io from 'socket.io-client';
     import Player from "../player";
     import pacmanController from "../pacman/pacmanController";
+    import {PlayerData, RestData} from "../playerStorage";
 
     @Component
     export default class MainBoard extends Vue {
         mounted() {
-            const player1Token: string = this.firstPlayer.token;
-            const player2Token: string = this.secondPlayer.token;
-            let player1: Player = Player.getPlayerByToken(player1Token);
-            let player2: Player = Player.getPlayerByToken(player2Token);
+            let player1: Player = Player.fromPlayerData(this.firstPlayer);
+            let player2: Player = Player.fromPlayerData(this.secondPlayer);
             pacmanController.setPlayer([player1, player2]).startGameWithNoGhost();
 
             var socket = io();
-            socket.on('action', (action: any) => {
+            socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
                 if (token == player1.token) {
@@ -46,11 +45,11 @@
             });
         }
 
-        get firstPlayer() {
+        get firstPlayer(): PlayerData {
             return this.$store.state.firstPlayer;
         }
 
-        get secondPlayer() {
+        get secondPlayer(): PlayerData {
             return this.$store.state.secondPlayer;
         }
 
