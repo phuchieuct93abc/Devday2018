@@ -2,6 +2,8 @@ import $ from "jquery";
 import pacmanController from "./pacman/pacmanController";
 import { playerDataSource, IPlayerDatasource } from "./playerStorage";
 
+import Store from './store';
+
 export default class Player {
 
     playerNameElement: JQuery<HTMLElement>;
@@ -24,6 +26,7 @@ export default class Player {
     }
     updateScore(score: number): any {
         this.score = score;
+        Store.commit("updateScoreSecondPlayer", score);
         this.playerNameElement.find(".player-name").text(`${this.name}: ${score}`);
     }
 

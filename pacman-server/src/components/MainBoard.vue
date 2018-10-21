@@ -1,9 +1,9 @@
 <template>
     <div class="main-board">
 
-        <score-board class="team-one" score="20" team-name="Hung Nguyen"></score-board>
+        <score-board class="team-one" :score=firstPlayerScore team-name="Hung Nguyen"></score-board>
 
-        <score-board class="team-two" score="50" team-name="Hieu Lam"></score-board>
+        <score-board class="team-two" :score=secondPlayerScore team-name="Hieu Lam"></score-board>
 
         <div id="pacman">
             <span id="player1" class="player-name-wrapper">
@@ -19,7 +19,7 @@
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
     import * as io from 'socket.io-client';
-    import Player from "../player"
+    import Player from "../player";
     import pacmanController from "../pacman/pacmanController";
 
     @Component
@@ -34,7 +34,7 @@
             var socket = io();
             socket.on('action', (action: any) => {
                 let token = action.token;
-                let player;
+                let player: Player;
                 if (token == player1.token) {
                     player = player1;
                 } else if (token == player2.token) {
@@ -44,6 +44,14 @@
                 }
                 player.move(action.action);
             });
+        }
+
+        get firstPlayerScore() {
+            return this.$store.state.firstPlayer.score;
+        }
+
+        get secondPlayerScore() {
+            return this.$store.state.secondPlayer.score;
         }
     }
 </script>
