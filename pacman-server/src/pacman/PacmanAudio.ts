@@ -19,6 +19,7 @@ let PacmanAudio = function (game) {
         f.setAttribute("src", path);
         f.pause();
     }
+
     function progress(event, name, callback) {
         if (event.loaded === event.total && typeof callback === "function") {
             callback();
@@ -26,6 +27,7 @@ let PacmanAudio = function (game) {
                 progressEvents[name], true);
         }
     }
+
     function disableSound() {
         for (var i = 0; i < playing.length; i++) {
             files[playing[i]].pause();
@@ -33,6 +35,7 @@ let PacmanAudio = function (game) {
         }
         playing = [];
     }
+
     function ended(name) {
 
         var i, tmp: any = [],
@@ -49,6 +52,7 @@ let PacmanAudio = function (game) {
         }
         playing = tmp;
     }
+
     function play(name) {
         if (!game.soundDisabled()) {
             endEvents[name] = function () {
@@ -59,16 +63,19 @@ let PacmanAudio = function (game) {
             files[name].play();
         }
     }
+
     function pause() {
         for (var i = 0; i < playing.length; i++) {
             files[playing[i]].pause();
         }
     }
+
     function resume() {
         for (var i = 0; i < playing.length; i++) {
             files[playing[i]].play();
         }
     }
+
     return {
         "disableSound": disableSound,
         "load": load,

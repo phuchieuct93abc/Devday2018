@@ -1,6 +1,6 @@
 import $ from "jquery";
 import pacmanController from "./pacman/pacmanController";
-import {playerDataSource, IPlayerDatasource} from "./playerStorage";
+import {IPlayerDatasource, playerDataSource} from "./playerStorage";
 
 import Store from './store';
 

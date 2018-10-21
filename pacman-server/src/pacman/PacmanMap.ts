@@ -72,17 +72,21 @@ let PacmanMap = function (size) {
         }
         return newObj;
     }
+
     function reset() {
         map = clone(PacmanMaze.MAP);
         height = map.length;
         width = map[0].length;
     }
+
     function block(pos) {
         return map[pos.y][pos.x];
     }
+
     function setBlock(pos, type) {
         map[pos.y][pos.x] = type;
     }
+
     function drawPills(ctx) {
 
         if (++pillSize > 30) {
@@ -110,6 +114,7 @@ let PacmanMap = function (size) {
             }
         }
     }
+
     function draw(ctx) {
 
         var i, j, size = blockSize;
@@ -125,6 +130,7 @@ let PacmanMap = function (size) {
             }
         }
     }
+
     function drawBlock(y, x, ctx) {
 
         var layout = map[y][x];
@@ -151,6 +157,7 @@ let PacmanMap = function (size) {
         }
         ctx.closePath();
     }
+
     reset();
 
     return {

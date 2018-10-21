@@ -9,7 +9,6 @@ let PacmanGhost = function (game, map, colour) {
         due: any = null;
 
 
-
     function getNewCoord(dir, current) {
 
         var speed = isVunerable() ? 1 : isHidden() ? 4 : 2,
@@ -21,6 +20,7 @@ let PacmanGhost = function (game, map, colour) {
             "y": addBounded(current.y, ySpeed)
         };
     }
+
     /* Collision detection(walls) is done when a ghost lands on an
      * exact block, make sure they dont skip over it
      */
@@ -34,20 +34,25 @@ let PacmanGhost = function (game, map, colour) {
         }
         return x1 + x2;
     }
+
     function isVunerable() {
         return eatable !== null;
     }
+
     function isDangerous() {
         return eaten === null;
     }
+
     function isHidden() {
         return eatable === null && eaten !== null;
     }
+
     function getRandomDirection() {
         var moves = (direction === LEFT || direction === RIGHT) ?
             [UP, DOWN] : [LEFT, RIGHT];
         return moves[Math.floor(Math.random() * 2)];
     }
+
     function reset() {
         eaten = null;
         eatable = null;
@@ -58,25 +63,31 @@ let PacmanGhost = function (game, map, colour) {
         direction = getRandomDirection();
         due = getRandomDirection();
     }
+
     function onWholeSquare(x) {
         return x % 10 === 0;
     }
+
     function oppositeDirection(dir) {
         return dir === LEFT && RIGHT ||
             dir === RIGHT && LEFT ||
             dir === UP && DOWN || UP;
     }
+
     function makeEatable() {
         direction = oppositeDirection(direction);
         eatable = game.getTick();
     }
+
     function eat() {
         eatable = null;
         eaten = game.getTick();
     }
+
     function pointToCoord(x) {
         return Math.round(x / 10);
     }
+
     function nextSquare(x, dir) {
         var rem = x % 10;
         if (rem === 0) {
@@ -87,12 +98,15 @@ let PacmanGhost = function (game, map, colour) {
             return x - rem;
         }
     }
+
     function onGridSquare(pos) {
         return onWholeSquare(pos.y) && onWholeSquare(pos.x);
     }
+
     function secondsAgo(tick) {
         return (game.getTick() - tick) / FPS;
     }
+
     function getColour() {
         if (eatable) {
             if (secondsAgo(eatable) > 5) {
@@ -105,6 +119,7 @@ let PacmanGhost = function (game, map, colour) {
         }
         return colour;
     }
+
     function draw(ctx) {
 
         var s = map.blockSize,
@@ -168,6 +183,7 @@ let PacmanGhost = function (game, map, colour) {
         ctx.fill();
 
     }
+
     function pane(pos) {
 
         if (pos.y === 100 && pos.x >= 190 && direction === RIGHT) {
@@ -186,6 +202,7 @@ let PacmanGhost = function (game, map, colour) {
 
         return false;
     }
+
     function move(ctx) {
 
         var oldPos = position,
@@ -235,6 +252,7 @@ let PacmanGhost = function (game, map, colour) {
             "old": oldPos
         };
     }
+
     return {
         "eat": eat,
         "isVunerable": isVunerable,

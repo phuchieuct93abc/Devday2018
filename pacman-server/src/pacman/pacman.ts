@@ -36,6 +36,7 @@ var PACMAN = (function () {
     function getTick() {
         return tick;
     }
+
     function drawScore(text, position) {
         ctx.fillStyle = "#FFFFFF";
         ctx.font = "12px BDCartoonShoutRegular";
@@ -55,6 +56,7 @@ var PACMAN = (function () {
     function soundDisabled() {
         return localStorage["soundDisabled"] === "true";
     }
+
     function startLevel() {
         users.resetPosition();
         for (var i = 0; i < ghosts.length; i += 1) {
@@ -92,10 +94,12 @@ var PACMAN = (function () {
         state = nState;
         stateChanged = true;
     }
+
     function collided(user, ghost) {
         return (Math.sqrt(Math.pow(ghost.x - user.x, 2) +
             Math.pow(ghost.y - user.y, 2))) < 10;
     }
+
     function drawFooter() {
 
         var topLeft = (map.height * map.blockSize),
@@ -178,6 +182,7 @@ var PACMAN = (function () {
             }
         }
     }
+
     function mainLoop() {
 
         var diff;
@@ -225,7 +230,7 @@ var PACMAN = (function () {
             }
         }
         //TODO: Remove footer
-       // drawFooter();
+        // drawFooter();
     }
 
     function eatenPill() {
@@ -236,6 +241,7 @@ var PACMAN = (function () {
             ghosts[i].makeEatable(ctx);
         }
     }
+
     function completedLevel() {
         setState(WAITING);
         level += 1;
@@ -243,13 +249,15 @@ var PACMAN = (function () {
         users.newLevel();
         startLevel();
     }
+
     function keyPress(e) {
         if (state !== WAITING && state !== PAUSE) {
             e.preventDefault();
             e.stopPropagation();
         }
     }
-    function registerPlayers(inputPlayers:Player[]){
+
+    function registerPlayers(inputPlayers: Player[]) {
         players = inputPlayers;
     }
 
@@ -299,18 +307,20 @@ var PACMAN = (function () {
             loaded();
         });
     }
-    function setUpUsers(players){
-        let pacmanUsers = players.map(player=>{
+
+    function setUpUsers(players) {
+        let pacmanUsers = players.map(player => {
             return new PacmanUser({
                 "completedLevel": completedLevel,
                 "eatenPill": eatenPill,
-                player:player
+                player: player
             }, map);
         });
 
         users = new PacmanUsers(pacmanUsers);
 
     }
+
     function load(arr, callback) {
 
         if (arr.length === 0) {
@@ -322,6 +332,7 @@ var PACMAN = (function () {
             });
         }
     }
+
     function loaded() {
 
         dialog("Press N to Start");
@@ -331,11 +342,12 @@ var PACMAN = (function () {
 
         timer = window.setInterval(mainLoop, 1000 / FPS);
     }
+
     return {
         "init": init,
         "move": keyDown,
         "startNewGame": startNewGame,
-        "registerPlayers":registerPlayers
+        "registerPlayers": registerPlayers
     };
 
 }());
