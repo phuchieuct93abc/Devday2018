@@ -1,13 +1,29 @@
-import * as CONST from "./pacmanConst"
 // import Modernizr from 'modernizr'
 
 import PacmanUser from "./pacmanUser";
 import Player from "../player";
 import PacmanUsers from "@/pacman/PacmanUsers";
 import PacmanMaze from "@/pacman/PacmanMaze";
+import {
+    LEFT,
+    WAITING,
+    RIGHT,
+    DOWN,
+    UP,
+    PAUSE,
+    PLAYING,
+    COUNTDOWN,
+    EATEN_PAUSE,
+    DYING,
+    FPS,
+    BISCUIT,
+    EMPTY,
+    BLOCK,
+    PILL,
+    WALL
+} from "./pacmanConst";
 
-var Pacman:any={};
-var {LEFT,WAITING,RIGHT,DOWN,UP,PAUSE,PLAYING,COUNTDOWN,EATEN_PAUSE,DYING,FPS,BISCUIT,EMPTY,BLOCK,PILL,WALL} = CONST;
+var Pacman: any = {};
 Pacman.Ghost = function (game, map, colour) {
 
     var position: any = null,
