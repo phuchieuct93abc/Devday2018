@@ -4,7 +4,9 @@ import PacmanUser from "./pacmanUser";
 import Player from "../player";
 import PacmanUsers from "@/pacman/PacmanUsers";
 import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, PAUSE, PLAYING, WAITING} from "./pacmanConst";
-import PacmanSupporter from "@/pacman/PacmanSupporter";
+import PacmanAudio from "@/pacman/PacmanAudio";
+import PacmanGhost from "@/pacman/PacmanGhost";
+import PacmanMap from "@/pacman/PacmanMap";
 
 var PACMAN = (function () {
 
@@ -264,15 +266,15 @@ var PACMAN = (function () {
 
         ctx = canvas.getContext('2d');
 
-        audio = new PacmanSupporter.Audio({
+        audio = PacmanAudio({
             "soundDisabled": soundDisabled
         });
-        map = new PacmanSupporter.Map(blockSize);
+        map = PacmanMap(blockSize);
         setUpUsers(players);
 
 
         for (let i = 0, len = ghostSpecs.length; i < len; i += 1) {
-            ghost = new PacmanSupporter.Ghost({
+            ghost = PacmanGhost({
                 "getTick": getTick
             }, map, ghostSpecs[i]);
             ghosts.push(ghost);
