@@ -1,6 +1,6 @@
 import $ from "jquery";
 import pacmanController from "./pacman/pacmanController";
-import {IPlayerDatasource, playerDataSource} from "./playerStorage";
+import {IPlayerDataSource, playerDataSource} from "./playerStorage";
 
 export default class Player {
 
@@ -11,11 +11,11 @@ export default class Player {
     token: string;
     name: string;
 
-    constructor(dataSource: IPlayerDatasource) {
-        this.id = dataSource.playerId;
-        this.name = dataSource.playerName;
+    constructor(dataSource: IPlayerDataSource) {
+        this.id = dataSource.id;
+        this.name = dataSource.name;
         this.token = dataSource.token;
-        this.color = dataSource.playerColor;
+        this.color = dataSource.color;
         this.playerNameElement = $(`#player${this.id}`);
         if (this.playerNameElement.length == 0) {
             this.playerNameElement = $(`#player`);
@@ -40,7 +40,7 @@ export default class Player {
     }
 
     static getPlayerByToken(token: string) {
-        let playerData: IPlayerDatasource = playerDataSource.filter(player => player.token == token)[0];
+        let playerData: IPlayerDataSource = playerDataSource.filter(player => player.token == token)[0];
         return new Player(playerData);
     }
 }

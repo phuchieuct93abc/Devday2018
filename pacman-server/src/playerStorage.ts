@@ -1,18 +1,20 @@
-interface IPlayerDatasource {
+interface IPlayerDataSource {
+    id: string,
     token: string,
-    playerId: string,
-    playerName: string,
-    playerColor: string
+    name: string,
+    color: string
 }
-let playerDataSource: IPlayerDatasource[] = [{
+
+let playerDataSource: IPlayerDataSource[] = [{
+    id: "1",
     token: "1",
-    playerId: "1",
-    playerName: "Hieu Lam",
-    playerColor: "#ff0000"
+    name: "Hieu Lam",
+    color: "#ff0000"
 }, {
+    id: "2",
     token: "2",
-    playerId: "2",
-    playerName: "Hung Nguyen",
-    playerColor: "#00ff18"
+    name: "Hung Nguyen",
+    color: "#00ff18"
 }];
-export { playerDataSource, IPlayerDatasource };
+
+export {playerDataSource, IPlayerDataSource};
