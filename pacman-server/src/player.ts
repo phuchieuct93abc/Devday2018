@@ -11,7 +11,7 @@ export default class Player {
     id: string;
     color: string;
     token: string;
-    name: string
+    name: string;
 
     constructor(dataSource: IPlayerDatasource) {
         this.id = dataSource.playerId;

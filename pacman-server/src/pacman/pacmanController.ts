@@ -7,7 +7,7 @@ const CONTROL_CODES = {
     down: DOWN,
     left: LEFT,
     right: RIGHT
-}
+};
 
 class PacmanController {
     private players!: Player[];
@@ -31,7 +31,7 @@ class PacmanController {
 
     setPlayer(players: Player[]) {
         this.players = players;
-        Pacman.registerPlayers(players)
+        Pacman.registerPlayers(players);
         return this;
     }
 

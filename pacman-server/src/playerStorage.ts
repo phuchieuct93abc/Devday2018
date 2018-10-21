@@ -14,5 +14,5 @@ let playerDataSource: IPlayerDatasource[] = [{
     playerId: "2",
     playerName: "Hung Nguyen",
     playerColor: "#00ff18"
-}]
+}];
 export { playerDataSource, IPlayerDatasource };

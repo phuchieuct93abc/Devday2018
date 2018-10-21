@@ -22,8 +22,7 @@ PacmanSupporter.Ghost = function (game, map, colour) {
             "x": addBounded(current.x, xSpeed),
             "y": addBounded(current.y, ySpeed)
         };
-    };
-
+    }
     /* Collision detection(walls) is done when a ghost lands on an
      * exact block, make sure they dont skip over it
      */
@@ -36,26 +35,21 @@ PacmanSupporter.Ghost = function (game, map, colour) {
             return x1 - rem;
         }
         return x1 + x2;
-    };
-
+    }
     function isVunerable() {
         return eatable !== null;
-    };
-
+    }
     function isDangerous() {
         return eaten === null;
-    };
-
+    }
     function isHidden() {
         return eatable === null && eaten !== null;
-    };
-
+    }
     function getRandomDirection() {
         var moves = (direction === LEFT || direction === RIGHT) ?
             [UP, DOWN] : [LEFT, RIGHT];
         return moves[Math.floor(Math.random() * 2)];
-    };
-
+    }
     function reset() {
         eaten = null;
         eatable = null;
@@ -65,32 +59,26 @@ PacmanSupporter.Ghost = function (game, map, colour) {
         };
         direction = getRandomDirection();
         due = getRandomDirection();
-    };
-
+    }
     function onWholeSquare(x) {
         return x % 10 === 0;
-    };
-
+    }
     function oppositeDirection(dir) {
         return dir === LEFT && RIGHT ||
             dir === RIGHT && LEFT ||
             dir === UP && DOWN || UP;
-    };
-
+    }
     function makeEatable() {
         direction = oppositeDirection(direction);
         eatable = game.getTick();
-    };
-
+    }
     function eat() {
         eatable = null;
         eaten = game.getTick();
-    };
-
+    }
     function pointToCoord(x) {
         return Math.round(x / 10);
-    };
-
+    }
     function nextSquare(x, dir) {
         var rem = x % 10;
         if (rem === 0) {
@@ -100,16 +88,13 @@ PacmanSupporter.Ghost = function (game, map, colour) {
         } else {
             return x - rem;
         }
-    };
-
+    }
     function onGridSquare(pos) {
         return onWholeSquare(pos.y) && onWholeSquare(pos.x);
-    };
-
+    }
     function secondsAgo(tick) {
         return (game.getTick() - tick) / FPS;
-    };
-
+    }
     function getColour() {
         if (eatable) {
             if (secondsAgo(eatable) > 5) {
@@ -121,8 +106,7 @@ PacmanSupporter.Ghost = function (game, map, colour) {
             return "#222";
         }
         return colour;
-    };
-
+    }
     function draw(ctx) {
 
         var s = map.blockSize,
@@ -185,8 +169,7 @@ PacmanSupporter.Ghost = function (game, map, colour) {
         ctx.closePath();
         ctx.fill();
 
-    };
-
+    }
     function pane(pos) {
 
         if (pos.y === 100 && pos.x >= 190 && direction === RIGHT) {
@@ -204,8 +187,7 @@ PacmanSupporter.Ghost = function (game, map, colour) {
         }
 
         return false;
-    };
-
+    }
     function move(ctx) {
 
         var oldPos = position,
@@ -254,8 +236,7 @@ PacmanSupporter.Ghost = function (game, map, colour) {
             "new": position,
             "old": oldPos
         };
-    };
-
+    }
     return {
         "eat": eat,
         "isVunerable": isVunerable,
@@ -338,22 +319,18 @@ PacmanSupporter.Map = function (size) {
             }
         }
         return newObj;
-    };
-
+    }
     function reset() {
         map = clone(PacmanMaze.MAP);
         height = map.length;
         width = map[0].length;
-    };
-
+    }
     function block(pos) {
         return map[pos.y][pos.x];
-    };
-
+    }
     function setBlock(pos, type) {
         map[pos.y][pos.x] = type;
-    };
-
+    }
     function drawPills(ctx) {
 
         if (++pillSize > 30) {
@@ -380,8 +357,7 @@ PacmanSupporter.Map = function (size) {
                 }
             }
         }
-    };
-
+    }
     function draw(ctx) {
 
         var i, j, size = blockSize;
@@ -396,8 +372,7 @@ PacmanSupporter.Map = function (size) {
                 drawBlock(i, j, ctx);
             }
         }
-    };
-
+    }
     function drawBlock(y, x, ctx) {
 
         var layout = map[y][x];
@@ -423,8 +398,7 @@ PacmanSupporter.Map = function (size) {
             }
         }
         ctx.closePath();
-    };
-
+    }
     reset();
 
     return {
@@ -462,24 +436,21 @@ PacmanSupporter.Audio = function (game) {
         f.setAttribute("autobuffer", "true");
         f.setAttribute("src", path);
         f.pause();
-    };
-
+    }
     function progress(event, name, callback) {
         if (event.loaded === event.total && typeof callback === "function") {
             callback();
             files[name].removeEventListener("canplaythrough",
                 progressEvents[name], true);
         }
-    };
-
+    }
     function disableSound() {
         for (var i = 0; i < playing.length; i++) {
             files[playing[i]].pause();
             files[playing[i]].currentTime = 0;
         }
         playing = [];
-    };
-
+    }
     function ended(name) {
 
         var i, tmp: any = [],
@@ -495,8 +466,7 @@ PacmanSupporter.Audio = function (game) {
             }
         }
         playing = tmp;
-    };
-
+    }
     function play(name) {
         if (!game.soundDisabled()) {
             endEvents[name] = function () {
@@ -506,20 +476,17 @@ PacmanSupporter.Audio = function (game) {
             files[name].addEventListener("ended", endEvents[name], true);
             files[name].play();
         }
-    };
-
+    }
     function pause() {
         for (var i = 0; i < playing.length; i++) {
             files[playing[i]].pause();
         }
-    };
-
+    }
     function resume() {
         for (var i = 0; i < playing.length; i++) {
             files[playing[i]].play();
         }
-    };
-
+    }
     return {
         "disableSound": disableSound,
         "load": load,

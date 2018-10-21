@@ -247,7 +247,7 @@ export default class PacmanUser {
 
         ctx.fillStyle = this.player.color;
         let positionX = ((this.position.x / 10) * blockSize) + blockSize / 2;
-        let positionY = ((this.position.y / 10) * blockSize) + blockSize / 2
+        let positionY = ((this.position.y / 10) * blockSize) + blockSize / 2;
 
         ctx.beginPath();
         ctx.moveTo(positionX, positionY);

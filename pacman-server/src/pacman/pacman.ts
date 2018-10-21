@@ -33,8 +33,7 @@ var PACMAN = (function () {
 
     function getTick() {
         return tick;
-    };
-
+    }
     function drawScore(text, position) {
         ctx.fillStyle = "#FFFFFF";
         ctx.font = "12px BDCartoonShoutRegular";
@@ -53,8 +52,7 @@ var PACMAN = (function () {
 
     function soundDisabled() {
         return localStorage["soundDisabled"] === "true";
-    };
-
+    }
     function startLevel() {
         users.resetPosition();
         for (var i = 0; i < ghosts.length; i += 1) {
@@ -91,13 +89,11 @@ var PACMAN = (function () {
     function setState(nState) {
         state = nState;
         stateChanged = true;
-    };
-
+    }
     function collided(user, ghost) {
         return (Math.sqrt(Math.pow(ghost.x - user.x, 2) +
             Math.pow(ghost.y - user.y, 2))) < 10;
-    };
-
+    }
     function drawFooter() {
 
         var topLeft = (map.height * map.blockSize),
@@ -141,7 +137,7 @@ var PACMAN = (function () {
         var diff, userPos, i, len, nScore;
 
         ghostPos = [];
-        userPos = []
+        userPos = [];
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             ghostPos.push(ghosts[i].move(ctx));
@@ -150,7 +146,7 @@ var PACMAN = (function () {
             redrawBlock(ghostPos[i].old);
         }
         userPos = users.move();
-        userPos.forEach(pos => redrawBlock(pos.old))
+        userPos.forEach(pos => redrawBlock(pos.old));
         //TODO
         //redrawBlock(userPos.old);
 
@@ -179,8 +175,7 @@ var PACMAN = (function () {
                 }
             }
         }
-    };
-
+    }
     function mainLoop() {
 
         var diff;
@@ -238,22 +233,20 @@ var PACMAN = (function () {
         for (let i = 0; i < ghosts.length; i += 1) {
             ghosts[i].makeEatable(ctx);
         }
-    };
-
+    }
     function completedLevel() {
         setState(WAITING);
         level += 1;
         map.reset();
         users.newLevel();
         startLevel();
-    };
-
+    }
     function keyPress(e) {
         if (state !== WAITING && state !== PAUSE) {
             e.preventDefault();
             e.stopPropagation();
         }
-    };
+    }
     function registerPlayers(inputPlayers:Player[]){
         players = inputPlayers;
     }
@@ -288,7 +281,7 @@ var PACMAN = (function () {
         map.draw(ctx);
         dialog("Loading ...");
 
-        var extension = "mp3"
+        var extension = "mp3";
         // var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 
         var audio_files = [
@@ -303,7 +296,7 @@ var PACMAN = (function () {
         load(audio_files, function () {
             loaded();
         });
-    };
+    }
     function setUpUsers(players){
         let pacmanUsers = players.map(player=>{
             return new PacmanUser({
@@ -311,7 +304,7 @@ var PACMAN = (function () {
                 "eatenPill": eatenPill,
                 player:player
             }, map);
-        })
+        });
 
         users = new PacmanUsers(pacmanUsers);
 
@@ -326,8 +319,7 @@ var PACMAN = (function () {
                 load(arr, callback);
             });
         }
-    };
-
+    }
     function loaded() {
 
         dialog("Press N to Start");
@@ -336,8 +328,7 @@ var PACMAN = (function () {
         // document.addEventListener("keypress", keyPress, true);
 
         timer = window.setInterval(mainLoop, 1000 / FPS);
-    };
-
+    }
     return {
         "init": init,
         "move": keyDown,

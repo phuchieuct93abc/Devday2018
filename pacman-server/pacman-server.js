@@ -10,7 +10,7 @@ const httpPort = process.env.PACMAN_HTTP_SERVER_PORT || 3001;
 const httpsOptions = {
   key: fs.readFileSync("./key/test_key.pem", "utf-8"),
   cert: fs.readFileSync("./key/test_cert.pem", "utf-8"),
-}
+};
 
 const httpsServer = https.createServer(httpsOptions, app);
 const httpServer = http.createServer(app);
