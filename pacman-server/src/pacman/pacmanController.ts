@@ -1,15 +1,19 @@
-import { UP, DOWN, LEFT, RIGHT } from "./pacmanConst";
+import {UP, DOWN, LEFT, RIGHT} from "./pacmanConst";
 import Pacman from "./pacman";
 import Player from "@/player";
+
 const CONTROL_CODES = {
     up: UP,
     down: DOWN,
     left: LEFT,
     right: RIGHT
 }
+
 class PacmanController {
     private players!: Player[];
-    constructor() { }
+
+    constructor() {
+    }
 
     startGameWithNoGhost() {
 
@@ -18,6 +22,7 @@ class PacmanController {
         this.startNewGame();
 
     }
+
     startGameplayWithGhost() {
         var el = document.getElementById("pacman");
         Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
@@ -34,6 +39,7 @@ class PacmanController {
         let playerIndex = this.players.indexOf(player);
         Pacman.move(playerIndex, CONTROL_CODES[direction])
     }
+
     private startNewGame() {
         setTimeout(() => {
             Pacman.startNewGame();

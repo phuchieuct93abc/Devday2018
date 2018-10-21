@@ -1,6 +1,6 @@
 import $ from "jquery";
 import pacmanController from "./pacman/pacmanController";
-import { playerDataSource, IPlayerDatasource } from "./playerStorage";
+import {playerDataSource, IPlayerDatasource} from "./playerStorage";
 
 import Store from './store';
 
@@ -12,6 +12,7 @@ export default class Player {
     color: string;
     token: string;
     name: string
+
     constructor(dataSource: IPlayerDatasource) {
         this.id = dataSource.playerId;
         this.name = dataSource.playerName;
@@ -22,8 +23,9 @@ export default class Player {
             this.playerNameElement = $(`#player`);
 
         }
-        this.playerNameElement.css({ "color": this.color }).hide().find(".player-name").text(this.name);
+        this.playerNameElement.css({"color": this.color}).hide().find(".player-name").text(this.name);
     }
+
     updateScore(score: number): any {
         this.score = score;
         Store.commit("updateScoreSecondPlayer", score);
@@ -33,11 +35,13 @@ export default class Player {
     move(direction: string) {
         pacmanController.move(this, direction);
     }
+
     moveName(positionX: number, positionY: number) {
         this.playerNameElement.show();
-        this.playerNameElement.css({ left: positionX, top: positionY - 40 })
+        this.playerNameElement.css({left: positionX, top: positionY - 40})
 
     }
+
     static getPlayerByToken(token: string) {
         let playerData: IPlayerDatasource = playerDataSource.filter(player => player.token == token)[0];
         return new Player(playerData);
