@@ -3,6 +3,7 @@ import * as CONST from "./pacmanConst"
 
 import PacmanUser from "./pacmanUser";
 import Player from "../player";
+import PacmanUsers from "@/pacman/PacmanUsers";
 
 var Pacman:any={};
 var {LEFT,WAITING,RIGHT,DOWN,UP,PAUSE,PLAYING,COUNTDOWN,EATEN_PAUSE,DYING,FPS,BISCUIT,EMPTY,BLOCK,PILL,WALL} = CONST;
@@ -873,55 +874,6 @@ var PACMAN = (function () {
     };
 
 }());
-
-class PacmanUsers {
-    addScore(nScore: any): any {
-        throw new Error("Method not implemented.");
-    }
-    drawDead(ctx: any, arg1: number): any {
-        throw new Error("Method not implemented.");
-    }
-    loseLife(): any {
-        throw new Error("Method not implemented.");
-    }
-    constructor(private users:PacmanUser[]) {
-    }
-
-    newLevel() {
-        this.users.forEach(element => element.newLevel());
-    }
-    keyDown(userIndex, direction) {
-        this.users[userIndex].keyDown(direction)
-
-    }
-    reset() {
-        this.users.forEach(element => element.reset());
-
-    }
-    getLives() {
-        return 3;
-    }
-    theScore() {
-        return 3;
-    }
-    resetPosition() {
-        this.users.forEach(element => element.resetPosition());
-
-    }
-    move() {
-        return this.users.map(element => element.move());
-
-    }
-    draw(ctx) {
-        this.users.forEach(element => element.draw(ctx));
-
-    }
-
-
-}
-
-
-
 
 Pacman.MAP = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
