@@ -1,5 +1,5 @@
-import {UP, DOWN, LEFT, RIGHT} from "./pacmanConst";
-import Pacman from "./pacman";
+import {UP, DOWN, LEFT, RIGHT} from "@/pacman/pacmanConst";
+import Pacman from "@/pacman/pacman";
 import Player from "@/player";
 
 const CONTROL_CODES = {

@@ -1,6 +1,9 @@
 import PacmanUser from "@/pacman/pacmanUser";
 
 export default class PacmanUsers {
+    constructor(private users: PacmanUser[]) {
+    }
+
     addScore(nScore: any): any {
         throw new Error("Method not implemented.");
     }
@@ -11,9 +14,6 @@ export default class PacmanUsers {
 
     loseLife(): any {
         throw new Error("Method not implemented.");
-    }
-
-    constructor(private users: PacmanUser[]) {
     }
 
     newLevel() {

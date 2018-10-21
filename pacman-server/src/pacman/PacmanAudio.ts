@@ -1,88 +1,95 @@
-let PacmanAudio = function (game) {
+class PacmanAudio {
 
-    var files: any = [],
-        endEvents: any = [],
-        progressEvents: any = [],
-        playing: any[] = [];
+    files: any = [];
+    endEvents: any = [];
+    progressEvents: any = [];
+    playing: any[] = [];
+    game: any;
 
-    function load(name, path, cb) {
+    constructor(game) {
+        this.game = game;
+    }
 
-        var f = files[name] = document.createElement("audio");
+    load(name, path, cb) {
 
-        progressEvents[name] = function (event) {
-            progress(event, name, cb);
+        var f = this.files[name] = document.createElement("audio");
+
+        this.progressEvents[name] = (event) => {
+            this.progress(event, name, cb);
         };
 
-        f.addEventListener("canplaythrough", progressEvents[name], true);
+        f.addEventListener("canplaythrough", this.progressEvents[name], true);
         f.setAttribute("preload", "true");
         f.setAttribute("autobuffer", "true");
         f.setAttribute("src", path);
         f.pause();
     }
 
-    function progress(event, name, callback) {
+    progress(event, name, callback) {
         if (event.loaded === event.total && typeof callback === "function") {
             callback();
-            files[name].removeEventListener("canplaythrough",
-                progressEvents[name], true);
+            this.files[name].removeEventListener("canplaythrough",
+                this.progressEvents[name], true);
         }
     }
 
-    function disableSound() {
-        for (var i = 0; i < playing.length; i++) {
-            files[playing[i]].pause();
-            files[playing[i]].currentTime = 0;
+    disableSound() {
+        for (var i = 0; i < this.playing.length; i++) {
+            this.files[this.playing[i]].pause();
+            this.files[this.playing[i]].currentTime = 0;
         }
-        playing = [];
+        this.playing = [];
     }
 
-    function ended(name) {
+    ended(name) {
 
         var i, tmp: any = [],
             found = false;
 
-        files[name].removeEventListener("ended", endEvents[name], true);
+        this.files[name].removeEventListener("ended", this.endEvents[name], true);
 
-        for (let i = 0; i < playing.length; i++) {
-            if (!found && playing[i]) {
+        for (let i = 0; i < this.playing.length; i++) {
+            if (!found && this.playing[i]) {
                 found = true;
             } else {
-                tmp.push(playing[i]);
+                tmp.push(this.playing[i]);
             }
         }
-        playing = tmp;
+        this.playing = tmp;
     }
 
-    function play(name) {
-        if (!game.soundDisabled()) {
-            endEvents[name] = function () {
-                ended(name);
+    play(name) {
+        if (!this.game.soundDisabled()) {
+            this.endEvents[name] = () => {
+                this.ended(name);
             };
-            playing.push(name);
-            files[name].addEventListener("ended", endEvents[name], true);
-            files[name].play();
+            this.playing.push(name);
+            this.files[name].addEventListener("ended", this.endEvents[name], true);
+            this.files[name].play();
         }
     }
 
-    function pause() {
-        for (var i = 0; i < playing.length; i++) {
-            files[playing[i]].pause();
+    pause() {
+        for (var i = 0; i < this.playing.length; i++) {
+            this.files[this.playing[i]].pause();
         }
     }
 
-    function resume() {
-        for (var i = 0; i < playing.length; i++) {
-            files[playing[i]].play();
+    resume() {
+        for (var i = 0; i < this.playing.length; i++) {
+            this.files[this.playing[i]].play();
         }
     }
-
-    return {
-        "disableSound": disableSound,
-        "load": load,
-        "play": play,
-        "pause": pause,
-        "resume": resume
-    };
 };
 
+
 export default PacmanAudio;
+
+
+// return {
+//     "disableSound": disableSound,
+//     "load": load,
+//     "play": play,
+//     "pause": pause,
+//     "resume": resume
+// };

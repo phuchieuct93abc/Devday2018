@@ -1,9 +1,9 @@
 // import Modernizr from 'modernizr'
 
-import PacmanUser from "./pacmanUser";
-import Player from "../player";
+import PacmanUser from "@/pacman/pacmanUser";
+import Player from "@/player";
 import PacmanUsers from "@/pacman/PacmanUsers";
-import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, PAUSE, PLAYING, WAITING} from "./pacmanConst";
+import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, PAUSE, PLAYING, WAITING} from "@/pacman/pacmanConst";
 import PacmanAudio from "@/pacman/PacmanAudio";
 import PacmanGhost from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
@@ -274,7 +274,7 @@ var PACMAN = (function () {
 
         ctx = canvas.getContext('2d');
 
-        audio = PacmanAudio({
+        audio = new PacmanAudio({
             "soundDisabled": soundDisabled
         });
         map = PacmanMap(blockSize);
