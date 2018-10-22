@@ -1,6 +1,6 @@
 import { UP, DOWN, LEFT, RIGHT } from "./pacmanConst";
 import Pacman from "./pacman";
-import Player from "../player";
+import Player from "@/player";
 const CONTROL_CODES = {
     up: UP,
     down: DOWN,
@@ -8,7 +8,7 @@ const CONTROL_CODES = {
     right: RIGHT
 }
 class PacmanController {
-    private players: Player[];
+    private players!: Player[];
     constructor() { }
 
     startGameWithNoGhost() {
@@ -23,7 +23,7 @@ class PacmanController {
         Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
         return this;
     }
- 
+
     setPlayer(players: Player[]) {
         this.players = players;
         Pacman.registerPlayers(players)

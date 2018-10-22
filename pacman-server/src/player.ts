@@ -1,11 +1,11 @@
-import * as $ from "jquery";
+import $ from "jquery";
 import pacmanController from "./pacman/pacmanController";
 import { playerDataSource, IPlayerDatasource } from "./playerStorage";
 
 export default class Player {
 
     playerNameElement: JQuery<HTMLElement>;
-    score: number;
+    score: number = 0;
     id: string;
     color: string;
     token: string;
@@ -36,7 +36,7 @@ export default class Player {
 
     }
     static getPlayerByToken(token: string) {
-        let playerData: IPlayerDatasource = playerDataSource.filter((player: any) => player.token == token)[0];
+        let playerData: IPlayerDatasource = playerDataSource.filter(player => player.token == token)[0];
         return new Player(playerData);
     }
 }

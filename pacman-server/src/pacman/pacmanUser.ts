@@ -1,13 +1,14 @@
 import * as CONST from "./pacmanConst"
 import Player from "../player";
 export default class PacmanUser {
-    position = null;
-    direction = null;
-    eaten = null;
-    due = null;
-    lives = null;
-    score = 5;
+    position: any = null;
+    direction: any = null;
+    eaten: any = null;
+    due: any = null;
+    lives: any = null;
+    score: any = 5;
     player: Player;
+
     constructor(public game: any, public map: any) {
         this.player = game.player;
         this.initUser();
@@ -105,8 +106,8 @@ export default class PacmanUser {
     };
 
     move() {
-        var npos = null,
-            nextWhole = null,
+        var npos: any = null,
+            nextWhole: any = null,
             oldPosition = this.position,
             block = null;
 

@@ -1,3 +1,14 @@
+<template>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
+  </div>
+</template>
+
+<style lang="less">
 * {
     margin: 0;
     padding: 0;
@@ -45,26 +56,4 @@ form button {
 #messages li:nth-child(odd) {
     background: #eee;
 }
-
-/* #pacman-container{
-    visibility: hidden
-} */
-
-#pacman {
-    height: 470px;
-    width: 382px;
-    border-radius: 5px;
-    margin: 20px auto;
-    position: relative;
-}
-.player-name-wrapper{
-    position: absolute;
-    width: 0;
-    display: flex;
-    overflow: visible;
-    white-space: nowrap;
-    justify-content: center;
-
-    font-size: 1.5em;
-
-}
+</style>

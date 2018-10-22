@@ -17,10 +17,9 @@ const httpServer = http.createServer(app);
 const io = require('socket.io').listen(httpsServer).listen(httpServer);
 
 app.use(express.static(__dirname + "/dist")); //Serves resources from public folder
-app.use(express.static(__dirname + "/src")); //Serves resources from public folder
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/dist/testing.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/move', function (req, res) {
@@ -28,7 +27,7 @@ app.get('/move', function (req, res) {
     action: req.query.action,
     token: req.query.token
   }
-  
+
  );
 
   res.jsonp({

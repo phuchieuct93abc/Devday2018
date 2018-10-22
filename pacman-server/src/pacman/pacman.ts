@@ -1,4 +1,5 @@
 import * as CONST from "./pacmanConst"
+// import Modernizr from 'modernizr'
 
 import PacmanUser from "./pacmanUser";
 import Player from "../player";
@@ -7,13 +8,13 @@ var Pacman:any={};
 var {LEFT,WAITING,RIGHT,DOWN,UP,PAUSE,PLAYING,COUNTDOWN,EATEN_PAUSE,DYING,FPS,BISCUIT,EMPTY,BLOCK,PILL,WALL} = CONST;
 Pacman.Ghost = function (game, map, colour) {
 
-    var position = null,
-        direction = null,
-        eatable = null,
-        eaten = null,
-        due = null;
+    var position: any = null,
+        direction: any = null,
+        eatable: any = null,
+        eaten: any = null,
+        due: any = null;
 
-    
+
 
     function getNewCoord(dir, current) {
 
@@ -213,7 +214,7 @@ Pacman.Ghost = function (game, map, colour) {
 
         var oldPos = position,
             onGrid = onGridSquare(position),
-            npos = null;
+            npos: any = null;
 
         if (due !== direction) {
 
@@ -273,11 +274,11 @@ Pacman.Ghost = function (game, map, colour) {
 
 Pacman.Map = function (size) {
 
-    var height = null,
-        width = null,
+    var height: any = null,
+        width: any = null,
         blockSize = size,
         pillSize = 0,
-        map = null;
+        map: any = null;
 
     function withinBounds(y, x) {
         return y >= 0 && y < height && x >= 0 && x < width;
@@ -447,10 +448,10 @@ Pacman.Map = function (size) {
 
 Pacman.Audio = function (game) {
 
-    var files = [],
-        endEvents = [],
-        progressEvents = [],
-        playing = [];
+    var files: any = [],
+        endEvents: any = [],
+        progressEvents: any = [],
+        playing: any[] = [];
 
     function load(name, path, cb) {
 
@@ -485,7 +486,7 @@ Pacman.Audio = function (game) {
 
     function ended(name) {
 
-        var i, tmp = [],
+        var i, tmp: any = [],
             found = false;
 
         files[name].removeEventListener("ended", endEvents[name], true);
@@ -534,23 +535,23 @@ Pacman.Audio = function (game) {
 
 var PACMAN = (function () {
 
-    var state = WAITING,
-        audio = null,
-        ghosts = [],
-        ghostSpecs = [],
-        eatenCount = 0,
-        level = 0,
-        tick = 0,
-        ghostPos, userPos,
-        stateChanged = true,
-        timerStart = null,
-        lastTime = 0,
-        ctx = null,
-        timer = null,
-        map = null,
-        users:PacmanUsers,
-        stored = null,
-        players=[];
+    var state: any = WAITING,
+        audio: any = null,
+        ghosts: any = [],
+        ghostSpecs: any = [],
+        eatenCount: number = 0,
+        level: number = 0,
+        tick: number = 0,
+        ghostPos: any, userPos: any,
+        stateChanged: any = true,
+        timerStart: any = null,
+        lastTime: number = 0,
+        ctx: any = null,
+        timer: any = null,
+        map: any = null,
+        users: PacmanUsers,
+        stored: any = null,
+        players: Player[] = [];
 
     function setGhost() {
         ghostSpecs = ["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]
@@ -802,7 +803,7 @@ var PACMAN = (function () {
         });
         map = new Pacman.Map(blockSize);
         setUpUsers(players);
-        
+
 
         for (let i = 0, len = ghostSpecs.length; i < len; i += 1) {
             ghost = new Pacman.Ghost({
@@ -814,7 +815,8 @@ var PACMAN = (function () {
         map.draw(ctx);
         dialog("Loading ...");
 
-        var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
+        var extension = "mp3"
+        // var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 
         var audio_files = [
             ["start", root + "audio/opening_song." + extension],
@@ -837,7 +839,7 @@ var PACMAN = (function () {
                 player:player
             }, map);
         })
-        
+
         users = new PacmanUsers(pacmanUsers);
 
     }
