@@ -1,5 +1,4 @@
-
-var NONE = 4,
+const NONE = 4,
     UP = 3,
     LEFT = 2,
     DOWN = 1,
@@ -16,8 +15,9 @@ var NONE = 4,
     BLOCK = 3,
     PILL = 4,
     FPS = 30,
-    BISCUIT_SCORE=1,
-    PILL_SCORE=20;
+    BISCUIT_SCORE = 1,
+    PILL_SCORE = 20;
+
 export {
     WALL,
     BISCUIT,
