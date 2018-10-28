@@ -15,7 +15,7 @@ Vue.config.productionTip = false;
 
 Vue.component("dd-main-board", MainBoard);
 Vue.component("dd-test-board", TestBoard);
-Vue.component('score-board', ScoreBoard);
+Vue.component('dd-score-board', ScoreBoard);
 Vue.component("dd-admin", Admin);
 
 new Vue({

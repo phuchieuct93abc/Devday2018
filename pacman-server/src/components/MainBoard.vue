@@ -1,9 +1,9 @@
 <template>
     <div class="main-board">
 
-        <score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></score-board>
+        <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
 
-        <score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></score-board>
+        <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
 
         <div id="pacman">
             <span id="player-1" class="player-name-wrapper">
