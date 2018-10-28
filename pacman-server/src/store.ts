@@ -9,6 +9,7 @@ export default new Vuex.Store({
         firstPlayer: Object.assign({}, PLAYER_ONE),
         secondPlayer: Object.assign({}, PLAYER_TWO),
         testPlayer: Object.assign({}, TEST_PLAYER),
+        timer: 5,
     },
 
     mutations: {
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         updateScoreFirstPlayer: (state, value) => state.firstPlayer.score = value,
         updateScoreSecondPlayer: (state, value) => state.secondPlayer.score = value,
         updateScoreTestPlayer: (state, value) => state.testPlayer.score = value,
+        updateTimer: (state, value) => state.timer = value,
     },
     actions: {}
 })

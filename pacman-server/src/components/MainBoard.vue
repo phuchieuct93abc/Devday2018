@@ -5,6 +5,10 @@
 
         <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
 
+        <v-layout justify-center>
+            <v-btn>Timer here</v-btn>
+        </v-layout>
+
         <div id="pacman">
             <span id="player-1" class="player-name-wrapper">
                 <span class="player-name"></span>

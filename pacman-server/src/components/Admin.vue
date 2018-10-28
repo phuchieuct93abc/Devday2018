@@ -2,6 +2,10 @@
     <v-container>
         <v-layout text-xs-center wrap>
             <v-flex xs12>
+                <v-text-field label="Timer" :value="timer" @input="updateTimer"></v-text-field>
+            </v-flex>
+
+            <v-flex xs12>
                 <h2 class="headline font-weight-bold">Player 1</h2>
                 <dd-player-information :value="firstPlayer" @input="updateFirstPlayer"></dd-player-information>
             </v-flex>
@@ -35,6 +39,14 @@
 
         updateSecondPlayer(value: PlayerData) {
             this.$store.commit("updateSecondPlayer", value);
+        }
+
+        get timer(): number {
+            return this.$store.state.timer;
+        }
+
+        updateTimer(value: number) {
+            this.$store.commit("updateTimer", value);
         }
     }
 </script>
