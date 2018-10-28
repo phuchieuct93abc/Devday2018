@@ -9,14 +9,14 @@ export default new Vuex.Store({
         firstPlayer: {
             id: "1",
             token: "1",
-            name: "Hieu",
+            name: "Team A",
             color: RED,
             score: 0,
         },
         secondPlayer: {
             id: "2",
             token: "2",
-            name: "Hung",
+            name: "Team B",
             color: GREEN,
             score: 0,
         },

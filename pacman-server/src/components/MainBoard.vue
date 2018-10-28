@@ -13,6 +13,11 @@
                 <span class="player-name"></span>
             </span>
         </div>
+
+        <v-layout align-center justify-center>
+            <v-btn @click="startGame" color="primary">Start</v-btn>
+            <v-btn @click="restartGame" color="error">Restart</v-btn>
+        </v-layout>
     </div>
 </template>
 
@@ -25,24 +30,33 @@
 
     @Component
     export default class MainBoard extends Vue {
-        mounted() {
-            let player1: Player = Player.fromPlayerData(this.firstPlayer);
-            let player2: Player = Player.fromPlayerData(this.secondPlayer);
-            pacmanController.setPlayer([player1, player2]).startGameWithNoGhost();
+        private player1: Player;
+        private player2: Player;
 
+        mounted() {
             var socket = io();
             socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
-                if (token == player1.token) {
-                    player = player1;
-                } else if (token == player2.token) {
-                    player = player2;
+                if (token === this.player1.token) {
+                    player = this.player1;
+                } else if (token === this.player2.token) {
+                    player = this.player2;
                 } else {
                     return;
                 }
                 player.move(action.action);
             });
+        }
+
+        startGame() {
+            this.player1 = Player.fromPlayerData(this.firstPlayer);
+            this.player2= Player.fromPlayerData(this.secondPlayer);
+            pacmanController.setPlayer([this.player1, this.player2]).startGameWithNoGhost();
+        }
+
+        restartGame() {
+            alert("Not implement yet");
         }
 
         get firstPlayer(): PlayerData {
