@@ -1,17 +1,15 @@
 <template>
-  <div class="home">
-    <testing-board></testing-board>
-  </div>
+    <v-app id="home" dark>
+        <v-content>
+            <dd-test-board></dd-test-board>
+        </v-content>
+    </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import TestingBoard from '@/components/TestingBoard.vue'
+    import {Component, Vue} from 'vue-property-decorator';
 
-@Component({
-  components: {
-    TestingBoard
-  },
-})
-export default class Home extends Vue {}
+    @Component
+    export default class Home extends Vue {
+    }
 </script>
