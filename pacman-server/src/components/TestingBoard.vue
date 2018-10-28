@@ -17,7 +17,7 @@
     import pacmanController from "../pacman/pacmanController";
     import Player from "../player"
     import * as io from 'socket.io-client';
-    import {PlayerData, RestData} from "../playerStorage";
+    import {PlayerData, RestData} from "../types";
 
     @Component
     export default class TestingBoard extends Vue {

@@ -21,7 +21,7 @@
     import * as io from 'socket.io-client';
     import Player from "../player";
     import pacmanController from "../pacman/pacmanController";
-    import {PlayerData, RestData} from "../playerStorage";
+    import {PlayerData, RestData} from "../types";
 
     @Component
     export default class MainBoard extends Vue {

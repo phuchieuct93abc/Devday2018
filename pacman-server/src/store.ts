@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {GREEN, PURPLE, RED} from "@/defined-color";
 
 Vue.use(Vuex);
 
@@ -9,21 +10,21 @@ export default new Vuex.Store({
             id: "1",
             token: "1",
             name: "Hieu",
-            color: "#00ff18",
+            color: RED,
             score: 0,
         },
         secondPlayer: {
             id: "2",
             token: "2",
             name: "Hung",
-            color: "#ff0000",
+            color: GREEN,
             score: 0,
         },
         testPlayer: {
             id: "3",
             token: "test",
             name: "Test",
-            color: "#6f2b8f",
+            color: PURPLE,
             score: 0,
         }
     },
