@@ -3,12 +3,12 @@
         <v-layout text-xs-center wrap>
             <v-flex xs12>
                 <h2 class="headline font-weight-bold">Player 1</h2>
-                <dd-player-information :player-data=firstPlayer></dd-player-information>
+                <dd-player-information :value="firstPlayer" @input="updateFirstPlayer"></dd-player-information>
             </v-flex>
 
             <v-flex xs12>
                 <h2 class="headline font-weight-bold">Player 2</h2>
-                <dd-player-information :player-data=secondPlayer></dd-player-information>
+                <dd-player-information :value="secondPlayer" @input="updateSecondPlayer"></dd-player-information>
             </v-flex>
         </v-layout>
     </v-container>
@@ -27,6 +27,14 @@
 
         get secondPlayer(): PlayerData {
             return this.$store.state.secondPlayer;
+        }
+
+        updateFirstPlayer(value: PlayerData) {
+            this.$store.commit("updateFirstPlayer", value);
+        }
+
+        updateSecondPlayer(value: PlayerData) {
+            this.$store.commit("updateSecondPlayer", value);
         }
     }
 </script>
