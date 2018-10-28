@@ -27,14 +27,15 @@
     import Player from "../player";
     import pacmanController from "../pacman/pacmanController";
     import {PlayerData, RestData} from "../types";
+    import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
 
     @Component
     export default class MainBoard extends Vue {
-        private player1: Player;
-        private player2: Player;
+        private player1!: Player;
+        private player2!: Player;
 
         mounted() {
-            var socket = io();
+            const socket = io();
             socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
@@ -56,7 +57,13 @@
         }
 
         restartGame() {
-            alert("Not implement yet");
+            const el = document.getElementById("pacman");
+            if (el) {
+                // TODO Find the way to keep the name in header of pacman
+                el.innerText = "";
+            }
+            this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
+            this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
         }
 
         get firstPlayer(): PlayerData {

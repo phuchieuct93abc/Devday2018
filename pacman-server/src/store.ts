@@ -1,32 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {GREEN, PURPLE, RED} from "@/defined-color";
+import {PLAYER_ONE, PLAYER_TWO, TEST_PLAYER} from "@/predefined-player";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        firstPlayer: {
-            id: "1",
-            token: "1",
-            name: "Team A",
-            color: RED,
-            score: 0,
-        },
-        secondPlayer: {
-            id: "2",
-            token: "2",
-            name: "Team B",
-            color: GREEN,
-            score: 0,
-        },
-        testPlayer: {
-            id: "3",
-            token: "test",
-            name: "Test",
-            color: PURPLE,
-            score: 0,
-        }
+        firstPlayer: Object.assign({}, PLAYER_ONE),
+        secondPlayer: Object.assign({}, PLAYER_TWO),
+        testPlayer: Object.assign({}, TEST_PLAYER),
     },
 
     mutations: {
