@@ -1,27 +1,13 @@
 <template>
-    <v-app id="app" dark>
-        <v-navigation-drawer v-model="drawer" clipped fixed app>
-            <dd-admin></dd-admin>
-        </v-navigation-drawer>
-        <v-content>
-            <v-btn fab dark small color="primary" @click="toggleDrawer">
-                <v-icon dark>settings</v-icon>
-            </v-btn>
-            <router-view/>
-        </v-content>
-    </v-app>
+    <router-view/>
 </template>
 
 <script lang="ts">
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Vue} from "vue-property-decorator";
 
     @Component
     export default class App extends Vue {
-        private drawer: boolean = true;
 
-        toggleDrawer() {
-            this.drawer = !this.drawer;
-        }
     }
 </script>
 

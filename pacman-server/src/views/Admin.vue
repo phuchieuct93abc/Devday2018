@@ -2,12 +2,12 @@
     <v-container>
         <v-layout text-xs-center wrap>
             <v-flex xs12>
-                <h2 class="headline font-weight-bold mb-3">Player 1</h2>
-                <player-information :player-data=firstPlayer ></player-information>
+                <h2 class="headline font-weight-bold">Player 1</h2>
+                <player-information :player-data=firstPlayer></player-information>
             </v-flex>
 
             <v-flex xs12>
-                <h2 class="headline font-weight-bold mb-3">Player 2</h2>
+                <h2 class="headline font-weight-bold">Player 2</h2>
                 <player-information :player-data=secondPlayer></player-information>
             </v-flex>
         </v-layout>

@@ -5,11 +5,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+
+import MainBoard from '@/components/MainBoard.vue'
 import ScoreBoard from './components/ScoreBoard.vue'
 import Admin from './views/Admin.vue'
 
 Vue.config.productionTip = false;
 
+Vue.component("dd-main-board", MainBoard);
 Vue.component('score-board', ScoreBoard);
 Vue.component("dd-admin", Admin);
 
