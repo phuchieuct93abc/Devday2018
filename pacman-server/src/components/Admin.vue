@@ -16,7 +16,7 @@
 
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
-    import PlayerInformation from "../components/PlayerInformation.vue";
+    import PlayerInformation from "./PlayerInformation.vue";
     import {PlayerData} from "../playerStorage";
 
     @Component({
