@@ -1,17 +1,27 @@
 <template>
-  <div class="main">
-    <main-board></main-board>
-  </div>
+    <v-app id="main" dark>
+        <v-navigation-drawer v-model="drawer" clipped fixed app>
+            <dd-admin></dd-admin>
+        </v-navigation-drawer>
+        <v-content>
+            <v-btn fab dark small color="primary" @click="toggleDrawer">
+                <v-icon dark>settings</v-icon>
+            </v-btn>
+            <dd-main-board></dd-main-board>
+        </v-content>
+    </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import MainBoard from '@/components/MainBoard.vue'
+    import {Component, Vue} from 'vue-property-decorator';
 
-@Component({
-  components: {
-    MainBoard
-  },
-})
-export default class Main extends Vue {}
+    @Component
+    export default class Main extends Vue {
+        // TODO Hide Admin setting by default
+        private drawer: boolean = true;
+
+        toggleDrawer() {
+            this.drawer = !this.drawer;
+        }
+    }
 </script>

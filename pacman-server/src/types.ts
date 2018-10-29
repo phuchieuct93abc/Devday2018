@@ -2,7 +2,7 @@ interface PlayerData {
     id: string,
     token: string,
     name: string,
-    color: string,
+    color: Color,
     score: number
 }
 
@@ -11,4 +11,9 @@ interface RestData {
     action: string,
 }
 
-export {PlayerData, RestData};
+interface Color {
+    text: string,
+    value: string,
+}
+
+export {PlayerData, RestData, Color};

@@ -1,12 +1,12 @@
 import $ from "jquery";
 import pacmanController from "./pacman/pacmanController";
-import {PlayerData} from "./playerStorage";
+import {Color, PlayerData} from "./types";
 
 export default class Player implements PlayerData {
 
     playerNameElement: JQuery<HTMLElement>;
     id: string;
-    color: string;
+    color: Color;
     token: string;
     name: string;
     score: number = 0;
@@ -21,7 +21,7 @@ export default class Player implements PlayerData {
             this.playerNameElement = $(`#player`);
 
         }
-        this.playerNameElement.css({"color": this.color}).hide().find(".player-name").text(this.name);
+        this.playerNameElement.css({"color": this.color.value}).hide().find(".player-name").text(this.name);
     }
 
     updateScore(score: number): any {

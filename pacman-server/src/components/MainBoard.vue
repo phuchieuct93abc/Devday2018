@@ -1,9 +1,9 @@
 <template>
     <div class="main-board">
 
-        <score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></score-board>
+        <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
 
-        <score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></score-board>
+        <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
 
         <div id="pacman">
             <span id="player-1" class="player-name-wrapper">
@@ -13,6 +13,11 @@
                 <span class="player-name"></span>
             </span>
         </div>
+
+        <v-layout align-center justify-center>
+            <v-btn @click="startGame" color="primary">Start</v-btn>
+            <v-btn @click="restartGame" color="error">Restart</v-btn>
+        </v-layout>
     </div>
 </template>
 
@@ -21,28 +26,44 @@
     import * as io from 'socket.io-client';
     import Player from "../player";
     import pacmanController from "../pacman/pacmanController";
-    import {PlayerData, RestData} from "../playerStorage";
+    import {PlayerData, RestData} from "../types";
+    import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
 
     @Component
     export default class MainBoard extends Vue {
-        mounted() {
-            let player1: Player = Player.fromPlayerData(this.firstPlayer);
-            let player2: Player = Player.fromPlayerData(this.secondPlayer);
-            pacmanController.setPlayer([player1, player2]).startGameWithNoGhost();
+        private player1!: Player;
+        private player2!: Player;
 
-            var socket = io();
+        mounted() {
+            const socket = io();
             socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
-                if (token == player1.token) {
-                    player = player1;
-                } else if (token == player2.token) {
-                    player = player2;
+                if (token === this.player1.token) {
+                    player = this.player1;
+                } else if (token === this.player2.token) {
+                    player = this.player2;
                 } else {
                     return;
                 }
                 player.move(action.action);
             });
+        }
+
+        startGame() {
+            this.player1 = Player.fromPlayerData(this.firstPlayer);
+            this.player2= Player.fromPlayerData(this.secondPlayer);
+            pacmanController.setPlayer([this.player1, this.player2]).startGameWithNoGhost();
+        }
+
+        restartGame() {
+            const el = document.getElementById("pacman");
+            if (el) {
+                // TODO Find the way to keep the name in header of pacman
+                el.innerText = "";
+            }
+            this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
+            this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
         }
 
         get firstPlayer(): PlayerData {
