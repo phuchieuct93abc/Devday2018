@@ -1,28 +1,41 @@
 <template>
-    <div class="main-board">
+    <v-container fluid grid-list-md text-xs-center class="main-board">
+        <v-layout row justify-space-around>
+            <v-flex xs2>
+                <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
+            </v-flex>
 
-        <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
+            <v-flex xs4>
+                <dd-timer value="5"></dd-timer>
+            </v-flex>
 
-        <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
-
-        <v-layout justify-center>
-            <v-btn>Timer here</v-btn>
+            <v-flex xs2>
+                <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
+            </v-flex>
         </v-layout>
 
-        <div id="pacman">
-            <span id="player-1" class="player-name-wrapper">
-                <span class="player-name"></span>
-            </span>
-                <span id="player-2" class="player-name-wrapper">
-                <span class="player-name"></span>
-            </span>
-        </div>
+        <v-layout row>
 
-        <v-layout align-center justify-center>
-            <v-btn @click="startGame" color="primary">Start</v-btn>
-            <v-btn @click="restartGame" color="error">Restart</v-btn>
+
+            <v-flex xs6>
+                <div id="pacman">
+                    <span id="player-1" class="player-name-wrapper">
+                        <span class="player-name"></span>
+                    </span>
+                    <span id="player-2" class="player-name-wrapper">
+                        <span class="player-name"></span>
+                    </span>
+                </div>
+            </v-flex>
         </v-layout>
-    </div>
+
+        <v-layout row>
+            <v-flex xs12>
+                <v-btn @click="startGame" color="primary">Start</v-btn>
+                <v-btn @click="restartGame" color="error">Restart</v-btn>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script lang="ts">
@@ -98,15 +111,5 @@
         white-space: nowrap;
         justify-content: center;
         font-size: 1.5em;
-    }
-
-    .team-one {
-        position: absolute;
-        left: 20%;
-    }
-
-    .team-two {
-        position: absolute;
-        right: 20%;
     }
 </style>

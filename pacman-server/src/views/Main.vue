@@ -4,7 +4,7 @@
             <dd-admin></dd-admin>
         </v-navigation-drawer>
         <v-content>
-            <v-btn fab dark small color="primary" @click="toggleDrawer">
+            <v-btn fixed fab dark small color="primary" @click="toggleDrawer">
                 <v-icon dark>settings</v-icon>
             </v-btn>
             <dd-main-board></dd-main-board>
