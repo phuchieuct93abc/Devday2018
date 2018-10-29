@@ -6,7 +6,7 @@
             </v-flex>
 
             <v-flex xs4>
-                <dd-timer value="5"></dd-timer>
+                <dd-timer :status="status" :value="timer"></dd-timer>
             </v-flex>
 
             <v-flex xs2>
@@ -15,8 +15,13 @@
         </v-layout>
 
         <v-layout row>
+            <v-flex xs12>
+                <v-btn @click="startGame" color="primary">Start</v-btn>
+                <v-btn @click="restartGame" color="error">Restart</v-btn>
+            </v-flex>
+        </v-layout>
 
-
+        <v-layout row justify-center>
             <v-flex xs6>
                 <div id="pacman">
                     <span id="player-1" class="player-name-wrapper">
@@ -26,13 +31,6 @@
                         <span class="player-name"></span>
                     </span>
                 </div>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row>
-            <v-flex xs12>
-                <v-btn @click="startGame" color="primary">Start</v-btn>
-                <v-btn @click="restartGame" color="error">Restart</v-btn>
             </v-flex>
         </v-layout>
     </v-container>
@@ -45,6 +43,7 @@
     import pacmanController from "../pacman/pacmanController";
     import {PlayerData, RestData} from "../types";
     import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
+    import {CombatStatus} from "../constants";
 
     @Component
     export default class MainBoard extends Vue {
@@ -71,6 +70,7 @@
             this.player1 = Player.fromPlayerData(this.firstPlayer);
             this.player2= Player.fromPlayerData(this.secondPlayer);
             pacmanController.setPlayer([this.player1, this.player2]).startGameWithNoGhost();
+            this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
         }
 
         restartGame() {
@@ -81,6 +81,7 @@
             }
             this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
             this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
+            this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
         }
 
         get firstPlayer(): PlayerData {
@@ -89,6 +90,14 @@
 
         get secondPlayer(): PlayerData {
             return this.$store.state.secondPlayer;
+        }
+
+        get timer(): number {
+            return this.$store.state.timer;
+        }
+
+        get status(): CombatStatus {
+            return this.$store.state.combatStatus;
         }
 
     }
