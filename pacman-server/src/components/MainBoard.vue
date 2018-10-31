@@ -1,24 +1,39 @@
 <template>
-    <div class="main-board">
+    <v-container fluid grid-list-md text-xs-center class="main-board">
+        <v-layout row justify-space-around>
+            <v-flex xs2>
+                <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
+            </v-flex>
 
-        <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
+            <v-flex xs4>
+                <dd-timer :status="status" :value="timer"></dd-timer>
+            </v-flex>
 
-        <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
-
-        <div id="pacman">
-            <span id="player-1" class="player-name-wrapper">
-                <span class="player-name"></span>
-            </span>
-                <span id="player-2" class="player-name-wrapper">
-                <span class="player-name"></span>
-            </span>
-        </div>
-
-        <v-layout align-center justify-center>
-            <v-btn @click="startGame" color="primary">Start</v-btn>
-            <v-btn @click="restartGame" color="error">Restart</v-btn>
+            <v-flex xs2>
+                <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
+            </v-flex>
         </v-layout>
-    </div>
+
+        <v-layout row>
+            <v-flex xs12>
+                <v-btn @click="startGame" color="primary">Start</v-btn>
+                <v-btn @click="restartGame" color="error">Restart</v-btn>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row justify-center>
+            <v-flex xs6>
+                <div id="pacman">
+                    <span id="player-1" class="player-name-wrapper">
+                        <span class="player-name"></span>
+                    </span>
+                    <span id="player-2" class="player-name-wrapper">
+                        <span class="player-name"></span>
+                    </span>
+                </div>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script lang="ts">
@@ -28,6 +43,7 @@
     import pacmanController from "../pacman/pacmanController";
     import {PlayerData, RestData} from "../types";
     import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
+    import {CombatStatus} from "../constants";
 
     @Component
     export default class MainBoard extends Vue {
@@ -35,7 +51,7 @@
         private player2!: Player;
 
         mounted() {
-            const socket = io();
+            const socket = io("https://localhost:3000");
             socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
@@ -54,6 +70,7 @@
             this.player1 = Player.fromPlayerData(this.firstPlayer);
             this.player2= Player.fromPlayerData(this.secondPlayer);
             pacmanController.setPlayer([this.player1, this.player2]).startGameWithNoGhost();
+            this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
         }
 
         restartGame() {
@@ -64,6 +81,7 @@
             }
             this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
             this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
+            this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
         }
 
         get firstPlayer(): PlayerData {
@@ -72,6 +90,14 @@
 
         get secondPlayer(): PlayerData {
             return this.$store.state.secondPlayer;
+        }
+
+        get timer(): number {
+            return this.$store.state.timer;
+        }
+
+        get status(): CombatStatus {
+            return this.$store.state.combatStatus;
         }
 
     }
@@ -94,15 +120,5 @@
         white-space: nowrap;
         justify-content: center;
         font-size: 1.5em;
-    }
-
-    .team-one {
-        position: absolute;
-        left: 20%;
-    }
-
-    .team-two {
-        position: absolute;
-        right: 20%;
     }
 </style>

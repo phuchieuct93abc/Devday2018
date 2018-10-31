@@ -23,8 +23,6 @@
 
     .score-board {
         border: @axon-blue 2px dashed;
-        width: 150px;
-        height: 150px;
     }
 
     .score-container {
@@ -34,7 +32,7 @@
         justify-content: center;
 
         .score {
-            font-size: 80px;
+            font-size: 65px;
         }
     }
 

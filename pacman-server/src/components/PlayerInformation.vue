@@ -1,5 +1,5 @@
 <template>
-    <v-flex>
+    <div>
         <v-text-field dark label="Id" :value=value.id disabled></v-text-field>
         <v-text-field dark label="Token" :value="value.token" @input="updateToken"></v-text-field>
         <v-text-field dark label="Name" :value="value.name" @input="updateName"></v-text-field>
@@ -11,7 +11,7 @@
             </template>
         </v-combobox>
         <v-text-field dark label="Score" :value=value.score disabled></v-text-field>
-    </v-flex>
+    </div>
 </template>
 
 <script lang="ts">

@@ -11,6 +11,7 @@ import TestBoard from '@/components/TestingBoard.vue'
 import ScoreBoard from '@/components/ScoreBoard.vue'
 import PlayerInformation from "@/components/PlayerInformation.vue";
 import Admin from '@/components/Admin.vue'
+import Timer from '@/components/Timer.vue'
 
 Vue.config.productionTip = false;
 
@@ -19,6 +20,7 @@ Vue.component("dd-test-board", TestBoard);
 Vue.component('dd-score-board', ScoreBoard);
 Vue.component("dd-admin", Admin);
 Vue.component("dd-player-information", PlayerInformation);
+Vue.component("dd-timer", Timer);
 
 new Vue({
   router,
