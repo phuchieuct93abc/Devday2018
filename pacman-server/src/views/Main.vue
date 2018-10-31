@@ -17,8 +17,7 @@
 
     @Component
     export default class Main extends Vue {
-        // TODO Hide Admin setting by default
-        private drawer: boolean = true;
+        private drawer: boolean = false;
 
         toggleDrawer() {
             this.drawer = !this.drawer;

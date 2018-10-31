@@ -1,3 +1,4 @@
+import {CombatStatus} from "../constants";
 <template>
     <v-container fluid grid-list-md text-xs-center class="main-board">
         <v-layout row justify-space-around>
@@ -16,8 +17,8 @@
 
         <v-layout row>
             <v-flex xs12>
-                <v-btn @click="startGame" color="primary">Start</v-btn>
-                <v-btn @click="restartGame" color="error">Restart</v-btn>
+                <v-btn v-if="isStopped" @click="startGame" color="primary">Start</v-btn>
+                <v-btn v-else @click="restartGame" color="error">Restart</v-btn>
             </v-flex>
         </v-layout>
 
@@ -44,6 +45,7 @@
     import {PlayerData, RestData} from "../types";
     import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
     import {CombatStatus} from "../constants";
+    import $ from "jquery";
 
     @Component
     export default class MainBoard extends Vue {
@@ -74,11 +76,8 @@
         }
 
         restartGame() {
-            const el = document.getElementById("pacman");
-            if (el) {
-                // TODO Find the way to keep the name in header of pacman
-                el.innerText = "";
-            }
+            $("#pacman").children("canvas").remove();
+            $(".player-name").text("");
             this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
             this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
             this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
@@ -100,13 +99,17 @@
             return this.$store.state.combatStatus;
         }
 
+        get isStopped(): boolean {
+            return this.$store.state.combatStatus === CombatStatus.STOPPED;
+        }
+
     }
 </script>
 
 <style lang="less" scoped>
     #pacman {
-        height: 470px;
-        width: 382px;
+        height: 500px;
+        width: 500px;
         border-radius: 5px;
         margin: 20px auto;
         position: relative;
