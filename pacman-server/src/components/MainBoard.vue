@@ -51,7 +51,7 @@
         private player2!: Player;
 
         mounted() {
-            const socket = io();
+            const socket = io("https://localhost:3000");
             socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
