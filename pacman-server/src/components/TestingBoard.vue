@@ -31,7 +31,7 @@
                 let player = Player.fromPlayerData(this.testPlayer);
                 pacmanController.setPlayer([player]).startGameWithNoGhost();
 
-                let socket = io();
+                let socket = io("https://localhost:3000");
                 socket.on('action', function (data: RestData) {
                     if (data.token == token) {
                         player.move(data.action)
