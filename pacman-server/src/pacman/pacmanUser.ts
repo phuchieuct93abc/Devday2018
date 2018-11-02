@@ -47,7 +47,7 @@ export default class PacmanUser {
         } else if (this.isSecondPlayer()) {
             return positions[this.getRandomInt(2)+2]
         } else {
-            return positions[this.getRandomInt(5)]
+            return positions[this.getRandomInt(4)]
         }
     }
     getRandomInt(max) {
