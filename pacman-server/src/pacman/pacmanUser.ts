@@ -19,15 +19,40 @@ export default class PacmanUser {
         this.score += score;
         this.player.updateScore(this.score);
 
-        if (this.player.token === Store.state.firstPlayer.token) {
+        if (this.isFirstPlayer()) {
             Store.commit("updateScoreFirstPlayer", this.score);
-        } else if (this.player.token === Store.state.secondPlayer.token) {
+        } else if (this.isSecondPlayer()) {
             Store.commit("updateScoreSecondPlayer", this.score);
         } else {
             Store.commit("updateScoreTestPlayer", this.score);
         }
     };
 
+    isFirstPlayer() {
+        return this.player.token === Store.state.firstPlayer.token;
+    }
+    isSecondPlayer() {
+        return this.player.token === Store.state.secondPlayer.token;
+    }
+    randomPosition(): { x: number, y: number, direction: any, due: any } {
+        let positions = [
+            { x: 10, y: 10, direction: CONST.LEFT, due: CONST.LEFT },
+            { x: 170, y: 200, direction: CONST.RIGHT, due: CONST.RIGHT },
+            { x: 170, y: 10, direction: CONST.RIGHT, due: CONST.RIGHT },
+            { x: 10, y: 200, direction: CONST.LEFT, due: CONST.LEFT } 
+        ]
+
+        if (this.isFirstPlayer()) {
+            return positions[this.getRandomInt(2)]
+        } else if (this.isSecondPlayer()) {
+            return positions[this.getRandomInt(2)+2]
+        } else {
+            return positions[this.getRandomInt(5)]
+        }
+    }
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
     theScore() {
         return this.score;
     };
@@ -52,12 +77,10 @@ export default class PacmanUser {
     };
 
     resetPosition() {
-        this.position = {
-            "x": 90,
-            "y": 120
-        };
-        this.direction = CONST.LEFT;
-        this.due = CONST.LEFT;
+        let newPostion = this.randomPosition();
+        this.position = { x: newPostion.x, y: newPostion.y }
+        this.direction = newPostion.direction;
+        this.due = newPostion.due;
     };
 
     reset() {
