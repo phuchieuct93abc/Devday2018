@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "run": "npm-run-all --parallel start build",
+    "run": "npm-run-all --parallel start serve",
     "start": "node pacman-server.js"
   },
   "dependencies": {
