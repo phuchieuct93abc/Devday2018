@@ -100,39 +100,6 @@ var PACMAN = (function () {
             Math.pow(ghost.y - user.y, 2))) < 10;
     }
 
-    function drawFooter() {
-
-        var topLeft = (map.height * map.blockSize),
-            textBase = topLeft + 17;
-
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(0, topLeft, (map.width * map.blockSize), 30);
-
-        ctx.fillStyle = "#FFFF00";
-
-        for (var i = 0, len = users.getLives(); i < len; i++) {
-            ctx.fillStyle = "#FFFF00";
-            ctx.beginPath();
-            ctx.moveTo(150 + (25 * i) + map.blockSize / 2,
-                (topLeft + 1) + map.blockSize / 2);
-
-            ctx.arc(150 + (25 * i) + map.blockSize / 2,
-                (topLeft + 1) + map.blockSize / 2,
-                map.blockSize / 2, Math.PI * 0.25, Math.PI * 1.75, false);
-            ctx.fill();
-        }
-
-        ctx.fillStyle = !soundDisabled() ? "#00FF00" : "#FF0000";
-        ctx.font = "bold 16px sans-serif";
-        //ctx.fillText("♪", 10, textBase);
-        ctx.fillText("s", 10, textBase);
-
-        ctx.fillStyle = "#FFFF00";
-        ctx.font = "14px Calibri";
-        ctx.fillText("Score: " + users.theScore(), 30, textBase);
-        ctx.fillText("Level: " + level, 260, textBase);
-    }
-
     function redrawBlock(pos) {
         map.drawBlock(Math.floor(pos.y / 10), Math.floor(pos.x / 10), ctx);
         map.drawBlock(Math.ceil(pos.y / 10), Math.ceil(pos.x / 10), ctx);
@@ -242,13 +209,6 @@ var PACMAN = (function () {
         }
     }
 
-    function completedLevel() {
-        setState(WAITING);
-        level += 1;
-        map.reset();
-        users.newLevel();
-        startLevel();
-    }
 
     function keyPress(e) {
         if (state !== WAITING && state !== PAUSE) {
@@ -311,7 +271,6 @@ var PACMAN = (function () {
     function setUpUsers(players) {
         let pacmanUsers = players.map(player => {
             return new PacmanUser({
-                "completedLevel": completedLevel,
                 "eatenPill": eatenPill,
                 player: player
             }, map);
