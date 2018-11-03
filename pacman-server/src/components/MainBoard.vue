@@ -7,18 +7,19 @@ import {CombatStatus} from "../constants";
             </v-flex>
 
             <v-flex xs4>
-                <dd-timer :status="status" :value="timer"></dd-timer>
+                <v-layout column>
+                    <v-flex xs6>
+                        <dd-timer :status="status" :value="timer"></dd-timer>
+                    </v-flex>
+                    <v-flex>
+                        <v-btn v-if="isStopped" @click="startGame" color="primary">Start</v-btn>
+                        <v-btn v-else @click="restartGame" color="error">Restart</v-btn>
+                    </v-flex>
+                </v-layout>
             </v-flex>
 
             <v-flex xs2>
                 <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row>
-            <v-flex xs12>
-                <v-btn v-if="isStopped" @click="startGame" color="primary">Start</v-btn>
-                <v-btn v-else @click="restartGame" color="error">Restart</v-btn>
             </v-flex>
         </v-layout>
 
