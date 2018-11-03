@@ -16,9 +16,7 @@ export default class PacmanUsers {
         throw new Error("Method not implemented.");
     }
 
-    newLevel() {
-        this.users.forEach(element => element.newLevel());
-    }
+
 
     keyDown(userIndex, direction) {
         this.users[userIndex].keyDown(direction)
