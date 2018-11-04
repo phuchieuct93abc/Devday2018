@@ -7,11 +7,12 @@ import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, PAUSE, PLAYING, WAITING} from "@/pac
 import PacmanAudio from "@/pacman/PacmanAudio";
 import PacmanGhost from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
+import {AudioFile} from "@/types";
 
 var PACMAN = (function () {
 
     var state: number = WAITING,
-        audio: any = null,
+        audio: PacmanAudio,
         ghosts: any = [],
         ghostSpecs: string[] = [],
         eatenCount: number = 0,
@@ -220,51 +221,43 @@ var PACMAN = (function () {
         players = inputPlayers;
     }
 
-    function init(wrapper, soundDir: string) {
-
-        var i, len, ghost,
-            blockSize = wrapper.offsetWidth / 19,
-            canvas = document.createElement("canvas");
+    function init(rootElement, soundDir: string) {
+        const blockSize: number = rootElement.offsetWidth / 19;
+        let canvas = document.createElement("canvas");
 
         canvas.setAttribute("width", (blockSize * 19) + "px");
         canvas.setAttribute("height", (blockSize * 22) + 30 + "px");
 
-        wrapper.appendChild(canvas);
+        rootElement.appendChild(canvas);
 
         ctx = canvas.getContext('2d');
 
-        audio = new PacmanAudio({
-            "soundDisabled": soundDisabled
-        });
+        audio = new PacmanAudio(soundDisabled());
         map = PacmanMap(blockSize);
         setUpUsers(players);
 
 
-        for (let i = 0, len = ghostSpecs.length; i < len; i += 1) {
-            ghost = PacmanGhost({
-                "getTick": getTick
-            }, map, ghostSpecs[i]);
+        for (let i = 0, numberOfGhost = ghostSpecs.length; i < numberOfGhost; i += 1) {
+            const ghost = PacmanGhost({"getTick": getTick}, map, ghostSpecs[i]);
             ghosts.push(ghost);
         }
 
         map.draw(ctx);
         dialog("Loading ...");
 
-        var extension = "mp3";
+        const extension = "mp3";
         // var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 
-        var audio_files = [
-            ["start", soundDir + "audio/opening_song." + extension],
-            ["die", soundDir + "audio/die." + extension],
-            ["eatghost", soundDir + "audio/eatghost." + extension],
-            ["eatpill", soundDir + "audio/eatpill." + extension],
-            ["eating", soundDir + "audio/eating.short." + extension],
-            ["eating2", soundDir + "audio/eating.short." + extension]
+        const audioFiles: AudioFile[] = [
+            {event: "start", path: soundDir + "audio/opening_song." + extension},
+            {event: "die", path: soundDir + "audio/die." + extension},
+            {event: "eatghost", path: soundDir + "audio/eatghost." + extension},
+            {event: "eatpill", path: soundDir + "audio/eatpill." + extension},
+            {event: "eating", path: soundDir + "audio/eating.short." + extension},
+            {event: "eating2", path: soundDir + "audio/eating.short." + extension}
         ];
 
-        load(audio_files, function () {
-            loaded();
-        });
+        loadAudio(audioFiles, () => loading());
     }
 
     function setUpUsers(players) {
@@ -279,21 +272,18 @@ var PACMAN = (function () {
 
     }
 
-    function load(arr, callback) {
-
-        if (arr.length === 0) {
-            callback();
+    function loadAudio(audioFiles: AudioFile[], whenFinish) {
+        if (audioFiles.length === 0) {
+            whenFinish();
         } else {
-            var x = arr.pop();
-            audio.load(x[0], x[1], function () {
-                load(arr, callback);
-            });
+            // @ts-ignore
+            const audioFile: AudioFile = audioFiles.pop();
+            audio.load(audioFile.event, audioFile.path, () => loadAudio(audioFiles, whenFinish));
         }
     }
 
-    function loaded() {
-
-        dialog("Press N to Start");
+    function loading() {
+        dialog("Loading...");
 
         // document.addEventListener("keydown", keyDown, true);
         // document.addEventListener("keypress", keyPress, true);

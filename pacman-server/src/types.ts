@@ -16,4 +16,9 @@ interface Color {
     value: string,
 }
 
-export {PlayerData, RestData, Color};
+interface AudioFile {
+    event: string,
+    path: string
+}
+
+export {PlayerData, RestData, Color, AudioFile};

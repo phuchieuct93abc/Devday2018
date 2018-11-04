@@ -4,10 +4,10 @@ class PacmanAudio {
     endEvents: any = [];
     progressEvents: any = [];
     playing: any[] = [];
-    game: any;
+    isSoundDisabled: boolean;
 
-    constructor(game) {
-        this.game = game;
+    constructor(isSoundDisabled: boolean) {
+        this.isSoundDisabled = isSoundDisabled;
     }
 
     load(name, path, cb) {
@@ -59,7 +59,7 @@ class PacmanAudio {
     }
 
     play(name) {
-        if (!this.game.soundDisabled()) {
+        if (!this.isSoundDisabled) {
             this.endEvents[name] = () => {
                 this.ended(name);
             };
