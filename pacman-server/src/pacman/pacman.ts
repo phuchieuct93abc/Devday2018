@@ -11,23 +11,24 @@ import {AudioFile} from "@/types";
 
 var PACMAN = (function () {
 
-    var state: number = WAITING,
-        audio: PacmanAudio,
-        ghosts: any = [],
-        ghostSpecs: string[] = [],
-        eatenCount: number = 0,
-        level: number = 0,
-        tick: number = 0,
-        ghostPos: any, userPos: any,
-        stateChanged: any = true,
-        timerStart: any = null,
-        lastTime: number = 0,
-        canvasContext: any = null,
-        timer: any = null,
-        mapMaze: any = null,
-        users: PacmanUsers,
-        stored: any = null,
-        players: Player[] = [];
+    let state: number = WAITING;
+    let audio: PacmanAudio;
+    let ghosts: PacmanGhost[] = [];
+    let ghostSpecs: string[] = [];
+    let eatenCount: number = 0;
+    let level: number = 0;
+    let tick: number = 0;
+    let ghostPos: any;
+    let userPos: any;
+    let stateChanged: boolean = true;
+    let timerStart!: number;
+    let lastTime: number = 0;
+    let canvasContext: any = null;
+    let timer: number;
+    let mapMaze: PacmanMap;
+    let users: PacmanUsers;
+    let stored: number;
+    let players: Player[] = [];
 
     function setGhost(ghostColors: string[]) {
         ghostSpecs = ghostColors;
@@ -201,7 +202,7 @@ var PACMAN = (function () {
         timerStart = tick;
         eatenCount = 0;
         for (let i = 0; i < ghosts.length; i += 1) {
-            ghosts[i].makeEatable(canvasContext);
+            ghosts[i].makeEatable();
         }
     }
 
