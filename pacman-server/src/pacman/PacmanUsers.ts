@@ -43,7 +43,6 @@ export default class PacmanUsers {
 
     move() {
         return this.users.map(element => element.move());
-
     }
 
     draw(ctx) {

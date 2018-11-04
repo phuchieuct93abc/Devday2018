@@ -206,7 +206,7 @@ export default class PacmanGhost {
         return false;
     }
 
-    move(ctx) {
+    move(canvasContext: CanvasRenderingContext2D) {
 
         let oldPos: Point = this.position;
         let onGrid = this.onGridSquare(this.position);
@@ -238,7 +238,7 @@ export default class PacmanGhost {
             })) {
 
             this.due = this.getRandomDirection();
-            return this.move(ctx);
+            return this.move(canvasContext);
         }
 
         this.position = npos;

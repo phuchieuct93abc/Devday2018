@@ -7,7 +7,7 @@ import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, KEY, PAUSE, PLAYING, WAITING} from "
 import PacmanAudio from "@/pacman/PacmanAudio";
 import PacmanGhost from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
-import {AudioFile} from "@/types";
+import {AudioFile, Point} from "@/types";
 import {YELLOW} from "@/defined-color";
 
 var PACMAN = (function () {
@@ -95,9 +95,8 @@ var PACMAN = (function () {
         stateChanged = true;
     }
 
-    function collided(user, ghost) {
-        return (Math.sqrt(Math.pow(ghost.x - user.x, 2) +
-            Math.pow(ghost.y - user.y, 2))) < 10;
+    function collided(user, ghost: Point) {
+        return (Math.sqrt(Math.pow(ghost.x - user.x, 2) + Math.pow(ghost.y - user.y, 2))) < 10;
     }
 
     function redrawBlock(pos) {
@@ -106,11 +105,8 @@ var PACMAN = (function () {
     }
 
     function mainDraw() {
-
-        var diff, userPos, i, len, nScore;
-
+        let nScore;
         ghostPos = [];
-        userPos = [];
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             ghostPos.push(ghosts[i].move(canvasContext));
@@ -118,10 +114,8 @@ var PACMAN = (function () {
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             redrawBlock(ghostPos[i].old);
         }
-        userPos = users.move();
+        let userPos = users.move();
         userPos.forEach(pos => redrawBlock(pos.old));
-        //TODO
-        //redrawBlock(userPos.old);
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             ghosts[i].draw(canvasContext);
@@ -151,9 +145,6 @@ var PACMAN = (function () {
     }
 
     function mainLoop() {
-
-        var diff;
-
         if (state !== PAUSE) {
             ++tick;
         }
@@ -162,8 +153,7 @@ var PACMAN = (function () {
 
         if (state === PLAYING) {
             mainDraw();
-        }  else if (state === EATEN_PAUSE &&
-            (tick - timerStart) > (FPS / 3)) {
+        }  else if (state === EATEN_PAUSE && (tick - timerStart) > (FPS / 3)) {
             mapMaze.draw(canvasContext);
             setState(PLAYING);
         } else if (state === DYING) {
@@ -179,7 +169,7 @@ var PACMAN = (function () {
             }
         } else if (state === COUNTDOWN) {
 
-            diff = 5 + Math.floor((timerStart - tick) / FPS);
+            let diff = 4 + Math.floor((timerStart - tick) / FPS);
 
             if (diff === 0) {
                 mapMaze.draw(canvasContext);
