@@ -7,7 +7,7 @@ import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, KEY, PAUSE, PLAYING, WAITING} from "
 import PacmanAudio from "@/pacman/PacmanAudio";
 import PacmanGhost from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
-import {AudioFile, Point} from "@/types";
+import {AudioFile, PacmanPosition, Point} from "@/types";
 import {YELLOW} from "@/defined-color";
 
 var PACMAN = (function () {
@@ -19,7 +19,7 @@ var PACMAN = (function () {
     let eatenCount: number = 0;
     let level: number = 0;
     let tick: number = 0;
-    let ghostPos: any;
+    let ghostPos: PacmanPosition[];
     let userPos: any;
     let stateChanged: boolean = true;
     let timerStart!: number;
@@ -114,7 +114,7 @@ var PACMAN = (function () {
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             redrawBlock(ghostPos[i].old);
         }
-        let userPos = users.move();
+        let userPos: PacmanPosition[] = users.move();
         userPos.forEach(pos => redrawBlock(pos.old));
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
@@ -122,10 +122,27 @@ var PACMAN = (function () {
         }
         users.draw(canvasContext);
 
-        userPos = userPos["new"];
+        let user1 = userPos[0].new;
+        let user2 = userPos[1].new;
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
-            if (collided(userPos, ghostPos[i]["new"])) {
+            if (collided(user1, ghostPos[i].new)) {
+                if (ghosts[i].isVunerable()) {
+                    audio.play("eatghost");
+                    ghosts[i].eat();
+                    eatenCount += 1;
+                    nScore = eatenCount * 50;
+                    drawScore(nScore, ghostPos[i]);
+                    users.addScore(nScore);
+                    setState(EATEN_PAUSE);
+                    timerStart = tick;
+                } else if (ghosts[i].isDangerous()) {
+                    audio.play("die");
+                    setState(DYING);
+                    timerStart = tick;
+                }
+            }
+            if (collided(user2, ghostPos[i].new)) {
                 if (ghosts[i].isVunerable()) {
                     audio.play("eatghost");
                     ghosts[i].eat();

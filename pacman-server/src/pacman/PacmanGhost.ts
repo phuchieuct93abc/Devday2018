@@ -1,5 +1,5 @@
 import {DOWN, FPS, LEFT, RIGHT, UP, WAITING} from "@/pacman/pacmanConst";
-import {Point} from "@/types";
+import {PacmanPosition, Point} from "@/types";
 
 export default class PacmanGhost {
     private position!: Point;
@@ -206,7 +206,7 @@ export default class PacmanGhost {
         return false;
     }
 
-    move(canvasContext: CanvasRenderingContext2D) {
+    move(canvasContext: CanvasRenderingContext2D): PacmanPosition {
 
         let oldPos: Point = this.position;
         let onGrid = this.onGridSquare(this.position);

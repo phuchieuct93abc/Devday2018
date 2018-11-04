@@ -1,4 +1,5 @@
 import PacmanUser from "@/pacman/pacmanUser";
+import {PacmanPosition} from "@/types";
 
 export default class PacmanUsers {
     constructor(private users: PacmanUser[]) {
@@ -13,19 +14,16 @@ export default class PacmanUsers {
     }
 
     loseLife(): any {
-        throw new Error("Method not implemented.");
+        // TODO: need to reduce life
+        // throw new Error("Method not implemented.");
     }
-
-
 
     keyDown(userIndex, direction) {
         this.users[userIndex].keyDown(direction)
-
     }
 
     reset() {
         this.users.forEach(element => element.reset());
-
     }
 
     getLives() {
@@ -38,15 +36,13 @@ export default class PacmanUsers {
 
     resetPosition() {
         this.users.forEach(element => element.resetPosition());
-
     }
 
-    move() {
+    move(): PacmanPosition[] {
         return this.users.map(element => element.move());
     }
 
     draw(ctx) {
         this.users.forEach(element => element.draw(ctx));
-
     }
 }

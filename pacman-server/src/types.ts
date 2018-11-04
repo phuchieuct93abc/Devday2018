@@ -26,4 +26,8 @@ interface Point {
     y: number
 }
 
-export {PlayerData, RestData, Color, AudioFile, Point};
+interface PacmanPosition {
+    old: Point,
+    new: Point
+}
+export {PlayerData, RestData, Color, AudioFile, Point, PacmanPosition};
