@@ -38,7 +38,7 @@ class PacmanController {
     }
 
     move(player: Player, direction) {
-        let playerIndex = this.players.indexOf(player);
+        const playerIndex = this.players.indexOf(player);
         Pacman.move(playerIndex, CONTROL_CODES[direction])
     }
 

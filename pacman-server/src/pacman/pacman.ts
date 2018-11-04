@@ -22,9 +22,9 @@ var PACMAN = (function () {
         stateChanged: any = true,
         timerStart: any = null,
         lastTime: number = 0,
-        ctx: any = null,
+        canvasContext: any = null,
         timer: any = null,
-        map: any = null,
+        mapMaze: any = null,
         users: PacmanUsers,
         stored: any = null,
         players: Player[] = [];
@@ -38,19 +38,19 @@ var PACMAN = (function () {
     }
 
     function drawScore(text, position) {
-        ctx.fillStyle = "#FFFFFF";
-        ctx.font = "12px BDCartoonShoutRegular";
-        ctx.fillText(text,
-            (position["new"]["x"] / 10) * map.blockSize,
-            ((position["new"]["y"] + 5) / 10) * map.blockSize);
+        canvasContext.fillStyle = "#FFFFFF";
+        canvasContext.font = "12px BDCartoonShoutRegular";
+        canvasContext.fillText(text,
+            (position["new"]["x"] / 10) * mapMaze.blockSize,
+            ((position["new"]["y"] + 5) / 10) * mapMaze.blockSize);
     }
 
     function dialog(text) {
-        ctx.fillStyle = "#FFFF00";
-        ctx.font = "18px Calibri";
-        var width = ctx.measureText(text).width,
-            x = ((map.width * map.blockSize) - width) / 2;
-        ctx.fillText(text, x, (map.height * 10) + 8);
+        canvasContext.fillStyle = "#FFFF00";
+        canvasContext.font = "18px Calibri";
+        var width = canvasContext.measureText(text).width,
+            x = ((mapMaze.width * mapMaze.blockSize) - width) / 2;
+        canvasContext.fillText(text, x, (mapMaze.height * 10) + 8);
     }
 
     function soundDisabled() {
@@ -71,8 +71,8 @@ var PACMAN = (function () {
         setState(WAITING);
         level = 1;
         users.reset();
-        map.reset();
-        map.draw(ctx);
+        mapMaze.reset();
+        mapMaze.draw(canvasContext);
         startLevel();
     }
 
@@ -99,8 +99,8 @@ var PACMAN = (function () {
     }
 
     function redrawBlock(pos) {
-        map.drawBlock(Math.floor(pos.y / 10), Math.floor(pos.x / 10), ctx);
-        map.drawBlock(Math.ceil(pos.y / 10), Math.ceil(pos.x / 10), ctx);
+        mapMaze.drawBlock(Math.floor(pos.y / 10), Math.floor(pos.x / 10), canvasContext);
+        mapMaze.drawBlock(Math.ceil(pos.y / 10), Math.ceil(pos.x / 10), canvasContext);
     }
 
     function mainDraw() {
@@ -111,7 +111,7 @@ var PACMAN = (function () {
         userPos = [];
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
-            ghostPos.push(ghosts[i].move(ctx));
+            ghostPos.push(ghosts[i].move(canvasContext));
         }
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             redrawBlock(ghostPos[i].old);
@@ -122,9 +122,9 @@ var PACMAN = (function () {
         //redrawBlock(userPos.old);
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
-            ghosts[i].draw(ctx);
+            ghosts[i].draw(canvasContext);
         }
-        users.draw(ctx);
+        users.draw(canvasContext);
 
         userPos = userPos["new"];
 
@@ -156,17 +156,17 @@ var PACMAN = (function () {
             ++tick;
         }
 
-        map.drawPills(ctx);
+        mapMaze.drawPills(canvasContext);
 
         if (state === PLAYING) {
             mainDraw();
         } else if (state === WAITING && stateChanged) {
             stateChanged = false;
-            map.draw(ctx);
+            mapMaze.draw(canvasContext);
             dialog("Press N to start a New game");
         } else if (state === EATEN_PAUSE &&
             (tick - timerStart) > (FPS / 3)) {
-            map.draw(ctx);
+            mapMaze.draw(canvasContext);
             setState(PLAYING);
         } else if (state === DYING) {
             if (tick - timerStart > (FPS * 2)) {
@@ -175,21 +175,21 @@ var PACMAN = (function () {
                 redrawBlock(userPos);
                 for (let i = 0, len = ghosts.length; i < len; i += 1) {
                     redrawBlock(ghostPos[i].old);
-                    ghostPos.push(ghosts[i].draw(ctx));
+                    ghostPos.push(ghosts[i].draw(canvasContext));
                 }
-                users.drawDead(ctx, (tick - timerStart) / (FPS * 2));
+                users.drawDead(canvasContext, (tick - timerStart) / (FPS * 2));
             }
         } else if (state === COUNTDOWN) {
 
             diff = 5 + Math.floor((timerStart - tick) / FPS);
 
             if (diff === 0) {
-                map.draw(ctx);
+                mapMaze.draw(canvasContext);
                 setState(PLAYING);
             } else {
                 if (diff !== lastTime) {
                     lastTime = diff;
-                    map.draw(ctx);
+                    mapMaze.draw(canvasContext);
                     dialog("Starting in: " + diff);
                 }
             }
@@ -201,7 +201,7 @@ var PACMAN = (function () {
         timerStart = tick;
         eatenCount = 0;
         for (let i = 0; i < ghosts.length; i += 1) {
-            ghosts[i].makeEatable(ctx);
+            ghosts[i].makeEatable(canvasContext);
         }
     }
 
@@ -221,13 +221,13 @@ var PACMAN = (function () {
             localStorage["soundDisabled"] = !soundDisabled();
         } else if (e.keyCode === KEY.P && state === PAUSE) {
             audio.resume();
-            map.draw(ctx);
+            mapMaze.draw(canvasContext);
             setState(stored);
         } else if (e.keyCode === KEY.P) {
             stored = state;
             setState(PAUSE);
             audio.pause();
-            map.draw(ctx);
+            mapMaze.draw(canvasContext);
             dialog("Paused");
         } else if (state !== PAUSE) {
 
@@ -244,23 +244,22 @@ var PACMAN = (function () {
         let canvas = document.createElement("canvas");
 
         canvas.setAttribute("width", (blockSize * 19) + "px");
-        canvas.setAttribute("height", (blockSize * 22) + 30 + "px");
+        canvas.setAttribute("height", (blockSize * 22) + "px");
 
         rootElement.appendChild(canvas);
 
-        ctx = canvas.getContext('2d');
+        canvasContext = canvas.getContext('2d');
 
         audio = new PacmanAudio(soundDisabled());
-        map = new PacmanMap(blockSize);
+        mapMaze = new PacmanMap(blockSize);
         setUpUsers(players);
 
-
         for (let i = 0, numberOfGhost = ghostSpecs.length; i < numberOfGhost; i += 1) {
-            const ghost = PacmanGhost({"getTick": getTick}, map, ghostSpecs[i]);
+            const ghost = PacmanGhost({"getTick": getTick}, mapMaze, ghostSpecs[i]);
             ghosts.push(ghost);
         }
 
-        map.draw(ctx);
+        mapMaze.draw(canvasContext);
         dialog("Loading ...");
 
         const extension = "mp3";
@@ -278,16 +277,13 @@ var PACMAN = (function () {
         loadAudio(audioFiles, () => loading());
     }
 
-    function setUpUsers(players) {
-        let pacmanUsers = players.map(player => {
-            return new PacmanUser({
+    function setUpUsers(players: Player[]) {
+        let pacmanUsers = players.map(player => new PacmanUser({
                 "eatenPill": eatenPill,
                 player: player
-            }, map);
-        });
+            }, mapMaze));
 
         users = new PacmanUsers(pacmanUsers);
-
     }
 
     function loadAudio(audioFiles: AudioFile[], whenFinish) {

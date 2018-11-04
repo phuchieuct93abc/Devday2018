@@ -124,7 +124,6 @@ import {CombatStatus} from "../constants";
 
 <style lang="less" scoped>
     #pacman {
-        height: 500px;
         width: 500px;
         border-radius: 5px;
         margin: 20px auto;
