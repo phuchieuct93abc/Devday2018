@@ -1,52 +1,46 @@
-class PacmanAudio {
-
-    files: any = [];
-    endEvents: any = [];
-    progressEvents: any = [];
-    playing: any[] = [];
-    isSoundDisabled: boolean;
+export default class PacmanAudio {
+    private files: any = [];
+    private endEvents: any = [];
+    private progressEvents: any = [];
+    private playing: any[] = [];
+    private readonly isSoundDisabled: boolean;
 
     constructor(isSoundDisabled: boolean) {
         this.isSoundDisabled = isSoundDisabled;
     }
 
-    load(name, path, cb) {
+    load(eventName: string, path: string, callback) {
+        const f = this.files[eventName] = document.createElement("audio");
 
-        var f = this.files[name] = document.createElement("audio");
+        this.progressEvents[eventName] = event => this.progress(event, eventName, callback);
 
-        this.progressEvents[name] = (event) => {
-            this.progress(event, name, cb);
-        };
-
-        f.addEventListener("canplaythrough", this.progressEvents[name], true);
+        f.addEventListener("canplaythrough", this.progressEvents[eventName], true);
         f.setAttribute("preload", "true");
         f.setAttribute("autobuffer", "true");
         f.setAttribute("src", path);
         f.pause();
     }
 
-    progress(event, name, callback) {
+    progress(event, eventName: string, callback) {
         if (event.loaded === event.total && typeof callback === "function") {
             callback();
-            this.files[name].removeEventListener("canplaythrough",
-                this.progressEvents[name], true);
+            this.files[eventName].removeEventListener("canplaythrough", this.progressEvents[eventName], true);
         }
     }
 
     disableSound() {
-        for (var i = 0; i < this.playing.length; i++) {
+        for (let i = 0; i < this.playing.length; i++) {
             this.files[this.playing[i]].pause();
             this.files[this.playing[i]].currentTime = 0;
         }
         this.playing = [];
     }
 
-    ended(name) {
+    ended(eventName: string) {
+        let tmp: any = [];
+        let found = false;
 
-        var i, tmp: any = [],
-            found = false;
-
-        this.files[name].removeEventListener("ended", this.endEvents[name], true);
+        this.files[eventName].removeEventListener("ended", this.endEvents[eventName], true);
 
         for (let i = 0; i < this.playing.length; i++) {
             if (!found && this.playing[i]) {
@@ -58,38 +52,24 @@ class PacmanAudio {
         this.playing = tmp;
     }
 
-    play(name) {
+    play(eventName: string) {
         if (!this.isSoundDisabled) {
-            this.endEvents[name] = () => {
-                this.ended(name);
-            };
-            this.playing.push(name);
-            this.files[name].addEventListener("ended", this.endEvents[name], true);
-            this.files[name].play();
+            this.endEvents[eventName] = () => this.ended(eventName);
+            this.playing.push(eventName);
+            this.files[eventName].addEventListener("ended", this.endEvents[eventName], true);
+            this.files[eventName].play();
         }
     }
 
     pause() {
-        for (var i = 0; i < this.playing.length; i++) {
+        for (let i = 0; i < this.playing.length; i++) {
             this.files[this.playing[i]].pause();
         }
     }
 
     resume() {
-        for (var i = 0; i < this.playing.length; i++) {
+        for (let i = 0; i < this.playing.length; i++) {
             this.files[this.playing[i]].play();
         }
     }
 };
-
-
-export default PacmanAudio;
-
-
-// return {
-//     "disableSound": disableSound,
-//     "load": load,
-//     "play": play,
-//     "pause": pause,
-//     "resume": resume
-// };
