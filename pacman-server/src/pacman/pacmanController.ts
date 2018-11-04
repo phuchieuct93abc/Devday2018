@@ -15,18 +15,9 @@ class PacmanController {
     constructor() {
     }
 
-    startGameWithNoGhost() {
-
-        var el = document.getElementById("pacman");
+    startGame() {
+        const el = document.getElementById("pacman");
         Pacman.init(el, "./");
-        this.startNewGame();
-
-    }
-
-    startGameplayWithGhost() {
-        var el = document.getElementById("pacman");
-        Pacman.init(el, "./");
-        Pacman.setGhost();
         this.startNewGame();
     }
 
@@ -36,15 +27,23 @@ class PacmanController {
         return this;
     }
 
+    setGhost() {
+        Pacman.setGhost(["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]);
+        return this;
+    }
+
+    setNoGhost() {
+        Pacman.setGhost([]);
+        return this;
+    }
+
     move(player: Player, direction) {
         let playerIndex = this.players.indexOf(player);
         Pacman.move(playerIndex, CONTROL_CODES[direction])
     }
 
     private startNewGame() {
-        setTimeout(() => {
-            Pacman.startNewGame();
-        }, 3000);
+        setTimeout(Pacman.startNewGame, 3000);
     }
 }
 

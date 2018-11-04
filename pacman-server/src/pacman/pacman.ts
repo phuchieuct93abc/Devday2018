@@ -13,7 +13,7 @@ var PACMAN = (function () {
     var state: number = WAITING,
         audio: any = null,
         ghosts: any = [],
-        ghostSpecs: any = [],
+        ghostSpecs: string[] = [],
         eatenCount: number = 0,
         level: number = 0,
         tick: number = 0,
@@ -28,8 +28,8 @@ var PACMAN = (function () {
         stored: any = null,
         players: Player[] = [];
 
-    function setGhost() {
-        ghostSpecs = ["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]
+    function setGhost(ghostColors: string[]) {
+        ghostSpecs = ghostColors;
     }
 
     function getTick() {
@@ -305,7 +305,8 @@ var PACMAN = (function () {
         "init": init,
         "move": keyDown,
         "startNewGame": startNewGame,
-        "registerPlayers": registerPlayers
+        "registerPlayers": registerPlayers,
+        "setGhost": setGhost,
     };
 
 }());

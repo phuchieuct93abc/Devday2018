@@ -6,6 +6,10 @@ import {CombatStatus} from "../constants";
                 <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
             </v-flex>
 
+            <v-flex xs2>
+                <v-btn v-if="hasGhost" @click="hasGhost = false">Semi-Finals</v-btn>
+            </v-flex>
+
             <v-flex xs4>
                 <v-layout column>
                     <v-flex xs6>
@@ -16,6 +20,10 @@ import {CombatStatus} from "../constants";
                         <v-btn v-else @click="restartGame" color="error">Restart</v-btn>
                     </v-flex>
                 </v-layout>
+            </v-flex>
+
+            <v-flex xs2>
+                <v-btn v-if="!hasGhost" @click="hasGhost = true">Final</v-btn>
             </v-flex>
 
             <v-flex xs2>
@@ -52,6 +60,7 @@ import {CombatStatus} from "../constants";
     export default class MainBoard extends Vue {
         private player1!: Player;
         private player2!: Player;
+        private hasGhost: boolean = false;
 
         mounted() {
             const socket = io("https://localhost:3000");
@@ -72,7 +81,13 @@ import {CombatStatus} from "../constants";
         startGame() {
             this.player1 = Player.fromPlayerData(this.firstPlayer);
             this.player2= Player.fromPlayerData(this.secondPlayer);
-            pacmanController.setPlayer([this.player1, this.player2]).startGameWithNoGhost();
+            pacmanController.setPlayer([this.player1, this.player2]);
+            if (this.hasGhost) {
+                pacmanController.setGhost();
+            } else {
+                pacmanController.setNoGhost();
+            }
+            pacmanController.startGame();
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
         }
 
