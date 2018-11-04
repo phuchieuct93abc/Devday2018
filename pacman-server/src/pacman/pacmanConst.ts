@@ -18,6 +18,12 @@ const NONE = 4,
     BISCUIT_SCORE = 1,
     PILL_SCORE = 20;
 
+const KEY = {
+    'N': 78,
+    'P': 80,
+    'S': 83,
+};
+
 export {
     WALL,
     BISCUIT,
@@ -37,5 +43,6 @@ export {
     EATEN_PAUSE,
     DYING,
     BISCUIT_SCORE,
-    PILL_SCORE
+    PILL_SCORE,
+    KEY,
 };

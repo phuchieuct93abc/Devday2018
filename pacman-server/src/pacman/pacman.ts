@@ -3,34 +3,36 @@
 import PacmanUser from "@/pacman/pacmanUser";
 import Player from "@/player";
 import PacmanUsers from "@/pacman/PacmanUsers";
-import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, PAUSE, PLAYING, WAITING} from "@/pacman/pacmanConst";
+import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, KEY, PAUSE, PLAYING, WAITING} from "@/pacman/pacmanConst";
 import PacmanAudio from "@/pacman/PacmanAudio";
 import PacmanGhost from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
+import {AudioFile, PacmanPosition, Point} from "@/types";
+import {YELLOW} from "@/defined-color";
 
 var PACMAN = (function () {
 
-    var state: any = WAITING,
-        audio: any = null,
-        ghosts: any = [],
-        ghostSpecs: any = [],
-        eatenCount: number = 0,
-        level: number = 0,
-        tick: number = 0,
-        ghostPos: any, userPos: any,
-        stateChanged: any = true,
-        timerStart: any = null,
-        lastTime: number = 0,
-        ctx: any = null,
-        timer: any = null,
-        map: any = null,
-        users: PacmanUsers,
-        stored: any = null,
-        players: Player[] = [];
+    let state: number = WAITING;
+    let audio: PacmanAudio;
+    let ghosts: PacmanGhost[] = [];
+    let ghostSpecs: string[] = [];
+    let eatenCount: number = 0;
+    let level: number = 0;
+    let tick: number = 0;
+    let ghostPos: PacmanPosition[];
+    let userPos: any;
+    let stateChanged: boolean = true;
+    let timerStart!: number;
+    let lastTime: number = 0;
+    let canvasContext: any = null;
+    let timer: number;
+    let mapMaze: PacmanMap;
+    let users: PacmanUsers;
+    let stored: number;
+    let players: Player[] = [];
 
-    function setGhost() {
-        ghostSpecs = ["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]
-
+    function setGhost(ghostColors: string[]) {
+        ghostSpecs = ghostColors;
     }
 
     function getTick() {
@@ -38,19 +40,19 @@ var PACMAN = (function () {
     }
 
     function drawScore(text, position) {
-        ctx.fillStyle = "#FFFFFF";
-        ctx.font = "12px BDCartoonShoutRegular";
-        ctx.fillText(text,
-            (position["new"]["x"] / 10) * map.blockSize,
-            ((position["new"]["y"] + 5) / 10) * map.blockSize);
+        canvasContext.fillStyle = "#FFFFFF";
+        canvasContext.font = "12px BDCartoonShoutRegular";
+        canvasContext.fillText(text,
+            (position["new"]["x"] / 10) * mapMaze.blockSize,
+            ((position["new"]["y"] + 5) / 10) * mapMaze.blockSize);
     }
 
-    function dialog(text) {
-        ctx.fillStyle = "#FFFF00";
-        ctx.font = "18px Calibri";
-        var width = ctx.measureText(text).width,
-            x = ((map.width * map.blockSize) - width) / 2;
-        ctx.fillText(text, x, (map.height * 10) + 8);
+    function dialog(text: string) {
+        canvasContext.fillStyle = YELLOW.value;
+        canvasContext.font = "35px Calibri";
+        var width = canvasContext.measureText(text).width,
+            x = ((mapMaze.width * mapMaze.blockSize) - width) / 2;
+        canvasContext.fillText(text, x, (mapMaze.height * 10) + 8);
     }
 
     function soundDisabled() {
@@ -71,15 +73,13 @@ var PACMAN = (function () {
         setState(WAITING);
         level = 1;
         users.reset();
-        map.reset();
-        map.draw(ctx);
+        mapMaze.reset();
+        mapMaze.draw(canvasContext);
         startLevel();
     }
 
-    function keyDown(userIndex, direction) {
-
+    function move(userIndex, direction) {
         return users.keyDown(userIndex, direction);
-
     }
 
     function loseLife() {
@@ -95,43 +95,54 @@ var PACMAN = (function () {
         stateChanged = true;
     }
 
-    function collided(user, ghost) {
-        return (Math.sqrt(Math.pow(ghost.x - user.x, 2) +
-            Math.pow(ghost.y - user.y, 2))) < 10;
+    function collided(user, ghost: Point) {
+        return (Math.sqrt(Math.pow(ghost.x - user.x, 2) + Math.pow(ghost.y - user.y, 2))) < 10;
     }
 
-    function redrawBlock(pos) {
-        map.drawBlock(Math.floor(pos.y / 10), Math.floor(pos.x / 10), ctx);
-        map.drawBlock(Math.ceil(pos.y / 10), Math.ceil(pos.x / 10), ctx);
+    function redrawBlock(pos: Point) {
+        mapMaze.drawBlock(Math.floor(pos.y / 10), Math.floor(pos.x / 10), canvasContext);
+        mapMaze.drawBlock(Math.ceil(pos.y / 10), Math.ceil(pos.x / 10), canvasContext);
     }
 
     function mainDraw() {
-
-        var diff, userPos, i, len, nScore;
-
+        let nScore;
         ghostPos = [];
-        userPos = [];
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
-            ghostPos.push(ghosts[i].move(ctx));
+            ghostPos.push(ghosts[i].move(canvasContext));
         }
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             redrawBlock(ghostPos[i].old);
         }
-        userPos = users.move();
+        let userPos: PacmanPosition[] = users.move();
         userPos.forEach(pos => redrawBlock(pos.old));
-        //TODO
-        //redrawBlock(userPos.old);
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
-            ghosts[i].draw(ctx);
+            ghosts[i].draw(canvasContext);
         }
-        users.draw(ctx);
+        users.draw(canvasContext);
 
-        userPos = userPos["new"];
+        let user1 = userPos[0].new;
+        let user2 = userPos[1].new;
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
-            if (collided(userPos, ghostPos[i]["new"])) {
+            if (collided(user1, ghostPos[i].new)) {
+                if (ghosts[i].isVunerable()) {
+                    audio.play("eatghost");
+                    ghosts[i].eat();
+                    eatenCount += 1;
+                    nScore = eatenCount * 50;
+                    drawScore(nScore, ghostPos[i]);
+                    users.addScore(nScore);
+                    setState(EATEN_PAUSE);
+                    timerStart = tick;
+                } else if (ghosts[i].isDangerous()) {
+                    audio.play("die");
+                    setState(DYING);
+                    timerStart = tick;
+                }
+            }
+            if (collided(user2, ghostPos[i].new)) {
                 if (ghosts[i].isVunerable()) {
                     audio.play("eatghost");
                     ghosts[i].eat();
@@ -151,24 +162,16 @@ var PACMAN = (function () {
     }
 
     function mainLoop() {
-
-        var diff;
-
         if (state !== PAUSE) {
             ++tick;
         }
 
-        map.drawPills(ctx);
+        mapMaze.drawPills(canvasContext);
 
         if (state === PLAYING) {
             mainDraw();
-        } else if (state === WAITING && stateChanged) {
-            stateChanged = false;
-            map.draw(ctx);
-            dialog("Press N to start a New game");
-        } else if (state === EATEN_PAUSE &&
-            (tick - timerStart) > (FPS / 3)) {
-            map.draw(ctx);
+        }  else if (state === EATEN_PAUSE && (tick - timerStart) > (FPS / 3)) {
+            mapMaze.draw(canvasContext);
             setState(PLAYING);
         } else if (state === DYING) {
             if (tick - timerStart > (FPS * 2)) {
@@ -177,27 +180,25 @@ var PACMAN = (function () {
                 redrawBlock(userPos);
                 for (let i = 0, len = ghosts.length; i < len; i += 1) {
                     redrawBlock(ghostPos[i].old);
-                    ghostPos.push(ghosts[i].draw(ctx));
+                    ghosts[i].draw(canvasContext);
                 }
-                users.drawDead(ctx, (tick - timerStart) / (FPS * 2));
+                users.drawDead(canvasContext, (tick - timerStart) / (FPS * 2));
             }
         } else if (state === COUNTDOWN) {
 
-            diff = 5 + Math.floor((timerStart - tick) / FPS);
+            let diff = 4 + Math.floor((timerStart - tick) / FPS);
 
             if (diff === 0) {
-                map.draw(ctx);
+                mapMaze.draw(canvasContext);
                 setState(PLAYING);
             } else {
                 if (diff !== lastTime) {
                     lastTime = diff;
-                    map.draw(ctx);
+                    mapMaze.draw(canvasContext);
                     dialog("Starting in: " + diff);
                 }
             }
         }
-        //TODO: Remove footer
-        // drawFooter();
     }
 
     function eatenPill() {
@@ -205,7 +206,7 @@ var PACMAN = (function () {
         timerStart = tick;
         eatenCount = 0;
         for (let i = 0; i < ghosts.length; i += 1) {
-            ghosts[i].makeEatable(ctx);
+            ghosts[i].makeEatable();
         }
     }
 
@@ -221,92 +222,75 @@ var PACMAN = (function () {
         players = inputPlayers;
     }
 
-    function init(wrapper, root) {
-
-        var i, len, ghost,
-            blockSize = wrapper.offsetWidth / 19,
-            canvas = document.createElement("canvas");
+    function init(rootElement, soundDir: string) {
+        const blockSize: number = rootElement.offsetWidth / 19;
+        let canvas = document.createElement("canvas");
 
         canvas.setAttribute("width", (blockSize * 19) + "px");
-        canvas.setAttribute("height", (blockSize * 22) + 30 + "px");
+        canvas.setAttribute("height", (blockSize * 22) + "px");
 
-        wrapper.appendChild(canvas);
+        rootElement.appendChild(canvas);
 
-        ctx = canvas.getContext('2d');
+        canvasContext = canvas.getContext('2d');
 
-        audio = new PacmanAudio({
-            "soundDisabled": soundDisabled
-        });
-        map = PacmanMap(blockSize);
+        audio = new PacmanAudio(soundDisabled());
+        mapMaze = new PacmanMap(blockSize);
         setUpUsers(players);
 
-
-        for (let i = 0, len = ghostSpecs.length; i < len; i += 1) {
-            ghost = PacmanGhost({
-                "getTick": getTick
-            }, map, ghostSpecs[i]);
+        for (let i = 0, numberOfGhost = ghostSpecs.length; i < numberOfGhost; i += 1) {
+            const ghost = new PacmanGhost({"getTick": getTick}, mapMaze, ghostSpecs[i]);
             ghosts.push(ghost);
         }
 
-        map.draw(ctx);
-        dialog("Loading ...");
-
-        var extension = "mp3";
+        const extension = "mp3";
         // var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 
-        var audio_files = [
-            ["start", root + "audio/opening_song." + extension],
-            ["die", root + "audio/die." + extension],
-            ["eatghost", root + "audio/eatghost." + extension],
-            ["eatpill", root + "audio/eatpill." + extension],
-            ["eating", root + "audio/eating.short." + extension],
-            ["eating2", root + "audio/eating.short." + extension]
+        const audioFiles: AudioFile[] = [
+            {event: "start", path: soundDir + "audio/opening_song." + extension},
+            {event: "die", path: soundDir + "audio/die." + extension},
+            {event: "eatghost", path: soundDir + "audio/eatghost." + extension},
+            {event: "eatpill", path: soundDir + "audio/eatpill." + extension},
+            {event: "eating", path: soundDir + "audio/eating.short." + extension},
+            {event: "eating2", path: soundDir + "audio/eating.short." + extension}
         ];
 
-        load(audio_files, function () {
-            loaded();
-        });
+        loadAudio(audioFiles, () => loading());
     }
 
-    function setUpUsers(players) {
-        let pacmanUsers = players.map(player => {
-            return new PacmanUser({
+    function setUpUsers(players: Player[]) {
+        let pacmanUsers = players.map(player => new PacmanUser({
                 "eatenPill": eatenPill,
                 player: player
-            }, map);
-        });
+            }, mapMaze));
 
         users = new PacmanUsers(pacmanUsers);
-
     }
 
-    function load(arr, callback) {
-
-        if (arr.length === 0) {
-            callback();
+    function loadAudio(audioFiles: AudioFile[], whenFinish) {
+        if (audioFiles.length === 0) {
+            whenFinish();
         } else {
-            var x = arr.pop();
-            audio.load(x[0], x[1], function () {
-                load(arr, callback);
-            });
+            // @ts-ignore
+            const audioFile: AudioFile = audioFiles.pop();
+            audio.load(audioFile.event, audioFile.path, () => loadAudio(audioFiles, whenFinish));
         }
     }
 
-    function loaded() {
+    function loading() {
+        mapMaze.draw(canvasContext);
+        dialog("Loading...");
 
-        dialog("Press N to Start");
-
-        // document.addEventListener("keydown", keyDown, true);
-        // document.addEventListener("keypress", keyPress, true);
+        document.addEventListener("keypress", keyPress, true);
 
         timer = window.setInterval(mainLoop, 1000 / FPS);
     }
 
     return {
         "init": init,
-        "move": keyDown,
+        "move": move,
         "startNewGame": startNewGame,
-        "registerPlayers": registerPlayers
+        "registerPlayers": registerPlayers,
+        "setGhost": setGhost,
     };
 
 }());

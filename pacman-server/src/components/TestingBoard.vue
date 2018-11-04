@@ -29,7 +29,7 @@
             if (token) {
                 this.error = false;
                 let player = Player.fromPlayerData(this.testPlayer);
-                pacmanController.setPlayer([player]).startGameWithNoGhost();
+                pacmanController.setPlayer([player]).startGame();
 
                 let socket = io("https://localhost:3000");
                 socket.on('action', function (data: RestData) {

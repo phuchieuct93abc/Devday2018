@@ -1,3 +1,4 @@
+import {CombatStatus} from "../constants";
 <template>
     <v-container fluid grid-list-md text-xs-center class="main-board">
         <v-layout row justify-space-around>
@@ -5,19 +6,28 @@
                 <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
             </v-flex>
 
+            <v-flex xs2>
+                <v-btn v-if="hasGhost" @click="hasGhost = false">Semi-Finals</v-btn>
+            </v-flex>
+
             <v-flex xs4>
-                <dd-timer :status="status" :value="timer"></dd-timer>
+                <v-layout column>
+                    <v-flex xs6>
+                        <dd-timer :status="status" :value="timer"></dd-timer>
+                    </v-flex>
+                    <v-flex>
+                        <v-btn v-if="isStopped" @click="startGame" color="primary">Start</v-btn>
+                        <v-btn v-else @click="restartGame" color="error">Restart</v-btn>
+                    </v-flex>
+                </v-layout>
+            </v-flex>
+
+            <v-flex xs2>
+                <v-btn v-if="!hasGhost" @click="hasGhost = true">Final</v-btn>
             </v-flex>
 
             <v-flex xs2>
                 <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row>
-            <v-flex xs12>
-                <v-btn @click="startGame" color="primary">Start</v-btn>
-                <v-btn @click="restartGame" color="error">Restart</v-btn>
             </v-flex>
         </v-layout>
 
@@ -44,11 +54,13 @@
     import {PlayerData, RestData} from "../types";
     import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
     import {CombatStatus} from "../constants";
+    import $ from "jquery";
 
     @Component
     export default class MainBoard extends Vue {
         private player1!: Player;
         private player2!: Player;
+        private hasGhost: boolean = false;
 
         mounted() {
             const socket = io("https://localhost:3000");
@@ -69,16 +81,19 @@
         startGame() {
             this.player1 = Player.fromPlayerData(this.firstPlayer);
             this.player2= Player.fromPlayerData(this.secondPlayer);
-            pacmanController.setPlayer([this.player1, this.player2]).startGameWithNoGhost();
+            pacmanController.setPlayer([this.player1, this.player2]);
+            if (this.hasGhost) {
+                pacmanController.setGhost();
+            } else {
+                pacmanController.setNoGhost();
+            }
+            pacmanController.startGame();
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
         }
 
         restartGame() {
-            const el = document.getElementById("pacman");
-            if (el) {
-                // TODO Find the way to keep the name in header of pacman
-                el.innerText = "";
-            }
+            $("#pacman").children("canvas").remove();
+            $(".player-name").text("");
             this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
             this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
             this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
@@ -100,13 +115,16 @@
             return this.$store.state.combatStatus;
         }
 
+        get isStopped(): boolean {
+            return this.$store.state.combatStatus === CombatStatus.STOPPED;
+        }
+
     }
 </script>
 
 <style lang="less" scoped>
     #pacman {
-        height: 470px;
-        width: 382px;
+        width: 500px;
         border-radius: 5px;
         margin: 20px auto;
         position: relative;

@@ -1,33 +1,35 @@
 import {BISCUIT, BLOCK, EMPTY, PILL, WALL} from "@/pacman/pacmanConst";
 import PacmanMaze from "@/pacman/PacmanMaze";
 
-let PacmanMap = function (size) {
+export default class PacmanMap {
+    height!: number;
+    width!: number;
+    blockSize: number;
+    private pillSize: number = 0;
+    private map: any = null;
 
-    var height: any = null,
-        width: any = null,
-        blockSize = size,
-        pillSize = 0,
-        map: any = null;
-
-    function withinBounds(y, x) {
-        return y >= 0 && y < height && x >= 0 && x < width;
+    constructor(blockSize: number) {
+        this.blockSize = blockSize;
+        this.reset();
     }
 
-    function isWall(pos) {
-        return withinBounds(pos.y, pos.x) && map[pos.y][pos.x] === WALL;
+    withinBounds(y, x) {
+        return y >= 0 && y < this.height && x >= 0 && x < this.width;
     }
 
-    function isFloorSpace(pos) {
-        if (!withinBounds(pos.y, pos.x)) {
+    isWallSpace(pos) {
+        return this.withinBounds(pos.y, pos.x) && this.map[pos.y][pos.x] === WALL;
+    }
+
+    isFloorSpace(pos) {
+        if (!this.withinBounds(pos.y, pos.x)) {
             return false;
         }
-        var peice = map[pos.y][pos.x];
-        return peice === EMPTY ||
-            peice === BISCUIT ||
-            peice === PILL;
+        const peice = this.map[pos.y][pos.x];
+        return peice === EMPTY || peice === BISCUIT || peice === PILL;
     }
 
-    function drawWall(ctx) {
+    drawWall(ctx) {
 
         var i, j, p, line;
 
@@ -44,28 +46,28 @@ let PacmanMap = function (size) {
                 p = line[j];
 
                 if (p.move) {
-                    ctx.moveTo(p.move[0] * blockSize, p.move[1] * blockSize);
+                    ctx.moveTo(p.move[0] * this.blockSize, p.move[1] * this.blockSize);
                 } else if (p.line) {
-                    ctx.lineTo(p.line[0] * blockSize, p.line[1] * blockSize);
+                    ctx.lineTo(p.line[0] * this.blockSize, p.line[1] * this.blockSize);
                 } else if (p.curve) {
-                    ctx.quadraticCurveTo(p.curve[0] * blockSize,
-                        p.curve[1] * blockSize,
-                        p.curve[2] * blockSize,
-                        p.curve[3] * blockSize);
+                    ctx.quadraticCurveTo(p.curve[0] * this.blockSize,
+                        p.curve[1] * this.blockSize,
+                        p.curve[2] * this.blockSize,
+                        p.curve[3] * this.blockSize);
                 }
             }
             ctx.stroke();
         }
     }
 
-    function clone(object) {
+    clone(object) {
         var i, newObj = (object instanceof Array) ? [] : {};
         for (let i in object) {
             if (i === 'clone') {
                 continue;
             }
             if (object[i] && typeof object[i] === "object") {
-                newObj[i] = clone(object[i]);
+                newObj[i] = this.clone(object[i]);
             } else {
                 newObj[i] = object[i];
             }
@@ -73,39 +75,39 @@ let PacmanMap = function (size) {
         return newObj;
     }
 
-    function reset() {
-        map = clone(PacmanMaze.MAP);
-        height = map.length;
-        width = map[0].length;
+    reset() {
+        this.map = this.clone(PacmanMaze.MAP);
+        this.height = this.map.length;
+        this.width = this.map[0].length;
     }
 
-    function block(pos) {
-        return map[pos.y][pos.x];
+    block(pos) {
+        return this.map[pos.y][pos.x];
     }
 
-    function setBlock(pos, type) {
-        map[pos.y][pos.x] = type;
+    setBlock(pos, type) {
+        this.map[pos.y][pos.x] = type;
     }
 
-    function drawPills(ctx) {
+    drawPills(ctx) {
 
-        if (++pillSize > 30) {
-            pillSize = 0;
+        if (++this.pillSize > 30) {
+            this.pillSize = 0;
         }
 
-        for (let i = 0; i < height; i += 1) {
-            for (let j = 0; j < width; j += 1) {
-                if (map[i][j] === PILL) {
+        for (let i = 0; i < this.height; i += 1) {
+            for (let j = 0; j < this.width; j += 1) {
+                if (this.map[i][j] === PILL) {
                     ctx.beginPath();
 
                     ctx.fillStyle = "#000";
-                    ctx.fillRect((j * blockSize), (i * blockSize),
-                        blockSize, blockSize);
+                    ctx.fillRect((j * this.blockSize), (i * this.blockSize),
+                        this.blockSize, this.blockSize);
 
                     ctx.fillStyle = "#FFF";
-                    ctx.arc((j * blockSize) + blockSize / 2,
-                        (i * blockSize) + blockSize / 2,
-                        Math.abs(5 - (pillSize / 3)),
+                    ctx.arc((j * this.blockSize) + this.blockSize / 2,
+                        (i * this.blockSize) + this.blockSize / 2,
+                        Math.abs(5 - (this.pillSize / 3)),
                         0,
                         Math.PI * 2, false);
                     ctx.fill();
@@ -115,25 +117,25 @@ let PacmanMap = function (size) {
         }
     }
 
-    function draw(ctx) {
+    draw(ctx) {
 
-        var i, j, size = blockSize;
+        var i, j, size = this.blockSize;
 
         ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, width * size, height * size);
+        ctx.fillRect(0, 0, this.width * size, this.height * size);
 
-        drawWall(ctx);
+        this.drawWall(ctx);
 
-        for (let i = 0; i < height; i += 1) {
-            for (j = 0; j < width; j += 1) {
-                drawBlock(i, j, ctx);
+        for (let i = 0; i < this.height; i += 1) {
+            for (j = 0; j < this.width; j += 1) {
+                this.drawBlock(i, j, ctx);
             }
         }
     }
 
-    function drawBlock(y, x, ctx) {
+    drawBlock(y, x, ctx) {
 
-        var layout = map[y][x];
+        var layout = this.map[y][x];
 
         if (layout === PILL) {
             return;
@@ -145,34 +147,16 @@ let PacmanMap = function (size) {
             layout === BISCUIT) {
 
             ctx.fillStyle = "#000";
-            ctx.fillRect((x * blockSize), (y * blockSize),
-                blockSize, blockSize);
+            ctx.fillRect((x * this.blockSize), (y * this.blockSize),
+                this.blockSize, this.blockSize);
 
             if (layout === BISCUIT) {
                 ctx.fillStyle = "#FFF";
-                ctx.fillRect((x * blockSize) + (blockSize / 2.5),
-                    (y * blockSize) + (blockSize / 2.5),
-                    blockSize / 6, blockSize / 6);
+                ctx.fillRect((x * this.blockSize) + (this.blockSize / 2.5),
+                    (y * this.blockSize) + (this.blockSize / 2.5),
+                    this.blockSize / 6, this.blockSize / 6);
             }
         }
         ctx.closePath();
     }
-
-    reset();
-
-    return {
-        "draw": draw,
-        "drawBlock": drawBlock,
-        "drawPills": drawPills,
-        "block": block,
-        "setBlock": setBlock,
-        "reset": reset,
-        "isWallSpace": isWall,
-        "isFloorSpace": isFloorSpace,
-        "height": height,
-        "width": width,
-        "blockSize": blockSize
-    };
 };
-
-export default PacmanMap;

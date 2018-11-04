@@ -1,6 +1,7 @@
 import * as CONST from "@/pacman/pacmanConst"
 import Player from "@/player";
 import Store from "@/store";
+import {PacmanPosition} from "@/types";
 
 export default class PacmanUser {
     position: any = null;
@@ -138,7 +139,7 @@ export default class PacmanUser {
                 (dir === CONST.UP || dir === CONST.DOWN));
     };
 
-    move() {
+    move(): PacmanPosition {
         var npos: any = null,
             nextWhole: any = null,
             oldPosition = this.position,

@@ -16,4 +16,18 @@ interface Color {
     value: string,
 }
 
-export {PlayerData, RestData, Color};
+interface AudioFile {
+    event: string,
+    path: string
+}
+
+interface Point {
+    x: number,
+    y: number
+}
+
+interface PacmanPosition {
+    old: Point,
+    new: Point
+}
+export {PlayerData, RestData, Color, AudioFile, Point, PacmanPosition};
