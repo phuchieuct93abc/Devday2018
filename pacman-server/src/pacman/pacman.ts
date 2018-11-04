@@ -3,7 +3,7 @@
 import PacmanUser from "@/pacman/pacmanUser";
 import Player from "@/player";
 import PacmanUsers from "@/pacman/PacmanUsers";
-import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, PAUSE, PLAYING, WAITING} from "@/pacman/pacmanConst";
+import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, KEY, PAUSE, PLAYING, WAITING} from "@/pacman/pacmanConst";
 import PacmanAudio from "@/pacman/PacmanAudio";
 import PacmanGhost from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
@@ -76,10 +76,8 @@ var PACMAN = (function () {
         startLevel();
     }
 
-    function keyDown(userIndex, direction) {
-
+    function move(userIndex, direction) {
         return users.keyDown(userIndex, direction);
-
     }
 
     function loseLife() {
@@ -196,8 +194,6 @@ var PACMAN = (function () {
                 }
             }
         }
-        //TODO: Remove footer
-        // drawFooter();
     }
 
     function eatenPill() {
@@ -215,6 +211,28 @@ var PACMAN = (function () {
             e.preventDefault();
             e.stopPropagation();
         }
+    }
+
+    function keyDown(e) {
+        if (e.keyCode === KEY.N) {
+            startNewGame();
+        } else if (e.keyCode === KEY.S) {
+            audio.disableSound();
+            localStorage["soundDisabled"] = !soundDisabled();
+        } else if (e.keyCode === KEY.P && state === PAUSE) {
+            audio.resume();
+            map.draw(ctx);
+            setState(stored);
+        } else if (e.keyCode === KEY.P) {
+            stored = state;
+            setState(PAUSE);
+            audio.pause();
+            map.draw(ctx);
+            dialog("Paused");
+        } else if (state !== PAUSE) {
+
+        }
+        return true;
     }
 
     function registerPlayers(inputPlayers: Player[]) {
@@ -285,15 +303,15 @@ var PACMAN = (function () {
     function loading() {
         dialog("Loading...");
 
-        // document.addEventListener("keydown", keyDown, true);
-        // document.addEventListener("keypress", keyPress, true);
+        document.addEventListener("keydown", keyDown, true);
+        document.addEventListener("keypress", keyPress, true);
 
         timer = window.setInterval(mainLoop, 1000 / FPS);
     }
 
     return {
         "init": init,
-        "move": keyDown,
+        "move": move,
         "startNewGame": startNewGame,
         "registerPlayers": registerPlayers,
         "setGhost": setGhost,
