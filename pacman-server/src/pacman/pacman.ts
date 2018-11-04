@@ -99,7 +99,7 @@ var PACMAN = (function () {
         return (Math.sqrt(Math.pow(ghost.x - user.x, 2) + Math.pow(ghost.y - user.y, 2))) < 10;
     }
 
-    function redrawBlock(pos) {
+    function redrawBlock(pos: Point) {
         mapMaze.drawBlock(Math.floor(pos.y / 10), Math.floor(pos.x / 10), canvasContext);
         mapMaze.drawBlock(Math.ceil(pos.y / 10), Math.ceil(pos.x / 10), canvasContext);
     }
@@ -218,28 +218,6 @@ var PACMAN = (function () {
         }
     }
 
-    function keyDown(e) {
-        if (e.keyCode === KEY.N) {
-            startNewGame();
-        } else if (e.keyCode === KEY.S) {
-            audio.disableSound();
-            localStorage["soundDisabled"] = !soundDisabled();
-        } else if (e.keyCode === KEY.P && state === PAUSE) {
-            audio.resume();
-            mapMaze.draw(canvasContext);
-            setState(stored);
-        } else if (e.keyCode === KEY.P) {
-            stored = state;
-            setState(PAUSE);
-            audio.pause();
-            mapMaze.draw(canvasContext);
-            dialog("Paused");
-        } else if (state !== PAUSE) {
-
-        }
-        return true;
-    }
-
     function registerPlayers(inputPlayers: Player[]) {
         players = inputPlayers;
     }
@@ -302,7 +280,6 @@ var PACMAN = (function () {
         mapMaze.draw(canvasContext);
         dialog("Loading...");
 
-        document.addEventListener("keydown", keyDown, true);
         document.addEventListener("keypress", keyPress, true);
 
         timer = window.setInterval(mainLoop, 1000 / FPS);
