@@ -180,7 +180,7 @@ var PACMAN = (function () {
                 redrawBlock(userPos);
                 for (let i = 0, len = ghosts.length; i < len; i += 1) {
                     redrawBlock(ghostPos[i].old);
-                    ghostPos.push(ghosts[i].draw(canvasContext));
+                    ghosts[i].draw(canvasContext);
                 }
                 users.drawDead(canvasContext, (tick - timerStart) / (FPS * 2));
             }
