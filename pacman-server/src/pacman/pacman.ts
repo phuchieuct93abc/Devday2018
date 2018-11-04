@@ -8,6 +8,7 @@ import PacmanAudio from "@/pacman/PacmanAudio";
 import PacmanGhost from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
 import {AudioFile} from "@/types";
+import {YELLOW} from "@/defined-color";
 
 var PACMAN = (function () {
 
@@ -46,9 +47,9 @@ var PACMAN = (function () {
             ((position["new"]["y"] + 5) / 10) * mapMaze.blockSize);
     }
 
-    function dialog(text) {
-        canvasContext.fillStyle = "#FFFF00";
-        canvasContext.font = "18px Calibri";
+    function dialog(text: string) {
+        canvasContext.fillStyle = YELLOW.value;
+        canvasContext.font = "35px Calibri";
         var width = canvasContext.measureText(text).width,
             x = ((mapMaze.width * mapMaze.blockSize) - width) / 2;
         canvasContext.fillText(text, x, (mapMaze.height * 10) + 8);
@@ -161,11 +162,7 @@ var PACMAN = (function () {
 
         if (state === PLAYING) {
             mainDraw();
-        } else if (state === WAITING && stateChanged) {
-            stateChanged = false;
-            mapMaze.draw(canvasContext);
-            dialog("Press N to start a New game");
-        } else if (state === EATEN_PAUSE &&
+        }  else if (state === EATEN_PAUSE &&
             (tick - timerStart) > (FPS / 3)) {
             mapMaze.draw(canvasContext);
             setState(PLAYING);
@@ -260,9 +257,6 @@ var PACMAN = (function () {
             ghosts.push(ghost);
         }
 
-        mapMaze.draw(canvasContext);
-        dialog("Loading ...");
-
         const extension = "mp3";
         // var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 
@@ -298,6 +292,7 @@ var PACMAN = (function () {
     }
 
     function loading() {
+        mapMaze.draw(canvasContext);
         dialog("Loading...");
 
         document.addEventListener("keydown", keyDown, true);
