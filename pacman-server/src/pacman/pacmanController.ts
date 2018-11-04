@@ -18,15 +18,16 @@ class PacmanController {
     startGameWithNoGhost() {
 
         var el = document.getElementById("pacman");
-        Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
+        Pacman.init(el, "./");
         this.startNewGame();
 
     }
 
     startGameplayWithGhost() {
         var el = document.getElementById("pacman");
-        Pacman.init(el, "https://raw.githubusercontent.com/daleharvey/pacman/master/");
-        return this;
+        Pacman.init(el, "./");
+        Pacman.setGhost();
+        this.startNewGame();
     }
 
     setPlayer(players: Player[]) {

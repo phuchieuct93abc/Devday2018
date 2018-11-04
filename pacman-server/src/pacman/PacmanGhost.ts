@@ -1,6 +1,6 @@
 import {DOWN, FPS, LEFT, RIGHT, UP, WAITING} from "@/pacman/pacmanConst";
 
-let PacmanGhost = function (game, map, colour) {
+let PacmanGhost = function (game, map, colour: string) {
 
     var position: any = null,
         direction: any = null,

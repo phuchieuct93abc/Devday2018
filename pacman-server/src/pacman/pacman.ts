@@ -10,7 +10,7 @@ import PacmanMap from "@/pacman/PacmanMap";
 
 var PACMAN = (function () {
 
-    var state: any = WAITING,
+    var state: number = WAITING,
         audio: any = null,
         ghosts: any = [],
         ghostSpecs: any = [],
@@ -30,7 +30,6 @@ var PACMAN = (function () {
 
     function setGhost() {
         ghostSpecs = ["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]
-
     }
 
     function getTick() {
@@ -221,7 +220,7 @@ var PACMAN = (function () {
         players = inputPlayers;
     }
 
-    function init(wrapper, root) {
+    function init(wrapper, soundDir: string) {
 
         var i, len, ghost,
             blockSize = wrapper.offsetWidth / 19,
@@ -255,12 +254,12 @@ var PACMAN = (function () {
         // var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 
         var audio_files = [
-            ["start", root + "audio/opening_song." + extension],
-            ["die", root + "audio/die." + extension],
-            ["eatghost", root + "audio/eatghost." + extension],
-            ["eatpill", root + "audio/eatpill." + extension],
-            ["eating", root + "audio/eating.short." + extension],
-            ["eating2", root + "audio/eating.short." + extension]
+            ["start", soundDir + "audio/opening_song." + extension],
+            ["die", soundDir + "audio/die." + extension],
+            ["eatghost", soundDir + "audio/eatghost." + extension],
+            ["eatpill", soundDir + "audio/eatpill." + extension],
+            ["eating", soundDir + "audio/eating.short." + extension],
+            ["eating2", soundDir + "audio/eating.short." + extension]
         ];
 
         load(audio_files, function () {
