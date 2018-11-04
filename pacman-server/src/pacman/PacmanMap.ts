@@ -2,9 +2,9 @@ import {BISCUIT, BLOCK, EMPTY, PILL, WALL} from "@/pacman/pacmanConst";
 import PacmanMaze from "@/pacman/PacmanMaze";
 
 export default class PacmanMap {
-    private height!: number;
-    private width!: number;
-    private readonly blockSize: number;
+    height!: number;
+    width!: number;
+    blockSize: number;
     private pillSize: number = 0;
     private map: any = null;
 
