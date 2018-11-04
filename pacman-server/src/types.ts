@@ -21,4 +21,9 @@ interface AudioFile {
     path: string
 }
 
-export {PlayerData, RestData, Color, AudioFile};
+interface Point {
+    x: number,
+    y: number
+}
+
+export {PlayerData, RestData, Color, AudioFile, Point};

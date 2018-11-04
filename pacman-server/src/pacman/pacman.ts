@@ -255,7 +255,7 @@ var PACMAN = (function () {
         setUpUsers(players);
 
         for (let i = 0, numberOfGhost = ghostSpecs.length; i < numberOfGhost; i += 1) {
-            const ghost = PacmanGhost({"getTick": getTick}, mapMaze, ghostSpecs[i]);
+            const ghost = new PacmanGhost({"getTick": getTick}, mapMaze, ghostSpecs[i]);
             ghosts.push(ghost);
         }
 

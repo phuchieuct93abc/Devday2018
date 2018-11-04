@@ -1,30 +1,33 @@
 import {DOWN, FPS, LEFT, RIGHT, UP, WAITING} from "@/pacman/pacmanConst";
+import {Point} from "@/types";
 
-let PacmanGhost = function (game, map, colour: string) {
+export default class PacmanGhost {
+    private position!: Point;
+    private direction!: number;
+    private eatable: any = null;
+    private eaten: any = null;
+    private due!: number;
 
-    var position: any = null,
-        direction: any = null,
-        eatable: any = null,
-        eaten: any = null,
-        due: any = null;
+    constructor (public game, public mapMaze, public colour: string) {
 
+    }
 
-    function getNewCoord(dir, current) {
+    getNewCoord(direction: number, current) {
 
-        var speed = isVunerable() ? 1 : isHidden() ? 4 : 2,
-            xSpeed = (dir === WAITING && -speed || dir === RIGHT && speed || 0),
-            ySpeed = (dir === DOWN && speed || dir === UP && -speed || 0);
+        var speed = this.isVunerable() ? 1 : this.isHidden() ? 4 : 2,
+            xSpeed = (direction === WAITING && -speed || direction === RIGHT && speed || 0),
+            ySpeed = (direction === DOWN && speed || direction === UP && -speed || 0);
 
         return {
-            "x": addBounded(current.x, xSpeed),
-            "y": addBounded(current.y, ySpeed)
+            "x": this.addBounded(current.x, xSpeed),
+            "y": this.addBounded(current.y, ySpeed)
         };
     }
 
     /* Collision detection(walls) is done when a ghost lands on an
      * exact block, make sure they dont skip over it
      */
-    function addBounded(x1, x2) {
+    addBounded(x1, x2) {
         var rem = x1 % 10,
             result = rem + x2;
         if (rem !== 0 && result > 10) {
@@ -35,60 +38,60 @@ let PacmanGhost = function (game, map, colour: string) {
         return x1 + x2;
     }
 
-    function isVunerable() {
-        return eatable !== null;
+    isVunerable() {
+        return this.eatable !== null;
     }
 
-    function isDangerous() {
-        return eaten === null;
+    isDangerous() {
+        return this.eaten === null;
     }
 
-    function isHidden() {
-        return eatable === null && eaten !== null;
+    isHidden() {
+        return this.eatable === null && this.eaten !== null;
     }
 
-    function getRandomDirection() {
-        var moves = (direction === LEFT || direction === RIGHT) ?
+    getRandomDirection(): number {
+        var moves = (this.direction === LEFT || this.direction === RIGHT) ?
             [UP, DOWN] : [LEFT, RIGHT];
         return moves[Math.floor(Math.random() * 2)];
     }
 
-    function reset() {
-        eaten = null;
-        eatable = null;
-        position = {
+    reset() {
+        this.eaten = null;
+        this.eatable = null;
+        this.position = {
             "x": 90,
             "y": 80
         };
-        direction = getRandomDirection();
-        due = getRandomDirection();
+        this.direction = this.getRandomDirection();
+        this.due = this.getRandomDirection();
     }
 
-    function onWholeSquare(x) {
+    onWholeSquare(x) {
         return x % 10 === 0;
     }
 
-    function oppositeDirection(dir) {
-        return dir === LEFT && RIGHT ||
-            dir === RIGHT && LEFT ||
-            dir === UP && DOWN || UP;
+    oppositeDirection(direction: number): number {
+        return direction === LEFT && RIGHT ||
+            direction === RIGHT && LEFT ||
+            direction === UP && DOWN || UP;
     }
 
-    function makeEatable() {
-        direction = oppositeDirection(direction);
-        eatable = game.getTick();
+    makeEatable() {
+        this.direction = this.oppositeDirection(this.direction);
+        this.eatable = this.game.getTick();
     }
 
-    function eat() {
-        eatable = null;
-        eaten = game.getTick();
+    eat() {
+        this.eatable = null;
+        this.eaten = this.game.getTick();
     }
 
-    function pointToCoord(x) {
+    pointToCoord(x) {
         return Math.round(x / 10);
     }
 
-    function nextSquare(x, dir) {
+    nextSquare(x, dir) {
         var rem = x % 10;
         if (rem === 0) {
             return x;
@@ -99,49 +102,49 @@ let PacmanGhost = function (game, map, colour: string) {
         }
     }
 
-    function onGridSquare(pos) {
-        return onWholeSquare(pos.y) && onWholeSquare(pos.x);
+    onGridSquare(pos: Point) {
+        return this.onWholeSquare(pos.y) && this.onWholeSquare(pos.x);
     }
 
-    function secondsAgo(tick) {
-        return (game.getTick() - tick) / FPS;
+    secondsAgo(tick) {
+        return (this.game.getTick() - tick) / FPS;
     }
 
-    function getColour() {
-        if (eatable) {
-            if (secondsAgo(eatable) > 5) {
-                return game.getTick() % 20 > 10 ? "#FFFFFF" : "#0000BB";
+    getColour() {
+        if (this.eatable) {
+            if (this.secondsAgo(this.eatable) > 5) {
+                return this.game.getTick() % 20 > 10 ? "#FFFFFF" : "#0000BB";
             } else {
                 return "#0000BB";
             }
-        } else if (eaten) {
+        } else if (this.eaten) {
             return "#222";
         }
-        return colour;
+        return this.colour;
     }
 
-    function draw(ctx) {
+    draw(ctx) {
 
-        var s = map.blockSize,
-            top = (position.y / 10) * s,
-            left = (position.x / 10) * s;
+        var s = this.mapMaze.blockSize,
+            top = (this.position.y / 10) * s,
+            left = (this.position.x / 10) * s;
 
-        if (eatable && secondsAgo(eatable) > 8) {
-            eatable = null;
+        if (this.eatable && this.secondsAgo(this.eatable) > 8) {
+            this.eatable = null;
         }
 
-        if (eaten && secondsAgo(eaten) > 3) {
-            eaten = null;
+        if (this.eaten && this.secondsAgo(this.eaten) > 3) {
+            this.eaten = null;
         }
 
         var tl = left + s;
         var base = top + s - 3;
         var inc = s / 10;
 
-        var high = game.getTick() % 10 > 5 ? 3 : -3;
-        var low = game.getTick() % 10 > 5 ? -3 : 3;
+        var high = this.game.getTick() % 10 > 5 ? 3 : -3;
+        var low = this.game.getTick() % 10 > 5 ? -3 : 3;
 
-        ctx.fillStyle = getColour();
+        ctx.fillStyle = this.getColour();
         ctx.beginPath();
 
         ctx.moveTo(left, base);
@@ -175,26 +178,26 @@ let PacmanGhost = function (game, map, colour: string) {
 
         ctx.beginPath();
         ctx.fillStyle = "#000";
-        ctx.arc(left + 6 + off[direction][0], top + 6 + off[direction][1],
+        ctx.arc(left + 6 + off[this.direction][0], top + 6 + off[this.direction][1],
             s / 15, 0, 300, false);
-        ctx.arc((left + s) - 6 + off[direction][0], top + 6 + off[direction][1],
+        ctx.arc((left + s) - 6 + off[this.direction][0], top + 6 + off[this.direction][1],
             s / 15, 0, 300, false);
         ctx.closePath();
         ctx.fill();
 
     }
 
-    function pane(pos) {
+    pane(pos: Point) {
 
-        if (pos.y === 100 && pos.x >= 190 && direction === RIGHT) {
+        if (pos.y === 100 && pos.x >= 190 && this.direction === RIGHT) {
             return {
                 "y": 100,
                 "x": -10
             };
         }
 
-        if (pos.y === 100 && pos.x <= -10 && direction === LEFT) {
-            return position = {
+        if (pos.y === 100 && pos.x <= -10 && this.direction === LEFT) {
+            return this.position = {
                 "y": 100,
                 "x": 190
             };
@@ -203,65 +206,53 @@ let PacmanGhost = function (game, map, colour: string) {
         return false;
     }
 
-    function move(ctx) {
+    move(ctx) {
 
-        var oldPos = position,
-            onGrid = onGridSquare(position),
-            npos: any = null;
+        let oldPos: Point = this.position;
+        let onGrid = this.onGridSquare(this.position);
+        let npos: any = null;
 
-        if (due !== direction) {
+        if (this.due !== this.direction) {
 
-            npos = getNewCoord(due, position);
+            npos = this.getNewCoord(this.due, this.position);
 
             if (onGrid &&
-                map.isFloorSpace({
-                    "y": pointToCoord(nextSquare(npos.y, due)),
-                    "x": pointToCoord(nextSquare(npos.x, due))
+                this.mapMaze.isFloorSpace({
+                    "y": this.pointToCoord(this.nextSquare(npos.y, this.due)),
+                    "x": this.pointToCoord(this.nextSquare(npos.x, this.due))
                 })) {
-                direction = due;
+                this.direction = this.due;
             } else {
                 npos = null;
             }
         }
 
         if (npos === null) {
-            npos = getNewCoord(direction, position);
+            npos = this.getNewCoord(this.direction, this.position);
         }
 
         if (onGrid &&
-            map.isWallSpace({
-                "y": pointToCoord(nextSquare(npos.y, direction)),
-                "x": pointToCoord(nextSquare(npos.x, direction))
+            this.mapMaze.isWallSpace({
+                "y": this.pointToCoord(this.nextSquare(npos.y, this.direction)),
+                "x": this.pointToCoord(this.nextSquare(npos.x, this.direction))
             })) {
 
-            due = getRandomDirection();
-            return move(ctx);
+            this.due = this.getRandomDirection();
+            return this.move(ctx);
         }
 
-        position = npos;
+        this.position = npos;
 
-        var tmp = pane(position);
+        let tmp = this.pane(this.position);
         if (tmp) {
-            position = tmp;
+            this.position = tmp;
         }
 
-        due = getRandomDirection();
+        this.due = this.getRandomDirection();
 
         return {
-            "new": position,
+            "new": this.position,
             "old": oldPos
         };
     }
-
-    return {
-        "eat": eat,
-        "isVunerable": isVunerable,
-        "isDangerous": isDangerous,
-        "makeEatable": makeEatable,
-        "reset": reset,
-        "move": move,
-        "draw": draw
-    };
 };
-
-export default PacmanGhost;
