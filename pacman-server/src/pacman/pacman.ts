@@ -251,7 +251,7 @@ var PACMAN = (function () {
         ctx = canvas.getContext('2d');
 
         audio = new PacmanAudio(soundDisabled());
-        map = PacmanMap(blockSize);
+        map = new PacmanMap(blockSize);
         setUpUsers(players);
 
 
