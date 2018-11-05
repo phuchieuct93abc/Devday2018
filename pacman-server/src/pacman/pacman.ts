@@ -5,7 +5,7 @@ import Player from "@/player";
 import PacmanUsers from "@/pacman/PacmanUsers";
 import {COUNTDOWN, DYING, EATEN_PAUSE, FPS, KEY, PAUSE, PLAYING, WAITING} from "@/pacman/pacmanConst";
 import PacmanAudio from "@/pacman/PacmanAudio";
-import PacmanGhost from "@/pacman/PacmanGhost";
+import GHOST from "@/pacman/PacmanGhost";
 import PacmanMap from "@/pacman/PacmanMap";
 import {AudioFile, PacmanPosition, Point} from "@/types";
 import {YELLOW} from "@/defined-color";
@@ -14,7 +14,7 @@ var PACMAN = (function () {
 
     let state: number = WAITING;
     let audio: PacmanAudio;
-    let ghosts: PacmanGhost[] = [];
+    let ghosts:  any[]=[];
     let ghostSpecs: string[] = [];
     let eatenCount: number = 0;
     let level: number = 0;
@@ -111,10 +111,10 @@ var PACMAN = (function () {
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             ghostPos.push(ghosts[i].move(canvasContext));
         }
+        let userPos: PacmanPosition[] = users.move();
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             redrawBlock(ghostPos[i].old);
         }
-        let userPos: PacmanPosition[] = users.move();
         userPos.forEach(pos => redrawBlock(pos.old));
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
@@ -237,8 +237,9 @@ var PACMAN = (function () {
         mapMaze = new PacmanMap(blockSize);
         setUpUsers(players);
 
+        //ghosts=[];
         for (let i = 0, numberOfGhost = ghostSpecs.length; i < numberOfGhost; i += 1) {
-            const ghost = new PacmanGhost({"getTick": getTick}, mapMaze, ghostSpecs[i]);
+            const ghost =  GHOST({"getTick": getTick}, mapMaze, ghostSpecs[i]);
             ghosts.push(ghost);
         }
 
