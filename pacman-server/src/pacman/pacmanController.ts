@@ -1,6 +1,7 @@
-import {UP, DOWN, LEFT, RIGHT} from "@/pacman/pacmanConst";
-import Pacman from "@/pacman/pacman";
+import { UP, DOWN, LEFT, RIGHT } from "@/pacman/pacmanConst";
 import Player from "@/player";
+import PACMAN from '@/pacman/pacman';
+import $ from "jquery";
 
 const CONTROL_CODES = {
     up: UP,
@@ -11,43 +12,48 @@ const CONTROL_CODES = {
 
 class PacmanController {
     private players!: Player[];
-
+    pacman:any = null;
     constructor() {
+        this.pacman = PACMAN();
     }
 
     startGame() {
         const el = document.getElementById("pacman");
-        Pacman.init(el, "./");
+        $("#pacman").children("canvas").remove();
+        this.pacman.init(el, "./");
         this.startNewGame();
     }
 
     setPlayer(players: Player[]) {
         this.players = players;
-        Pacman.registerPlayers(players);
+        this.pacman.registerPlayers(players);
         return this;
     }
 
     setGhost() {
-         Pacman.setGhost(["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]);
+        this.pacman.setGhost(["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]);
         // Pacman.setGhost(["#00FFDE","#FF0000"]);
         return this;
     }
 
     setNoGhost() {
-        Pacman.setGhost([]);
+        this.pacman.setGhost([]);
         return this;
     }
 
     move(player: Player, direction) {
         const playerIndex = this.players.indexOf(player);
-        Pacman.move(playerIndex, CONTROL_CODES[direction])
+        this.pacman.move(playerIndex, CONTROL_CODES[direction])
+    }
+    stop(){
+        this.pacman.stop();
     }
 
     private startNewGame() {
-        setTimeout(Pacman.startNewGame, 3000);
+        setTimeout(this.pacman.startNewGame, 3000);
     }
 }
 
-export default new PacmanController();
+export default PacmanController;
 
 

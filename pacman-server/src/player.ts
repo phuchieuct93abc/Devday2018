@@ -1,6 +1,6 @@
 import $ from "jquery";
-import pacmanController from "./pacman/pacmanController";
 import {Color, PlayerData} from "./types";
+import PacmanController from './pacman/pacmanController';
 
 export default class Player implements PlayerData {
 
@@ -22,6 +22,7 @@ export default class Player implements PlayerData {
 
         }
         this.playerNameElement.css({"color": this.color.value}).hide().find(".player-name").text(this.name);
+        this.updateScore(0);
     }
 
     updateScore(score: number): any {
@@ -29,7 +30,7 @@ export default class Player implements PlayerData {
         this.playerNameElement.find(".player-name").text(`${this.name}: ${score}`);
     }
 
-    move(direction: string) {
+    move(direction: string,pacmanController:PacmanController) {
         pacmanController.move(this, direction);
     }
 

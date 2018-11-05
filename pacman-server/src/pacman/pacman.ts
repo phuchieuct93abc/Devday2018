@@ -10,7 +10,7 @@ import PacmanMap from "@/pacman/PacmanMap";
 import {AudioFile, PacmanPosition, Point} from "@/types";
 import {YELLOW} from "@/defined-color";
 
-var PACMAN = (function () {
+var PACMAN = function () {
 
     let state: number = WAITING;
     let audio: PacmanAudio;
@@ -286,14 +286,19 @@ var PACMAN = (function () {
         timer = window.setInterval(mainLoop, 1000 / FPS);
     }
 
+    function stop(){
+        clearInterval(timer);
+    }
+
     return {
         "init": init,
         "move": move,
         "startNewGame": startNewGame,
         "registerPlayers": registerPlayers,
         "setGhost": setGhost,
+        "stop":stop
     };
 
-}());
+};
 
 export default PACMAN

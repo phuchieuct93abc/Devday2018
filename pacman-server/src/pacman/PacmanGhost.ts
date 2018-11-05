@@ -140,7 +140,6 @@ export default function GHOST(game, map, colour) {
 
         ctx.fillStyle = getColour();
         ctx.beginPath();
-        console.log(left,base);
 
         ctx.moveTo(left, base);
 
