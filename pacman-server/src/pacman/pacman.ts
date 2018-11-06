@@ -209,6 +209,10 @@ var PACMAN = function () {
             ghosts[i].makeEatable();
         }
     }
+    
+    function eatenBiscuit() {
+        audio.play("eating2");
+    }
 
 
     function keyPress(e) {
@@ -261,6 +265,7 @@ var PACMAN = function () {
     function setUpUsers(players: Player[]) {
         let pacmanUsers = players.map(player => new PacmanUser({
                 "eatenPill": eatenPill,
+                "eatenBiscuit": eatenBiscuit,
                 player: player
             }, mapMaze));
 
