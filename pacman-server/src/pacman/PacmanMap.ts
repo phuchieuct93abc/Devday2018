@@ -76,7 +76,7 @@ export default class PacmanMap {
     }
 
     reset() {
-        this.map = this.clone(PacmanMaze.MAP);
+        this.map = this.clone(PacmanMaze.MAP_SEMI_FINALS);
         this.height = this.map.length;
         this.width = this.map[0].length;
     }
