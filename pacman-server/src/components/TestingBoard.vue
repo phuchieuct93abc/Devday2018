@@ -18,6 +18,7 @@
     import Player from "../player"
     import * as io from 'socket.io-client';
     import {PlayerData, RestData} from "../types";
+    import PacmanController from '../pacman/pacmanController';
 
     @Component
     export default class TestingBoard extends Vue {
@@ -26,6 +27,7 @@
         mounted() {
             let urlParams = new URLSearchParams(window.location.search);
             let token = urlParams.get('token');
+            let pacmanController = new PacmanController();
             if (token) {
                 this.error = false;
                 let player = Player.fromPlayerData(this.testPlayer);
@@ -34,7 +36,7 @@
                 let socket = io("https://localhost:3000");
                 socket.on('action', function (data: RestData) {
                     if (data.token == token) {
-                        player.move(data.action)
+                        player.move(data.action,pacmanController)
                     }
                 });
             } else {

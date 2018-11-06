@@ -50,7 +50,7 @@ import {CombatStatus} from "../constants";
     import {Component, Vue} from 'vue-property-decorator';
     import * as io from 'socket.io-client';
     import Player from "../player";
-    import pacmanController from "../pacman/pacmanController";
+    import PacmanController from "../pacman/pacmanController";
     import {PlayerData, RestData} from "../types";
     import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
     import {CombatStatus} from "../constants";
@@ -61,6 +61,7 @@ import {CombatStatus} from "../constants";
         private player1!: Player;
         private player2!: Player;
         private hasGhost: boolean = false;
+        private pacmanController:PacmanController;
 
         mounted() {
             const socket = io("https://localhost:3000");
@@ -74,26 +75,29 @@ import {CombatStatus} from "../constants";
                 } else {
                     return;
                 }
-                player.move(action.action);
+                player.move(action.action,this.pacmanController);
             });
         }
 
         startGame() {
             this.player1 = Player.fromPlayerData(this.firstPlayer);
             this.player2= Player.fromPlayerData(this.secondPlayer);
-            pacmanController.setPlayer([this.player1, this.player2]);
-            if (this.hasGhost) {
-                pacmanController.setGhost();
-            } else {
-                pacmanController.setNoGhost();
+            if(this.pacmanController){
+                this.pacmanController.stop();
             }
-            pacmanController.startGame();
+            this.pacmanController = new PacmanController();
+            this.pacmanController.setPlayer([this.player1, this.player2]);
+            if (this.hasGhost) {
+                this.pacmanController.setGhost();
+            } else {
+                this.pacmanController.setNoGhost();
+            }
+            this.pacmanController.startGame();
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
         }
 
         restartGame() {
             $("#pacman").children("canvas").remove();
-            $(".player-name").text("");
             this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
             this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
             this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
