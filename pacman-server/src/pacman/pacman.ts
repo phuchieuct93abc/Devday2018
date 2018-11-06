@@ -234,7 +234,7 @@ var PACMAN = function () {
         canvasContext = canvas.getContext('2d');
 
         audio = new PacmanAudio(soundDisabled());
-        mapMaze = new PacmanMap(blockSize);
+        mapMaze = new PacmanMap(blockSize, ghostSpecs.length != 0);
         setUpUsers(players);
 
         //ghosts=[];
