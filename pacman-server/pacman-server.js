@@ -3,6 +3,7 @@ const app = express();
 const https = require('https');
 const http = require('http');
 const fs = require("fs");
+const cors = require('cors')
 
 const httpsPort = process.env.PACMAN_HTTPS_SERVER_PORT || 3000;
 const httpPort = process.env.PACMAN_HTTP_SERVER_PORT || 3001;
@@ -17,6 +18,7 @@ const httpServer = http.createServer(app);
 const io = require('socket.io').listen(httpsServer).listen(httpServer);
 
 app.use(express.static(__dirname + "/dist")); //Serves resources from public folder
+app.use(cors())
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
