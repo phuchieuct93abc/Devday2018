@@ -205,7 +205,9 @@ export default class PacmanUser {
 
             if (block === CONST.PILL) {
 
-                //this.game.eatenPill();
+                this.game.eatenPill();
+            } else {
+                this.game.eatenBiscuit();
             }
         }
 

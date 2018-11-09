@@ -61,7 +61,7 @@ import {CombatStatus} from "../constants";
         private player1!: Player;
         private player2!: Player;
         private hasGhost: boolean = false;
-        private pacmanController:PacmanController;
+        private pacmanController!: PacmanController;
 
         mounted() {
             const socket = io("https://localhost:3000");
