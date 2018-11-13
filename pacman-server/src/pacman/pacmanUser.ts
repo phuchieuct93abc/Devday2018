@@ -96,9 +96,10 @@ export default class PacmanUser {
     };
 
     getNewCoord(dir, current) {
+        const speed = 1;
         return {
-            "x": current.x + (dir === CONST.LEFT && -2 || dir === CONST.RIGHT && 2 || 0),
-            "y": current.y + (dir === CONST.DOWN && 2 || dir === CONST.UP && -2 || 0)
+            "x": current.x + (dir === CONST.LEFT && -speed || dir === CONST.RIGHT && speed || 0),
+            "y": current.y + (dir === CONST.DOWN && speed || dir === CONST.UP && -speed || 0)
         };
     };
 
