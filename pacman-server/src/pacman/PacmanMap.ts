@@ -7,11 +7,9 @@ export default class PacmanMap {
     blockSize: number;
     private pillSize: number = 0;
     private map: any = null;
-    private readonly isFinal: boolean = false;
 
-    constructor(blockSize: number, isFinal: boolean) {
+    constructor(blockSize: number) {
         this.blockSize = blockSize;
-        this.isFinal = isFinal;
         this.reset();
     }
 
@@ -78,7 +76,7 @@ export default class PacmanMap {
     }
 
     reset() {
-        this.map = this.isFinal ? this.clone(PacmanMaze.MAP_FINAL) : this.clone(PacmanMaze.MAP_SEMI_FINALS);
+        this.map = this.clone(PacmanMaze.MAP);
         this.height = this.map.length;
         this.width = this.map[0].length;
     }
