@@ -9,12 +9,11 @@ export default function GHOST(game, map, colour) {
         eatable   ,
         eaten     ,
         due      ;
-    
-    function getNewCoord(dir, current) { 
-        
-        var speed  = isVunerable() ? 1 : isHidden() ? 4 : 2,
-            xSpeed = (dir === LEFT && -speed || dir === RIGHT && speed || 0),
-            ySpeed = (dir === DOWN && speed || dir === UP && -speed || 0);
+
+    function getNewCoord(dir, current) {
+        const speed = isVunerable() ? 0.5 : isHidden() ? 2 : 1;
+        const xSpeed = (dir === LEFT && -speed || dir === RIGHT && speed || 0);
+        const ySpeed = (dir === DOWN && speed || dir === UP && -speed || 0);
         return {
             "x": addBounded(current.x, xSpeed),
             "y": addBounded(current.y, ySpeed)

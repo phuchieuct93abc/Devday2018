@@ -15,8 +15,8 @@ const NONE = 4,
     BLOCK = 3,
     PILL = 4,
     FPS = 30,
-    BISCUIT_SCORE = 1,
-    PILL_SCORE = 20;
+    BISCUIT_SCORE = 5,
+    PILL_SCORE = 50;
 
 const KEY = {
     'N': 78,

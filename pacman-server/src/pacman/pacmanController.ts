@@ -31,7 +31,7 @@ class PacmanController {
     }
 
     setGhost() {
-        this.pacman.setGhost(["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"]);
+        this.pacman.setGhost(["#FF0000", "#FFB847"]);
         // Pacman.setGhost(["#00FFDE","#FF0000"]);
         return this;
     }
