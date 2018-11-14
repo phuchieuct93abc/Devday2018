@@ -10,7 +10,7 @@ export default new Vuex.Store({
         firstPlayer: Object.assign({}, PLAYER_ONE),
         secondPlayer: Object.assign({}, PLAYER_TWO),
         testPlayer: Object.assign({}, TEST_PLAYER),
-        timer: 4,
+        timer: 3,
         combatStatus: CombatStatus.STOPPED,
     },
 
