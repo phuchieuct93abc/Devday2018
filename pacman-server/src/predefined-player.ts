@@ -36,7 +36,7 @@ const PLAYER_FOUR: PlayerData = {
 
 const DEFAULT_LAYER: PlayerData = {
     id: "0",
-    token: "5Irv9uE",
+    token: "MSN4Gvw",
     name: "Team",
     color: GRAY,
     score: 0
@@ -44,7 +44,7 @@ const DEFAULT_LAYER: PlayerData = {
 
 
 class PredefinedPlayer {
-    static players: PlayerData[] = [PLAYER_ONE, PLAYER_TWO, PLAYER_THREE, PLAYER_FOUR];
+    static players: PlayerData[] = [DEFAULT_LAYER, PLAYER_ONE, PLAYER_TWO, PLAYER_THREE, PLAYER_FOUR];
 
     private readonly token: string | null;
     private isFound!: boolean;
