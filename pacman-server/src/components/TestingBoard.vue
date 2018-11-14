@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isError" class="error-message">Please put token in url like ?token=ABC</div>
+        <div v-if="isError" class="error-message">{{ message }}</div>
         <div v-else>
             <score-board class="test-player" :score=testPlayer.score :team-name=testPlayer.name></score-board>
             <div id="pacman">
@@ -19,37 +19,53 @@
     import * as io from 'socket.io-client';
     import {PlayerData, RestData} from "../types";
     import PacmanController from '../pacman/pacmanController';
+    import {PredefinedPlayer} from "../predefined-player";
 
     @Component
     export default class TestingBoard extends Vue {
-        private error: boolean = false;
+        private error!: boolean;
+        private message: string = "";
+        private predefinedPlayer!: PredefinedPlayer;
+
+        beforeCreate() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            this.predefinedPlayer = new PredefinedPlayer(token);
+        }
 
         mounted() {
-            let urlParams = new URLSearchParams(window.location.search);
-            let token = urlParams.get('token');
-            let pacmanController = new PacmanController();
-            if (token) {
-                this.error = false;
-                let player = Player.fromPlayerData(this.testPlayer);
+            this.evaluateMessage();
+            if (!this.error) {
+                const pacmanController = new PacmanController();
+                let player = Player.fromPlayerData(this.predefinedPlayer.getUser());
                 pacmanController.setPlayer([player]).startGame();
 
                 let socket = io("https://localhost:3000");
                 socket.on('action', function (data: RestData) {
-                    if (data.token == token) {
-                        player.move(data.action,pacmanController)
-                    }
+                    player.move(data.action, pacmanController)
                 });
-            } else {
-                this.error = true;
             }
         }
 
         get testPlayer(): PlayerData {
-            return this.$store.state.testPlayer;
+            return this.predefinedPlayer.getUser();
         }
 
-        get isError() {
+        get isError(): boolean {
             return this.error;
+        }
+
+        private evaluateMessage(): void {
+            if (!this.predefinedPlayer.isValidToken()) {
+                this.message = "Please put token in url like ?token=ABC";
+                this.error = true;
+            } else if (!this.predefinedPlayer.isFoundUser()) {
+                this.message = "Your token is not correct, please refers to a document";
+                this.error = true;
+            } else {
+                this.message = ""
+                this.error = false;
+            }
         }
     }
 </script>
