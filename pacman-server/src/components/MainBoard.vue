@@ -6,10 +6,6 @@ import {CombatStatus} from "../constants";
                 <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
             </v-flex>
 
-            <v-flex xs2>
-                <v-btn v-if="hasGhost" @click="hasGhost = false">Semi-Finals</v-btn>
-            </v-flex>
-
             <v-flex xs4>
                 <v-layout column>
                     <v-flex xs6>
@@ -17,13 +13,8 @@ import {CombatStatus} from "../constants";
                     </v-flex>
                     <v-flex>
                         <v-btn v-if="isStopped" @click="startGame" color="primary">Start</v-btn>
-                        <v-btn v-else @click="restartGame" color="error">Restart</v-btn>
                     </v-flex>
                 </v-layout>
-            </v-flex>
-
-            <v-flex xs2>
-                <v-btn v-if="!hasGhost" @click="hasGhost = true">Final</v-btn>
             </v-flex>
 
             <v-flex xs2>
@@ -52,9 +43,7 @@ import {CombatStatus} from "../constants";
     import Player from "../player";
     import PacmanController from "../pacman/pacmanController";
     import {PlayerData, RestData} from "../types";
-    import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
     import {CombatStatus} from "../constants";
-    import $ from "jquery";
 
     @Component
     export default class MainBoard extends Vue {
@@ -94,13 +83,6 @@ import {CombatStatus} from "../constants";
             }
             this.pacmanController.startGame();
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
-        }
-
-        restartGame() {
-            $("#pacman").children("canvas").remove();
-            this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
-            this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
-            this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
         }
 
         get firstPlayer(): PlayerData {
