@@ -3,7 +3,7 @@ import {CombatStatus} from "../constants";
     <v-container fluid grid-list-md text-xs-center class="main-board">
         <v-layout row justify-space-around>
             <v-flex xs2>
-                <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
+                <dd-score-board class="team-one" :score="firstPlayer.score" :team-name="firstPlayer.name" :color="firstPlayer.color"></dd-score-board>
             </v-flex>
 
             <v-flex xs4>
@@ -18,7 +18,7 @@ import {CombatStatus} from "../constants";
             </v-flex>
 
             <v-flex xs2>
-                <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
+                <dd-score-board class="team-two" :score="secondPlayer.score" :team-name="secondPlayer.name" :color="secondPlayer.color"></dd-score-board>
             </v-flex>
         </v-layout>
 
