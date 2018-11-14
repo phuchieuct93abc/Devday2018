@@ -23,7 +23,7 @@
     @Component
     export default class GamePad extends Vue {
         @Prop() private token!: string;
-        private url: string = "https://localhost:3000/move";
+        private url: string = "https://localhost/move";
 
         goUp() {
             http.get(this.url, {

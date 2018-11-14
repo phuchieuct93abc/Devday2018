@@ -40,7 +40,7 @@
                 let player = Player.fromPlayerData(this.predefinedPlayer.getUser());
                 pacmanController.setPlayer([player]).startGame();
 
-                let socket = io("https://localhost:3000");
+                let socket = io("https://localhost");
                 socket.on('action', function (data: RestData) {
                     player.move(data.action, pacmanController)
                 });

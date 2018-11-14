@@ -52,7 +52,7 @@ import {CombatStatus} from "../constants";
         private pacmanController!: PacmanController;
 
         mounted() {
-            const socket = io("https://localhost:3000");
+            const socket = io("https://localhost");
             socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
