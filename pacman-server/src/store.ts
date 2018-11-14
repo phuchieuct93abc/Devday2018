@@ -12,6 +12,7 @@ export default new Vuex.Store({
         testPlayer: Object.assign({}, DEFAULT_LAYER),
         timer: 3,
         combatStatus: CombatStatus.STOPPED,
+        hasGhost: false,
     },
 
     mutations: {
@@ -22,6 +23,7 @@ export default new Vuex.Store({
         updateScoreTestPlayer: (state, value) => state.testPlayer.score = value,
         updateTimer: (state, value) => state.timer = value,
         updateCombatStatus: (state, value) => state.combatStatus = value,
+        updateHasGhost: (state, value) => state.hasGhost = value,
     },
     actions: {}
 })

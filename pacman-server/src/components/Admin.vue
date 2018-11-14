@@ -3,6 +3,7 @@
         <v-layout text-xs-center wrap>
             <v-flex xs12>
                 <v-text-field label="Timer" v-model="timer"></v-text-field>
+                <v-checkbox label="Has ghost?" v-model="hasGhost"></v-checkbox>
             </v-flex>
 
             <v-flex xs12>
@@ -44,10 +45,12 @@
         }
 
         updateFirstPlayer(value: PlayerData) {
+            value.id = "1";
             this.$store.commit("updateFirstPlayer", value);
         }
 
         updateSecondPlayer(value: PlayerData) {
+            value.id = "2";
             this.$store.commit("updateSecondPlayer", value);
         }
 
@@ -57,6 +60,14 @@
 
         set timer(value: number) {
             this.$store.commit("updateTimer", value);
+        }
+
+        get hasGhost(): boolean {
+            return this.$store.state.hasGhost;
+        }
+
+        set hasGhost(value: boolean) {
+            this.$store.commit("updateHasGhost", value);
         }
 
         get players(): PlayerData[] {

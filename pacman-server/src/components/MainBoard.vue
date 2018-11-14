@@ -49,7 +49,6 @@ import {CombatStatus} from "../constants";
     export default class MainBoard extends Vue {
         private player1!: Player;
         private player2!: Player;
-        private hasGhost: boolean = false;
         private pacmanController!: PacmanController;
 
         mounted() {
@@ -83,6 +82,10 @@ import {CombatStatus} from "../constants";
             }
             this.pacmanController.startGame();
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
+        }
+
+        hasGhost(): boolean {
+            return this.$store.state.hasGhost;
         }
 
         get firstPlayer(): PlayerData {
