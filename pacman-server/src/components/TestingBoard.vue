@@ -2,7 +2,7 @@
     <div>
         <div v-if="isError" class="error-message">{{ message }}</div>
         <div v-else>
-            <score-board class="test-player" :score=testPlayer.score :team-name=testPlayer.name></score-board>
+            <dd-score-board class="test-player" :score=testPlayer.score :team-name=testPlayer.name></dd-score-board>
             <div id="pacman">
                 <span id="player" class="player-name-wrapper">
                 <span class="player-name"></span>
@@ -19,7 +19,7 @@
     import * as io from 'socket.io-client';
     import {PlayerData, RestData} from "../types";
     import PacmanController from '../pacman/pacmanController';
-    import {PredefinedPlayer} from "../predefined-player";
+    import {DEFAULT_LAYER, PredefinedPlayer} from "../predefined-player";
 
     @Component
     export default class TestingBoard extends Vue {
@@ -33,8 +33,11 @@
             this.predefinedPlayer = new PredefinedPlayer(token);
         }
 
-        mounted() {
+        created() {
             this.evaluateMessage();
+        }
+
+        mounted() {
             if (!this.error) {
                 const pacmanController = new PacmanController();
                 let player = Player.fromPlayerData(this.predefinedPlayer.getUser());
@@ -48,7 +51,12 @@
         }
 
         get testPlayer(): PlayerData {
-            return this.predefinedPlayer.getUser();
+            const player: PlayerData = this.predefinedPlayer.getUser();
+            if (player) {
+                return player;
+            } else {
+                return DEFAULT_LAYER
+            }
         }
 
         get isError(): boolean {

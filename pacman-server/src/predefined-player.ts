@@ -67,14 +67,14 @@ class PredefinedPlayer {
     }
 
     isValidToken(): boolean {
-        return this.token !== "";
+        return !!this.token;
     }
 
     isFoundUser(): boolean {
         return this.isFound;
     }
 
-    getUser() {
+    getUser(): PlayerData {
         return this.user;
     }
 }
