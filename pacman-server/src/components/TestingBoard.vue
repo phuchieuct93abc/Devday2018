@@ -1,15 +1,22 @@
 <template>
-    <div>
-        <div v-if="isError" class="error-message">{{ message }}</div>
-        <div v-else>
-            <dd-score-board class="test-player" :score="testPlayer.score" :team-name="testPlayer.name" :color="testPlayer.color"></dd-score-board>
-            <div id="pacman">
-                <span id="player" class="player-name-wrapper">
-                <span class="player-name"></span>
-            </span>
-            </div>
-        </div>
-    </div>
+    <v-container fluid grid-list-md text-xs-center class="test-board">
+        <v-layout row justify-space-around>
+            <v-flex xs2>
+                <dd-score-board v-if="!isError" class="test-player" :score="testPlayer.score" :team-name="testPlayer.name" :color="testPlayer.color"></dd-score-board>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row justify-center>
+            <v-flex xs6>
+                <div v-if="isError" class="error-message">{{ message }}</div>
+                <div v-else id="pacman">
+                    <span id="player" class="player-name-wrapper">
+                        <span class="player-name"></span>
+                    </span>
+                </div>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script lang="ts">
