@@ -3,11 +3,7 @@ import {CombatStatus} from "../constants";
     <v-container fluid grid-list-md text-xs-center class="main-board">
         <v-layout row justify-space-around>
             <v-flex xs2>
-                <dd-score-board class="team-one" :score=firstPlayer.score :team-name=firstPlayer.name></dd-score-board>
-            </v-flex>
-
-            <v-flex xs2>
-                <v-btn v-if="hasGhost" @click="hasGhost = false">Semi-Finals</v-btn>
+                <dd-score-board class="team-one" :score="firstPlayer.score" :team-name="firstPlayer.name" :color="firstPlayer.color"></dd-score-board>
             </v-flex>
 
             <v-flex xs4>
@@ -17,17 +13,12 @@ import {CombatStatus} from "../constants";
                     </v-flex>
                     <v-flex>
                         <v-btn v-if="isStopped" @click="startGame" color="primary">Start</v-btn>
-                        <v-btn v-else @click="restartGame" color="error">Restart</v-btn>
                     </v-flex>
                 </v-layout>
             </v-flex>
 
             <v-flex xs2>
-                <v-btn v-if="!hasGhost" @click="hasGhost = true">Final</v-btn>
-            </v-flex>
-
-            <v-flex xs2>
-                <dd-score-board class="team-two" :score=secondPlayer.score :team-name=secondPlayer.name></dd-score-board>
+                <dd-score-board class="team-two" :score="secondPlayer.score" :team-name="secondPlayer.name" :color="secondPlayer.color"></dd-score-board>
             </v-flex>
         </v-layout>
 
@@ -52,19 +43,16 @@ import {CombatStatus} from "../constants";
     import Player from "../player";
     import PacmanController from "../pacman/pacmanController";
     import {PlayerData, RestData} from "../types";
-    import {PLAYER_ONE, PLAYER_TWO} from "../predefined-player";
     import {CombatStatus} from "../constants";
-    import $ from "jquery";
 
     @Component
     export default class MainBoard extends Vue {
         private player1!: Player;
         private player2!: Player;
-        private hasGhost: boolean = false;
         private pacmanController!: PacmanController;
 
         mounted() {
-            const socket = io("https://localhost:3000");
+            const socket = io("https://localhost");
             socket.on('action', (action: RestData) => {
                 let token = action.token;
                 let player: Player;
@@ -96,11 +84,8 @@ import {CombatStatus} from "../constants";
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
         }
 
-        restartGame() {
-            $("#pacman").children("canvas").remove();
-            this.$store.commit("updateFirstPlayer", Object.assign({}, PLAYER_ONE));
-            this.$store.commit("updateSecondPlayer", Object.assign({}, PLAYER_TWO));
-            this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
+        hasGhost(): boolean {
+            return this.$store.state.hasGhost;
         }
 
         get firstPlayer(): PlayerData {

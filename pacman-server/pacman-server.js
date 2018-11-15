@@ -5,8 +5,8 @@ const http = require('http');
 const fs = require("fs");
 const cors = require('cors')
 
-const httpsPort = process.env.PACMAN_HTTPS_SERVER_PORT || 3000;
-const httpPort = process.env.PACMAN_HTTP_SERVER_PORT || 3001;
+const httpsPort = process.env.PACMAN_HTTPS_SERVER_PORT || 443;
+const httpPort = process.env.PACMAN_HTTP_SERVER_PORT || 80;
 
 const httpsOptions = {
   key: fs.readFileSync("./key/test_key.pem", "utf-8"),

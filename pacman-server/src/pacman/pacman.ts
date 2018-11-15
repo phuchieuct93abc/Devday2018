@@ -84,10 +84,11 @@ var PACMAN = function () {
 
     function loseLife() {
         setState(WAITING);
-        users.loseLife();
-        if (users.getLives() > 0) {
-            startLevel();
-        }
+        // Stop Game when lose life
+        // users.loseLife();
+        // if (users.getLives() > 0) {
+        //     startLevel();
+        // }
     }
 
     function setState(nState) {

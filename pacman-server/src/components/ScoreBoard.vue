@@ -1,19 +1,21 @@
 <template>
     <div class="score-board">
         <div class="score-container">
-            <div class="score">{{ score }}</div>
+            <div class="score" :style="{ color: color.value}">{{ score }}</div>
         </div>
-        <p class="team-name">{{ teamName }}</p>
+        <p class="team-name" :style="{ color: color.value}">{{ teamName }}</p>
     </div>
 </template>
 
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
+    import {Color} from "../types";
 
     @Component
     export default class ScoreBoard extends Vue {
         @Prop({default: 0}) private score!: number;
         @Prop() private teamName!: String;
+        @Prop({default: "#ffffff"}) private color!: Color;
     }
 </script>
 
