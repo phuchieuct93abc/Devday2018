@@ -2,7 +2,7 @@
     <div>
         <div v-if="isError" class="error-message">{{ message }}</div>
         <div v-else>
-            <dd-score-board class="test-player" :score=testPlayer.score :team-name=testPlayer.name></dd-score-board>
+            <dd-score-board class="test-player" :score="testPlayer.score" :team-name="testPlayer.name" :color="testPlayer.color"></dd-score-board>
             <div id="pacman">
                 <span id="player" class="player-name-wrapper">
                 <span class="player-name"></span>
@@ -14,11 +14,10 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import pacmanController from "../pacman/pacmanController";
+    import PacmanController from "../pacman/pacmanController";
     import Player from "../player"
     import * as io from 'socket.io-client';
     import {PlayerData, RestData} from "../types";
-    import PacmanController from '../pacman/pacmanController';
     import {DEFAULT_LAYER, PredefinedPlayer} from "../predefined-player";
 
     @Component
@@ -81,8 +80,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
     #pacman {
-        height: 470px;
-        width: 382px;
+        width: 500px;
         border-radius: 5px;
         margin: 20px auto;
         position: relative;
