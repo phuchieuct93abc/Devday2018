@@ -124,7 +124,10 @@ var PACMAN = function () {
         users.draw(canvasContext);
 
         let user1 = userPos[0].new;
-        let user2 = userPos[1].new;
+        let user2;
+        if (userPos[1]) {
+            user2 = userPos[1].new;
+        }
 
         for (let i = 0, len = ghosts.length; i < len; i += 1) {
             if (collided(user1, ghostPos[i].new)) {
@@ -143,7 +146,7 @@ var PACMAN = function () {
                     timerStart = tick;
                 }
             }
-            if (collided(user2, ghostPos[i].new)) {
+            if (user2 && collided(user2, ghostPos[i].new)) {
                 if (ghosts[i].isVunerable()) {
                     audio.play("eatghost");
                     ghosts[i].eat();
