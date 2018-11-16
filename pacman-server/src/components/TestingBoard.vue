@@ -46,23 +46,25 @@
         mounted() {
             if (!this.error) {
                 const pacmanController = new PacmanController();
-                let player = Player.fromPlayerData(this.predefinedPlayer.getUser());
+                let player = Player.fromPlayerData(this.testPlayer);
                 pacmanController.setPlayer([player]).startGame();
 
                 let socket = io("https://localhost");
-                socket.on('action', function (data: RestData) {
-                    player.move(data.action, pacmanController)
+                socket.on('action', (data: RestData) => {
+                    if (data.token === this.testPlayer.token) {
+                        player.move(data.action, pacmanController)
+                    }
                 });
             }
         }
 
         get testPlayer(): PlayerData {
-            const player: PlayerData = this.predefinedPlayer.getUser();
-            if (player) {
-                return player;
-            } else {
-                return DEFAULT_LAYER
+            let player: PlayerData = this.predefinedPlayer.getUser();
+            if (!player) {
+                player = DEFAULT_LAYER;
             }
+            this.$store.commit("updateTestPlayer", player);
+            return this.$store.state.testPlayer;
         }
 
         get isError(): boolean {
