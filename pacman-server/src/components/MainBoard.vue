@@ -84,7 +84,7 @@ import {CombatStatus} from "../constants";
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
         }
 
-        hasGhost(): boolean {
+        get hasGhost(): boolean {
             return this.$store.state.hasGhost;
         }
 
