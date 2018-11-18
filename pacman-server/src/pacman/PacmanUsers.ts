@@ -1,5 +1,7 @@
 import PacmanUser from "@/pacman/pacmanUser";
 import {PacmanPosition} from "@/types";
+import Store from "@/store";
+import {CombatStatus} from "@/constants";
 
 export default class PacmanUsers {
     constructor(private users: PacmanUser[]) {
@@ -14,8 +16,7 @@ export default class PacmanUsers {
     }
 
     loseLife(): any {
-        // TODO: need to reduce life
-        // throw new Error("Method not implemented.");
+        Store.commit("updateCombatStatus", CombatStatus.STOPPED);
     }
 
     keyDown(userIndex, direction) {
