@@ -83,10 +83,10 @@ var PACMAN = function () {
     }
 
     function loseLife() {
-        setState(WAITING);
-        users.loseLife();
-        dialog("Game over -_-");
         // Stop Game when lose life
+        users.loseLife();
+        stop();
+        dialog("Game over -_-");
         // if (users.getLives() > 0) {
         //     startLevel();
         // }
