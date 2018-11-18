@@ -9,7 +9,7 @@ import {CombatStatus} from "../constants";
             <v-flex xs4>
                 <v-layout column>
                     <v-flex xs6>
-                        <dd-timer :status="status" :value="timer"></dd-timer>
+                        <dd-timer :status="status" :value="timer" @change="onTimerChanged"></dd-timer>
                     </v-flex>
                     <v-flex>
                         <v-btn v-if="isStopped" @click="startGame" color="primary">Start</v-btn>
@@ -43,7 +43,7 @@ import {CombatStatus} from "../constants";
     import Player from "../player";
     import PacmanController from "../pacman/pacmanController";
     import {PlayerData, RestData} from "../types";
-    import {CombatStatus} from "../constants";
+    import {CombatStatus, TimerStatus} from "../constants";
 
     @Component
     export default class MainBoard extends Vue {
@@ -69,8 +69,8 @@ import {CombatStatus} from "../constants";
 
         startGame() {
             this.player1 = Player.fromPlayerData(this.firstPlayer);
-            this.player2= Player.fromPlayerData(this.secondPlayer);
-            if(this.pacmanController){
+            this.player2 = Player.fromPlayerData(this.secondPlayer);
+            if (this.pacmanController) {
                 this.pacmanController.stop();
             }
             this.pacmanController = new PacmanController();
@@ -82,6 +82,13 @@ import {CombatStatus} from "../constants";
             }
             this.pacmanController.startGame();
             this.$store.commit("updateCombatStatus", CombatStatus.STARTED);
+        }
+
+        onTimerChanged(value: TimerStatus) {
+            if (value === TimerStatus.TIME_OUT) {
+                this.$store.commit("updateCombatStatus", CombatStatus.STOPPED);
+                this.pacmanController.timeout();
+            }
         }
 
         get hasGhost(): boolean {

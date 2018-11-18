@@ -300,13 +300,19 @@ var PACMAN = function () {
         clearInterval(timer);
     }
 
+    function timeout() {
+        dialog("Time's up!!!!");
+        clearInterval(timer);
+    }
+
     return {
         "init": init,
         "move": move,
         "startNewGame": startNewGame,
         "registerPlayers": registerPlayers,
         "setGhost": setGhost,
-        "stop":stop
+        "timeout": timeout,
+        "stop": stop,
     };
 
 };

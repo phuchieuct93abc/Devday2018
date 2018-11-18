@@ -7,7 +7,7 @@ import {CombatStatus} from "../constants";
 
 <script lang="ts">
     import {Component, Prop, Vue, Watch} from "vue-property-decorator";
-    import {CombatStatus} from "../constants";
+    import {CombatStatus, TimerStatus} from "../constants";
 
     @Component
     export default class Timer extends Vue {
@@ -33,8 +33,10 @@ import {CombatStatus} from "../constants";
         private start() {
             this.intervalId = setInterval(() => {
                 if (this.timeLeft !== 0) {
+                    this.$emit("change", TimerStatus.RUNNING);
                     this.timeLeft--;
                 } else {
+                    this.$emit("change", TimerStatus.TIME_OUT);
                     clearInterval(this.intervalId);
                 }
             }, 1000);
@@ -42,7 +44,6 @@ import {CombatStatus} from "../constants";
 
         private stop() {
             clearInterval(this.intervalId);
-            this.timeLeft = this.value * 60;
         }
 
         get timer() {

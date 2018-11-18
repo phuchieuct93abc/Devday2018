@@ -45,8 +45,13 @@ class PacmanController {
         const playerIndex = this.players.indexOf(player);
         this.pacman.move(playerIndex, CONTROL_CODES[direction])
     }
-    stop(){
+
+    stop() {
         this.pacman.stop();
+    }
+
+    timeout(){
+        this.pacman.timeout();
     }
 
     private startNewGame() {
