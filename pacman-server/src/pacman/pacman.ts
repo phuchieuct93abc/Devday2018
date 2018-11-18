@@ -83,10 +83,10 @@ var PACMAN = function () {
     }
 
     function loseLife() {
-        setState(WAITING);
-        users.loseLife();
-        dialog("Game over -_-");
         // Stop Game when lose life
+        users.loseLife();
+        stop();
+        dialog("Game over -_-");
         // if (users.getLives() > 0) {
         //     startLevel();
         // }
@@ -300,13 +300,19 @@ var PACMAN = function () {
         clearInterval(timer);
     }
 
+    function timeout() {
+        dialog("Time's up!!!!");
+        clearInterval(timer);
+    }
+
     return {
         "init": init,
         "move": move,
         "startNewGame": startNewGame,
         "registerPlayers": registerPlayers,
         "setGhost": setGhost,
-        "stop":stop
+        "timeout": timeout,
+        "stop": stop,
     };
 
 };

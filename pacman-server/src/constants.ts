@@ -3,4 +3,9 @@ enum CombatStatus {
     STOPPED
 }
 
-export {CombatStatus}
+enum TimerStatus {
+    TIME_OUT,
+    RUNNING,
+}
+
+export {CombatStatus, TimerStatus}
