@@ -2,12 +2,12 @@
     <v-container fluid grid-list-md text-xs-center class="test-board">
         <v-layout row justify-space-around>
             <v-flex xs2>
-                <dd-score-board v-if="!isError" class="test-player" :score="testPlayer.score" :team-name="testPlayer.name" :color="testPlayer.color"></dd-score-board>
+                <dd-score-board v-if="!isError" :score="testPlayer.score" :team-name="testPlayer.name" :color="testPlayer.color"></dd-score-board>
             </v-flex>
         </v-layout>
 
         <v-layout row justify-center>
-            <v-flex xs6>
+            <v-flex xs12>
                 <div v-if="isError" class="error-message">{{ message }}</div>
                 <div v-else id="pacman">
                     <span id="player" class="player-name-wrapper">
@@ -103,11 +103,6 @@
         white-space: nowrap;
         justify-content: center;
         font-size: 1.5em;
-    }
-
-    .test-player {
-        position: absolute;
-        right: 20%;
     }
 
     .error-message {
