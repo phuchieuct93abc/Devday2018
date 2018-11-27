@@ -1,4 +1,3 @@
-import {CombatStatus} from "../constants";
 <template>
     <v-container fluid grid-list-md text-xs-center class="main-board">
         <v-layout row justify-space-around>
@@ -23,7 +22,7 @@ import {CombatStatus} from "../constants";
         </v-layout>
 
         <v-layout row justify-center>
-            <v-flex xs6>
+            <v-flex xs12>
                 <div id="pacman">
                     <span id="player-1" class="player-name-wrapper">
                         <span class="player-name"></span>
