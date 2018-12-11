@@ -21,7 +21,7 @@ const NONE = 4,
     WALL_COLOR = "#ff5252",
     BISCUIT_COLOR = '#fff',
     BISCUIT_SIZE = 10,
-    MAX_PILL_SIZE = 50;
+    MAX_PILL_SIZE = 40;
 
 const KEY = {
     'N': 78,

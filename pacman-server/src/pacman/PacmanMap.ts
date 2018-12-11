@@ -44,7 +44,7 @@ export default class PacmanMap {
         var i, j, p, line;
 
         ctx.strokeStyle = WALL_COLOR;
-        ctx.lineWidth = 8;
+        ctx.lineWidth = 7;
         ctx.lineCap = "round";
 
         for (let i = 0; i < PacmanMaze.WALLS.length; i += 1) {
