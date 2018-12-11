@@ -17,10 +17,10 @@ const NONE = 4,
     FPS = 30,
     BISCUIT_SCORE = 5,
     PILL_SCORE = 50,
-    MAP_BACKGROUND = 'white',
-    WALL_COLOR = "blue",
-    BISCUIT_COLOR = 'red',
-    BISCUIT_SIZE = 15,
+    MAP_BACKGROUND = '#303030',
+    WALL_COLOR = "#ff5252",
+    BISCUIT_COLOR = '#fff',
+    BISCUIT_SIZE = 10,
     MAX_PILL_SIZE = 50;
 
 const KEY = {
