@@ -89,7 +89,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
     #pacman {
-        width: 400px;
+        width: 450px;
         border-radius: 5px;
         margin: 20px auto;
         position: relative;
