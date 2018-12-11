@@ -119,7 +119,7 @@
 
 <style lang="less" scoped>
     #pacman {
-        width: 500px;
+        width: 400px;
         border-radius: 5px;
         margin: 20px auto;
         position: relative;
