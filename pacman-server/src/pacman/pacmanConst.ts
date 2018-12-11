@@ -16,7 +16,12 @@ const NONE = 4,
     PILL = 4,
     FPS = 30,
     BISCUIT_SCORE = 5,
-    PILL_SCORE = 50;
+    PILL_SCORE = 50,
+    MAP_BACKGROUND = 'white',
+    WALL_COLOR = "blue",
+    BISCUIT_COLOR = 'red',
+    BISCUIT_SIZE = 15,
+    MAX_PILL_SIZE = 50;
 
 const KEY = {
     'N': 78,
@@ -45,4 +50,9 @@ export {
     BISCUIT_SCORE,
     PILL_SCORE,
     KEY,
+    MAP_BACKGROUND,
+    BISCUIT_COLOR,
+    BISCUIT_SIZE,
+    WALL_COLOR,
+    MAX_PILL_SIZE
 };

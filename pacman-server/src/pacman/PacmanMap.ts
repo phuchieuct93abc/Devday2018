@@ -1,4 +1,14 @@
-import {BISCUIT, BLOCK, EMPTY, PILL, WALL} from "@/pacman/pacmanConst";
+import {
+    BISCUIT,
+    BISCUIT_COLOR,
+    BISCUIT_SIZE,
+    BLOCK,
+    EMPTY,
+    MAP_BACKGROUND, MAX_PILL_SIZE,
+    PILL,
+    WALL,
+    WALL_COLOR
+} from "@/pacman/pacmanConst";
 import PacmanMaze from "@/pacman/PacmanMaze";
 
 export default class PacmanMap {
@@ -33,8 +43,8 @@ export default class PacmanMap {
 
         var i, j, p, line;
 
-        ctx.strokeStyle = "#0000FF";
-        ctx.lineWidth = 5;
+        ctx.strokeStyle = WALL_COLOR;
+        ctx.lineWidth = 8;
         ctx.lineCap = "round";
 
         for (let i = 0; i < PacmanMaze.WALLS.length; i += 1) {
@@ -91,23 +101,23 @@ export default class PacmanMap {
 
     drawPills(ctx) {
 
-        if (++this.pillSize > 30) {
+        if (++this.pillSize > MAX_PILL_SIZE) {
             this.pillSize = 0;
         }
-
         for (let i = 0; i < this.height; i += 1) {
             for (let j = 0; j < this.width; j += 1) {
                 if (this.map[i][j] === PILL) {
                     ctx.beginPath();
 
-                    ctx.fillStyle = "#000";
+                    ctx.fillStyle = MAP_BACKGROUND;
                     ctx.fillRect((j * this.blockSize), (i * this.blockSize),
                         this.blockSize, this.blockSize);
 
-                    ctx.fillStyle = "#FFF";
+                    ctx.fillStyle = BISCUIT_COLOR;
+                    const sizeAdjustment = MAX_PILL_SIZE/4;
                     ctx.arc((j * this.blockSize) + this.blockSize / 2,
                         (i * this.blockSize) + this.blockSize / 2,
-                        Math.abs(5 - (this.pillSize / 3)),
+                        Math.abs(sizeAdjustment - (this.pillSize / 2)),
                         0,
                         Math.PI * 2, false);
                     ctx.fill();
@@ -121,7 +131,7 @@ export default class PacmanMap {
 
         var i, j, size = this.blockSize;
 
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = MAP_BACKGROUND;
         ctx.fillRect(0, 0, this.width * size, this.height * size);
 
         this.drawWall(ctx);
@@ -146,15 +156,18 @@ export default class PacmanMap {
         if (layout === EMPTY || layout === BLOCK ||
             layout === BISCUIT) {
 
-            ctx.fillStyle = "#000";
+            ctx.fillStyle = MAP_BACKGROUND;
             ctx.fillRect((x * this.blockSize), (y * this.blockSize),
                 this.blockSize, this.blockSize);
 
             if (layout === BISCUIT) {
-                ctx.fillStyle = "#FFF";
-                ctx.fillRect((x * this.blockSize) + (this.blockSize / 2.5),
-                    (y * this.blockSize) + (this.blockSize / 2.5),
-                    this.blockSize / 6, this.blockSize / 6);
+                ctx.fillStyle = BISCUIT_COLOR;
+                ctx.fillRect(
+                    (x * this.blockSize) + (this.blockSize / 4),
+                    (y * this.blockSize) + (this.blockSize / 4),
+                    BISCUIT_SIZE,
+                    BISCUIT_SIZE
+                );
             }
         }
         ctx.closePath();
